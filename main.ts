@@ -4,7 +4,8 @@ import { Network, NetworkType } from './model/Network';
 var passphrase = 'abstract ill robust brown tennis uncover pilot elite antique uncle special word';
 var wif = 'SFpyHgsgkGRwJg9yLHHrP8XsXe4sQ8LazH6NuujVeUUJBHcNQwhk';
 
-var keys = Key.getKeysFromWIF(wif);
+var network = new Network().getDefault(NetworkType.Devnet);
+var keys = Key.getKeys(passphrase, network);
 var address = Key.getAddress(keys.publicKey);
 var wif = Key.toWIF(keys);
 console.log(address, wif, keys.publicKey.publicKey.toString('hex'));

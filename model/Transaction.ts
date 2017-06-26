@@ -91,6 +91,7 @@ export class TransactionQueryParams {
 
 @JsonObject
 export class TransactionSend {
+
   @JsonMember({ type: Number })
   amount: number;
 
@@ -106,11 +107,9 @@ export class TransactionSend {
   @JsonMember({ type: String })
   secondPassphrase?: string;
 
-  @JsonMember({ type: Number })
-  type: TransactionType;
-
   @JsonMember({ type: String })
   vendorField?: string;
+
 }
 
 @JsonObject
@@ -129,4 +128,10 @@ export class TransactionResponse {
 
   @JsonMember({ type: String })
   error: string
+}
+
+@JsonObject
+export class TransactionPayload {
+  @JsonMember({ elements: Transaction })
+  transactions: Array<Transaction>;
 }

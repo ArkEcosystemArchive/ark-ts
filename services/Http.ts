@@ -23,7 +23,7 @@ export class Http {
 
   private baseRequest: RxHttpRequest;
 
-  constructor(network: model.Network) {
+  constructor(public network: model.Network) {
     this.baseRequest = RxHR.defaults({
       baseUrl: network.getPeerUrl() + '/api',
       json: true,
@@ -40,13 +40,14 @@ export class Http {
                            .map(data => formatResponse(data, responseType));
   }
 
-  post(url: string, data: any) {
+  post(url: string, data: any, responseType?: any) {
     var options = {
       form: data,
       json: true
     };
 
-    return this.baseRequest.post(url, options);
+    return this.baseRequest.post(url, options)
+                           .map(data => formatResponse(data, responseType));;
   }
 
   put(url: string, data: any) {
