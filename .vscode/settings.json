@@ -1,0 +1,14 @@
+{
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "files.eol": "\n",
+  "files.trimTrailingWhitespace": true,
+  "files.exclude": {
+    "**/.git": true,
+    "**/package-lock.json": true
+  },
+  "search.exclude":{
+    "**/node_modules": true
+  },
+  "tslint.enable": true
+}
