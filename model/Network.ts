@@ -13,6 +13,7 @@ export class Network {
   symbol: string;
   version: number;
   explorer: string;
+  wif?: number;
   activePeer: model.Peer;
 
   constructor() {}
