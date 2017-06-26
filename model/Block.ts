@@ -80,6 +80,32 @@ export class BlockFee {
 }
 
 @JsonObject
+export class Fees {
+  @JsonMember({ type: Number })
+  send: number;
+
+  @JsonMember({ type: Number })
+  vote: number;
+
+  @JsonMember({ type: Number })
+  secondsignature: number;
+
+  @JsonMember({ type: Number })
+  delegate: number;
+
+  @JsonMember({ type: Number })
+  multisignature: number;
+}
+
+@JsonObject
+export class BlockFees {
+  @JsonMember({ type: Boolean })
+  success: boolean;
+  @JsonMember({ type: Fees })
+  fees: Fees
+}
+
+@JsonObject
 export class BlockHeight {
   @JsonMember({ type: Boolean })
   success: boolean;

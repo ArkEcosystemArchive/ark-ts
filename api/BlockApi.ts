@@ -1,4 +1,5 @@
 import * as model from '../model/Block';
+import { Network } from '../model/Network';
 import { Http } from '../services/Http';
 
 export class BlockApi {
@@ -19,6 +20,10 @@ export class BlockApi {
 
   blockchainHeight() {
     return this.http.get('/blocks', null, model.BlockHeight);
+  }
+
+  static networkFees(network: Network) {
+    return new Http(network).get('/blocks/getfees', null, model.BlockFees);
   }
 
 }
