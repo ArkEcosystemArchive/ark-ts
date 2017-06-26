@@ -15,14 +15,14 @@ export default {
     },
     "devnet": {
       "name": "devnet",
-      "nethash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
-      "token": "DEVARK",
+      "nethash": "578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23",
+      "token": "DARK",
       "symbol": "DѦ",
-      "version": 0x82,
+      "version": 30,
       "explorer": "https://dexplorer.arkcoin.net",
       "wif": 0xba,
       "activePeer": {
-        "ip": "164.8.251.179",
+        "ip": "167.114.43.45",
         "port": 4002
       }
     }
