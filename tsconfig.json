@@ -6,7 +6,17 @@
     "sourceMap": false,
     "allowJs": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types/",
+      "node_modules/@upe/"
+    ],
+    "types":[
+      "node",
+      "typedjson",
+      "chai",
+      "mocha"
+    ]
   },
   "exclude": [
     "node_modules"
