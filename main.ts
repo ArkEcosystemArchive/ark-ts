@@ -1,17 +1,17 @@
+import { Client } from './api/Client';
 import { Key } from './core/Key';
-import { Network, NetworkType } from './model/Network';
 
-var passphrase = 'abstract ill robust brown tennis uncover pilot elite antique uncle special word';
-var wif = 'SFpyHgsgkGRwJg9yLHHrP8XsXe4sQ8LazH6NuujVeUUJBHcNQwhk';
+import * as model from './model/models';
 
-var network = new Network().getDefault(NetworkType.Devnet);
-var keys = Key.getKeys(passphrase, network);
-var address = Key.getAddress(keys.publicKey);
-var wif = Key.toWIF(keys);
-console.log(address, wif, keys.publicKey.publicKey.toString('hex'));
+var network = new model.Network().getDefault(model.NetworkType.Mainnet);
+var client = new Client(network);
 
-var hash = new Buffer(32);
-var signature = Key.sign(hash, keys);
-var verify = Key.verify(signature, hash, keys.publicKey);
+var tx = new model.TransactionSend();
+tx.passphrase = 'relax degree chest flip nerve plastic resemble truth zero depth merit robust';
+tx.recipientId = 'AaeUXmGKG1GRsCEZrBzsBfBs2sEx4z5ozu';
+tx.amount = 10000000;
+tx.vendorField = 'ark-tsc';
 
-console.log(verify);
+client.transaction.send(tx).subscribe(transaction => {
+  console.log(transaction, client.transaction.verify(transaction));
+});

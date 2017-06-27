@@ -112,10 +112,32 @@ export class Key {
     return wif.encode(pri.publicKey.network.wif, pri.privateKey, pri.publicKey.isCompressed);
   }
 
+  static decodeAddress(address: string) {
+    return bs58check.decode(address);
+  }
+
+  /* Verify is a valid address. */
+  static validateAddress(address: string, network: Network) {
+    try {
+      var decode = this.decodeAddress(address);
+      return decode[0] == network.version;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /* Verify an ECDSA signature. */
-  static verify(signature: Buffer, data: Buffer, pub: PublicKey):boolean {
+  static verify(signature: Buffer, data: Buffer, pub: PublicKey | Buffer):boolean {
     var sig = secp256k1.signatureImport(signature);
-    return secp256k1.verify(data, sig, pub.publicKey);
+    let pubKey:Buffer;
+
+    if (pub instanceof Buffer) {
+      pubKey = <Buffer>pub;
+    } else {
+      pubKey = pub.publicKey;
+    }
+
+    return secp256k1.verify(data, sig, pubKey);
   }
 
 }
