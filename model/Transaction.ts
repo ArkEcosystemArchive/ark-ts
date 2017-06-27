@@ -28,7 +28,7 @@ export class Transaction {
   @JsonMember({ type: Number })
   fee: number;
 
-  @JsonMember({ type: Object, refersAbstractType: true })
+  @JsonMember({ type: Number })
   type: TransactionType;
 
   @JsonMember({ type: String })

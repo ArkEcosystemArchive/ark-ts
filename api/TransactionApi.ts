@@ -18,6 +18,11 @@ export class TransactionApi {
 
   send(params: model.TransactionSend):Observable<model.Transaction> {
     return Observable.create((observer:any) => {
+
+      if (!Key.validateAddress(params.recipientId, this.http.network)) {
+        observer.error('Wrong recipientId')
+      }
+
       BlockApi.networkFees(this.http.network).subscribe(blocks => {
         var fees = blocks.fees;
         var tx = <model.Transaction>{
@@ -29,16 +34,22 @@ export class TransactionApi {
           vendorField: params.vendorField
         };
 
-        var sign = this.sign(tx, params.passphrase);
-        tx.signature = sign;
+        this.sign(tx, params.passphrase);
 
-        var id = this.getId(tx);
+        if (params.secondPassphrase) {
+          this.secondSign(tx, params.secondPassphrase);
+        }
 
-        observer.next(tx);
+        this.setId(tx);
+
+        var typedTx = TypedJSON.parse(TypedJSON.stringify(tx), model.Transaction);
+
+        observer.next(typedTx);
         observer.complete();
       }, (e) => observer.error(e));
     })
   }
+
 
   post(params: model.TransactionPayload) {
     return this.http.post('/peer/transactions', params, model.TransactionResponse);
@@ -48,7 +59,7 @@ export class TransactionApi {
     return this.http.get('/transactions/get', params, model.TransactionResponse);
   }
 
-  getUncofirmed(params: model.TransactionQueryParams) {
+  getUnconfirmed(params: model.TransactionQueryParams) {
     return this.http.get('/transactions/unconfirmed/get', params, model.TransactionResponse);
   }
 
@@ -56,14 +67,23 @@ export class TransactionApi {
     return this.http.get('/transactions', params, model.TransactionResponse);
   }
 
-  listUncofirmed(params?: model.TransactionQueryParams) {
+  listUnconfirmed(params?: model.TransactionQueryParams) {
     return this.http.get('/transactions/unconfirmed', params, model.TransactionResponse);
   }
 
+  /* Verify function verifies if tx is validly signed */
   verify(transaction: model.Transaction) {
     var txBytes = Crypto.hash256(this.toBytes(transaction, true, true));
     var signBytes = new Buffer(transaction.signature, 'hex');
     var pubBytes = new Buffer(transaction.senderPublicKey, 'hex');
+
+    return Key.verify(signBytes, txBytes, pubBytes);
+  }
+
+  secondVerify(transaction: model.Transaction) {
+    var txBytes = Crypto.hash256(this.toBytes(transaction, true, true));
+    var signBytes = new Buffer(transaction.signSignature, 'hex');
+    var pubBytes = new Buffer(transaction.secondSenderPublicKey, 'hex');
 
     return Key.verify(signBytes, txBytes, pubBytes);
   }
@@ -134,15 +154,30 @@ export class TransactionApi {
     var txBytes = Crypto.hash256(this.toBytes(transaction, true, true));
 
     var sig = Key.sign(txBytes, keys);
+    transaction.signature = sig.toString('hex');
 
-    return sig.toString('hex');
+    return transaction;
+  }
+
+  /* sign the transaction */
+  private secondSign(transaction: model.Transaction, passphrase: string) {
+    var keys = Key.getKeys(passphrase, this.http.network);
+    transaction.secondSenderPublicKey = keys.publicKey.publicKey.toString('hex');
+
+    var txBytes = Crypto.hash256(this.toBytes(transaction, true, true));
+
+    var sig = Key.sign(txBytes, keys);
+    transaction.signSignature = sig.toString('hex');
+
+    return transaction;
   }
 
   /* returns calculated ID of transaction - hashed 256 */
-  private getId(transaction: model.Transaction) {
+  private setId(transaction: model.Transaction) {
     var hash = Crypto.hash256(this.toBytes(transaction, false, false));
+    transaction.id = hash.toString('hex');
 
-    return hash.toString('hex');
+    return transaction;
   }
 
 }
