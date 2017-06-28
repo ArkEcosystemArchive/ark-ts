@@ -11,18 +11,18 @@ export enum TransactionType {
 @JsonObject
 export class Transaction {
   @JsonMember({ type: String })
-  id: string;
+  id?: string;
 
   @JsonMember({ type: Number })
   timestamp: number;
 
   @JsonMember({ type: String })
-  recipientId: string;
+  recipientId?: string;
 
   @JsonMember({ type: Number })
   amount: number;
 
-  @JsonMember({ type: Object })
+  @JsonMember({ type: Object, refersAbstractType: true })
   asset: Object;
 
   @JsonMember({ type: Number })
@@ -35,31 +35,31 @@ export class Transaction {
   vendorField: string;
 
   @JsonMember({ type: String })
-  signature: string;
+  signature?: string;
 
   @JsonMember({ type: String })
-  signSignature: string;
+  signSignature?: string;
 
   @JsonMember({ type: String })
-  senderPublicKey: string;
+  senderPublicKey?: string;
 
   @JsonMember({ type: String })
-  secondSenderPublicKey: string;
+  secondSenderPublicKey?: string;
 
   @JsonMember({ type: String })
-  requesterPublicKey: string;
+  requesterPublicKey?: string;
 
   @JsonMember({ type: String })
-  blockId: string;
+  blockId?: string;
 
   @JsonMember({ type: Number })
-  height: number;
+  height?: number;
 
   @JsonMember({ type: String })
-  senderId: string;
+  senderId?: string;
 
   @JsonMember({ type: Number })
-  confirmations: number
+  confirmations?: number
 }
 
 @JsonObject
@@ -134,4 +134,36 @@ export class TransactionResponse {
 export class TransactionPayload {
   @JsonMember({ elements: Transaction })
   transactions: Array<Transaction>;
+}
+
+export interface VoteType {
+  Add: '+',
+  Remove: '-'
+}
+
+@JsonObject
+export class TransactionVote {
+  @JsonMember({ type: String })
+  type: VoteType;
+
+  @JsonMember({ type: String })
+  delegatePublicKey: string;
+
+  @JsonMember({ type: String })
+  passphrase: string;
+
+  @JsonMember({ type: String })
+  secondPassphrase: string;
+}
+
+@JsonObject
+export class TransactionDelegate {
+  @JsonMember({ type: String })
+  username: string;
+
+  @JsonMember({ type: String })
+  passphrase: string;
+
+  @JsonMember({ type: String })
+  secondPassphrase: string;
 }

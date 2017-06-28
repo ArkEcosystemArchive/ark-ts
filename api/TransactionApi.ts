@@ -16,7 +16,8 @@ export class TransactionApi {
 
   constructor(private http: Http) {}
 
-  send(params: model.TransactionSend):Observable<model.Transaction> {
+  /* Transaction used to transfer amounts to specific address */
+  createTransaction(params: model.TransactionSend):Observable<model.Transaction> {
     return Observable.create((observer:any) => {
 
       if (!Key.validateAddress(params.recipientId, this.http.network)) {
@@ -50,6 +51,105 @@ export class TransactionApi {
     })
   }
 
+  /* Transaction used to vote for a chosen Delegate */
+  createVote(params: model.TransactionVote) {
+    return Observable.create((observer:any) => {
+      BlockApi.networkFees(this.http.network).subscribe(blocks => {
+        var fees = blocks.fees;
+        var tx = <model.Transaction>{
+          type: model.TransactionType.Vote,
+          fee: fees.vote,
+          amount: 0,
+          timestamp: Slot.getTime(),
+          vendorField: "Delegate vote transaction",
+          asset: {
+            votes: params.type+params.delegatePublicKey
+          }
+        };
+
+        var keys = Key.getKeys(params.passphrase, this.http.network);
+        var address = Key.getAddress(keys.publicKey);
+        tx.recipientId = address;
+
+        this.sign(tx, params.passphrase);
+
+        if (params.secondPassphrase) {
+          this.secondSign(tx, params.secondPassphrase);
+        }
+
+        this.setId(tx);
+
+        var typedTx = TypedJSON.parse(TypedJSON.stringify(tx), model.Transaction);
+
+        observer.next(typedTx);
+        observer.complete();
+      }, (e) => observer.error(e));
+    });
+  }
+
+  /* Transaction used to register as a Delegate */
+  createDelegate(params: model.TransactionDelegate) {
+    return Observable.create((observer:any) => {
+      BlockApi.networkFees(this.http.network).subscribe(blocks => {
+        var fees = blocks.fees;
+        var tx = <model.Transaction>{
+          type: model.TransactionType.CreateDelegate,
+          fee: fees.delegate,
+          amount: 0,
+          recipientId: null,
+          timestamp: Slot.getTime(),
+          vendorField: "Create delegate transaction",
+          asset: {
+            username: params.username
+          }
+        }
+
+        this.sign(tx, params.passphrase);
+
+        if (params.secondPassphrase) {
+          this.secondSign(tx, params.secondPassphrase);
+        }
+
+        this.setId(tx);
+
+        var typedTx = TypedJSON.parse(TypedJSON.stringify(tx), model.Transaction);
+
+        observer.next(typedTx);
+        observer.complete();
+      }, (e) => observer.error(e));
+    });
+  }
+
+  /* Transaction used to create second passphrase */
+  createSignature(passphrase:string, secondPassphrase:string) {
+    return Observable.create((observer:any) => {
+      BlockApi.networkFees(this.http.network).subscribe(blocks => {
+        var fees = blocks.fees;
+        var keys = Key.getKeys(secondPassphrase, this.http.network);
+
+        var tx = <model.Transaction>{
+          type: model.TransactionType.SecondSignature,
+          fee: fees.secondsignature,
+          amount: 0,
+          recipientId: null,
+          timestamp: Slot.getTime(),
+          vendorField: "Create second signature",
+          asset: {
+            signature: keys.publicKey.publicKey.toString('hex')
+          }
+        }
+
+        this.sign(tx, passphrase);
+
+        this.setId(tx);
+
+        var typedTx = TypedJSON.parse(TypedJSON.stringify(tx), model.Transaction);
+
+        observer.next(typedTx);
+        observer.complete();
+      }, (e) => observer(e));
+    });
+  }
 
   post(params: model.TransactionPayload) {
     return this.http.post('/peer/transactions', params, model.TransactionResponse);
@@ -80,6 +180,7 @@ export class TransactionApi {
     return Key.verify(signBytes, txBytes, pubBytes);
   }
 
+  /* Verify function verifies if tx is validly signed by secondPublicKey */
   secondVerify(transaction: model.Transaction) {
     var txBytes = Crypto.hash256(this.toBytes(transaction, true, true));
     var signBytes = new Buffer(transaction.signSignature, 'hex');
@@ -88,7 +189,7 @@ export class TransactionApi {
     return Key.verify(signBytes, txBytes, pubBytes);
   }
 
-  /* Returns bytearray of the Transaction object to be signed and send to blockchain */
+  /* returns bytearray of the Transaction object to be signed and send to blockchain */
   private toBytes(transaction: model.Transaction, skipSignature: boolean, skipSecondSignature: boolean):Buffer {
     var txBuf = new ByteBuffer(undefined, true);
 
@@ -130,7 +231,7 @@ export class TransactionApi {
         txBuf.append(usernameBytes);
         break;
       case model.TransactionType.Vote:
-        var voteBytes = new Buffer(transaction.asset["votes"].join(""), 'utf-8');
+        var voteBytes = new Buffer(transaction.asset["votes"], 'utf-8');
         txBuf.append(voteBytes);
         break;
     }
@@ -159,7 +260,7 @@ export class TransactionApi {
     return transaction;
   }
 
-  /* sign the transaction */
+  /* sign the transaction with second passphrase */
   private secondSign(transaction: model.Transaction, passphrase: string) {
     var keys = Key.getKeys(passphrase, this.http.network);
     transaction.secondSenderPublicKey = keys.publicKey.publicKey.toString('hex');
