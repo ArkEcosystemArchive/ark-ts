@@ -9,7 +9,11 @@ export class LoaderApi {
     return this.http.get('/loader/status', null, model.LoaderStatus);
   }
 
-  synchronisationStatus() {
+  synchronisationStatus(fromPeerUrl?: string) {
+    if (fromPeerUrl) {
+      return this.http.getNative(`${fromPeerUrl}/loader/status/sync`, null, model.LoaderStatusSync);
+    }
+
     return this.http.get('/loader/status/sync', null, model.LoaderStatusSync);
   }
 

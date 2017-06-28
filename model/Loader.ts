@@ -29,6 +29,6 @@ export class LoaderStatusSync {
   @JsonMember({ type: Number })
   height: number;
 
-  @JsonMember({ type: Number })
-  id: number;
+  @JsonMember({ type: String })
+  id: string;
 }

@@ -35,6 +35,11 @@ export class Http {
     });
   }
 
+  getNative(url: string, params?: any, responseType?: any) {
+    return RxHR.get(url, formatParams(params))
+               .map(data => formatResponse(data, responseType));
+  }
+
   get(url: string, params?: any, responseType?: any) {
     return this.baseRequest.get(url, formatParams(params))
                            .map(data => formatResponse(data, responseType));

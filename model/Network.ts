@@ -7,6 +7,7 @@ export enum NetworkType {
 }
 
 export class Network {
+  type: NetworkType;
   name: string;
   nethash: string;
   token: string;
@@ -23,13 +24,21 @@ export class Network {
     var networks = config.networks;
 
     var name = networks[item];
+    let {peers, ...defaultNetwork} = name; // to remove peers list
 
     var network = new Network();
-    Object.assign(network, name);
+    Object.assign(network, defaultNetwork);
+
+    network.type = type;
 
     return network;
   }
 
+  setPeer(peer: model.Peer) {
+    this.activePeer = peer;
+  }
+
+  /* Get formated peer url */
   getPeerUrl(): string {
     return `http://${this.activePeer.ip}:${this.activePeer.port}`;
   }
