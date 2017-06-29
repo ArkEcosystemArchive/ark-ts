@@ -14,25 +14,25 @@ export class Transaction {
   id?: string;
 
   @JsonMember({ type: Number })
-  timestamp: number;
+  timestamp?: number;
 
   @JsonMember({ type: String })
   recipientId?: string;
 
   @JsonMember({ type: Number })
-  amount: number;
+  amount?: number;
 
   @JsonMember({ type: Object, refersAbstractType: true })
-  asset: Object;
+  asset?: Object;
 
   @JsonMember({ type: Number })
-  fee: number;
+  fee?: number;
 
   @JsonMember({ type: Number })
-  type: TransactionType;
+  type?: TransactionType;
 
   @JsonMember({ type: String })
-  vendorField: string;
+  vendorField?: string;
 
   @JsonMember({ type: String })
   signature?: string;
@@ -136,9 +136,9 @@ export class TransactionPayload {
   transactions: Array<Transaction>;
 }
 
-export interface VoteType {
-  Add: '+',
-  Remove: '-'
+export enum VoteType {
+  Add,
+  Remove
 }
 
 @JsonObject

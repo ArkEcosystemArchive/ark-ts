@@ -3,7 +3,8 @@ import * as bs58check from 'bs58check';
 import * as wif from 'wif';
 
 import { Crypto } from '../utils/Crypto';
-import { Network } from '../model/Network';
+
+import * as model from '../model/models';
 
 /* Throw new error based on condition */
 function assert(condition: boolean, message: string = "Assertion failed") {
@@ -14,7 +15,7 @@ function assert(condition: boolean, message: string = "Assertion failed") {
 interface PublicKey {
   publicKey: Buffer,
   isCompressed: boolean,
-  network: Network
+  network: model.Network
 }
 
 interface PrivateKey {
@@ -24,8 +25,25 @@ interface PrivateKey {
 
 export class Key {
 
+  /* Return public key from address */
+  static decodeAddress(address: string) {
+    return bs58check.decode(address);
+  }
+
+  /* Return address from publicKey */
+  static getAddress(pub: PublicKey):string {
+    var payload = new Buffer(21);
+    var hash = Crypto.ripemd160(pub.publicKey);
+    var version = pub.network.version;
+
+    payload.writeUInt8(version, 0);
+    hash.copy(payload, 1);
+
+    return bs58check.encode(payload);
+  }
+
   /* Gets public and private key from private key of WIF format. */
-  static getKeysFromWIF(wifString: string, network: Network = new Network().getDefault()) {
+  static getKeysFromWIF(wifString: string, network: model.Network = new model.Network().getDefault()) {
     var decoded = wif.decode(wifString);
     var version = decoded.version;
 
@@ -47,8 +65,8 @@ export class Key {
     return pri;
   }
 
-  /* Return public and private key */
-  static getKeys(passphrase: string | Buffer, network: Network = new Network().getDefault()) {
+  /* Return public and private key from passphrase */
+  static getKeys(passphrase: string | Buffer, network: model.Network = new model.Network().getDefault()) {
     var privateKey = this.getPrivateKey(passphrase);
     var publicKey = this.getPublicKey(privateKey);
 
@@ -66,8 +84,11 @@ export class Key {
     return pri;
   }
 
-  /* Return public key from 32-byte private key. */
-  static getPublicKey(privateKey: Buffer):Buffer {
+  /* Return public key from 32-byte private key or passphrase. */
+  static getPublicKey(privateKey: string | Buffer):Buffer {
+    if (typeof privateKey === 'string')
+      privateKey = this.getPrivateKey(privateKey);
+
     assert(privateKey.length === 32, "Bad private key");
     var compressed = secp256k1.publicKeyCreate(privateKey);
 
@@ -89,18 +110,6 @@ export class Key {
     return hash;
   }
 
-  /* Return address from publicKey */
-  static getAddress(pub: PublicKey):string {
-    var payload = new Buffer(21);
-    var hash = Crypto.ripemd160(pub.publicKey);
-    var version = pub.network.version;
-
-    payload.writeUInt8(version, 0);
-    hash.copy(payload, 1);
-
-    return bs58check.encode(payload);
-  }
-
   /* Create an ECDSA signature */
   static sign(hash: Buffer, pri: PrivateKey):Buffer {
     var sig = secp256k1.sign(hash, pri.privateKey).signature;
@@ -112,12 +121,8 @@ export class Key {
     return wif.encode(pri.publicKey.network.wif, pri.privateKey, pri.publicKey.isCompressed);
   }
 
-  static decodeAddress(address: string) {
-    return bs58check.decode(address);
-  }
-
-  /* Verify is a valid address. */
-  static validateAddress(address: string, network: Network) {
+  /* Verify if is a valid address. */
+  static validateAddress(address: string, network: model.Network) {
     try {
       var decode = this.decodeAddress(address);
       return decode[0] == network.version;
