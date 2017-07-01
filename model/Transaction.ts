@@ -153,7 +153,7 @@ export class TransactionVote {
   passphrase: string;
 
   @JsonMember({ type: String })
-  secondPassphrase: string;
+  secondPassphrase?: string;
 }
 
 @JsonObject
@@ -165,5 +165,5 @@ export class TransactionDelegate {
   passphrase: string;
 
   @JsonMember({ type: String })
-  secondPassphrase: string;
+  secondPassphrase?: string;
 }

@@ -32,7 +32,7 @@ export class TransactionApi {
         };
 
         var tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
-        data = tx.finalize();
+        data = tx.generate();
 
         var typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
 
@@ -60,7 +60,7 @@ export class TransactionApi {
 
         var tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
         tx.setAddress();
-        data = tx.finalize();
+        data = tx.generate();
 
         var typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
 
@@ -73,6 +73,10 @@ export class TransactionApi {
   /* Transaction used to register as a Delegate */
   createDelegate(params: model.TransactionDelegate) {
     return Observable.create((observer:any) => {
+      if (params.username.length > 20) {
+        observer.error('Delegate name is too long, 20 characters maximum');
+      }
+
       BlockApi.networkFees(this.http.network).subscribe(blocks => {
         var fees = blocks.fees;
         var data = <model.Transaction>{
@@ -85,7 +89,7 @@ export class TransactionApi {
         }
 
         var tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
-        data = tx.finalize();
+        data = tx.generate();
 
         var typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
 
@@ -109,7 +113,7 @@ export class TransactionApi {
 
         var tx = new Tx(data, this.http.network, passphrase, secondPassphrase);
         tx.setAssetSignature();
-        data = tx.finalize();
+        data = tx.generate();
 
         var typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
 

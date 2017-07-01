@@ -6,6 +6,16 @@ import { Key } from './Key';
 import { Crypto } from '../utils/Crypto';
 import { Slot } from '../utils/Slot';
 
+function padBytes(value: string, buf: Buffer) {
+  var valBuffer = new Buffer(value);
+
+  if (valBuffer.length <= buf.length) {
+    buf.fill(0);
+    valBuffer.copy(buf, buf.length - valBuffer.length);
+  }
+
+  return buf;
+}
 /* Comunicate between transaction and keypair */
 export class Tx {
 
@@ -20,7 +30,7 @@ export class Tx {
     }
   }
 
-  public finalize() {
+  public generate() {
     var tx = this.transaction;
     tx.timestamp = Slot.getTime();
     tx.senderPublicKey = this.privKey.publicKey.publicKey.toString('hex');
@@ -74,29 +84,29 @@ export class Tx {
       buf.append(tx.requesterPublicKey, 'hex');
 
     if (typeof tx.recipientId !== 'undefined') {
-      buf.append(Key.decodeAddress(tx.recipientId), 'hex');
+      buf.append(Key.decodeAddress(tx.recipientId));
     } else {
       buf.append(new Buffer(21));
     }
 
-    if (tx.vendorField) {
-      var vendorBytes = new Buffer(tx.vendorField);
-      var padBuffer = new Buffer(64);
+    var padVendor = new Buffer(64);
 
-      if (vendorBytes.length < 65) {
-        padBuffer.fill(0);
-        vendorBytes.copy(padBuffer, 64 - vendorBytes.length);
-      }
-    } else {
-      buf.append(padBuffer);
+    if (tx.vendorField) {
+      padVendor = padBytes(tx.vendorField, padVendor);
     }
+
+    buf.append(padVendor);
 
     buf.writeLong(tx.amount);
     buf.writeLong(tx.fee);
 
     if (tx.asset && Object.keys(tx.asset).length > 0) {
       var asset = tx.asset[Object.keys(tx.asset)[0]];
-      buf.append(new Buffer(asset, 'utf-8'));
+      if (tx.type == model.TransactionType.CreateDelegate) {
+        buf.append(padBytes(asset, new Buffer(20)), 'utf-8');
+      } else {
+        buf.append(new Buffer(asset, 'utf-8'));
+      }
     }
 
     if (tx.signature) {
@@ -114,7 +124,37 @@ export class Tx {
     return txBytes;
   }
 
-  static fromBytes(hash: Buffer) {
+  static fromBytes(hash: string) {
+    var buf = new bytebuffer.fromHex(hash, true, false);
+    var type = buf.readByte();
+    var timestamp = buf.readInt();
+    var senderPublicKey = buf.readBytes(33).toBuffer();
+
+    var recipientBegin = buf.readBytes(21);
+
+    if (type == 0 || type == 3) {
+      recipientBegin = buf.readBytes(13).prepend(recipientBegin);
+    }
+
+    recipientBegin = recipientBegin.toBuffer();
+
+    var vendorField = buf.readBytes(64).toBuffer();
+    var amount = buf.readLong().low;
+    var fee = buf.readLong().low;
+
+    let asset;
+
+    switch (type) {
+      case model.TransactionType.CreateDelegate:
+        asset = buf.readBytes(20);
+      case model.TransactionType.Vote:
+        asset = buf.readBytes(67);
+      case model.TransactionType.SecondSignature:
+        asset = buf.readBytes(33);
+    }
+
+    // TODO
+    // signature
 
   }
 
