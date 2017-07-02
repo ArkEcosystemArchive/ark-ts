@@ -5,6 +5,7 @@ import * as wif from 'wif';
 import { Crypto } from '../utils/Crypto';
 
 import * as model from '../model/models';
+import config from '../config';
 
 /* Throw new error based on condition */
 function assert(condition: boolean, message: string = "Assertion failed") {
@@ -31,10 +32,15 @@ export class Key {
   }
 
   /* Return address from publicKey */
-  static getAddress(pub: PublicKey):string {
+  static getAddress(pub: PublicKey | Buffer, networkVersion?: number):string {
+    if (!(pub instanceof Buffer)) {
+      networkVersion = pub.network.version;
+      pub = pub.publicKey;
+    }
+
     var payload = new Buffer(21);
-    var hash = Crypto.ripemd160(pub.publicKey);
-    var version = pub.network.version;
+    var hash = Crypto.ripemd160(pub);
+    var version = networkVersion;
 
     payload.writeUInt8(version, 0);
     hash.copy(payload, 1);

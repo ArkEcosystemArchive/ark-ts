@@ -1,6 +1,10 @@
 export default {
   "networks": {
     "mainnet": {
+      "bip32": {
+        "public": 0x2bf4968,
+        "private": 0x2bf4530
+      },
       "name": "mainnet",
       "nethash": "6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988",
       "token": "ARK",
@@ -62,6 +66,10 @@ export default {
       ]
     },
     "devnet": {
+      "bip32": {
+        "public": 0x043587cf,
+        "private": 0x04358394
+      },
       "name": "devnet",
       "nethash": "578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23",
       "token": "DARK",
