@@ -121,6 +121,16 @@ export class HDNode {
     return Key.getAddress(pub, Number(this.masterKey.version.toString()));
   }
 
+  public sign(hash: Buffer) {
+    return Key.sign(hash, this.masterKey.key);
+  }
+
+  public verify(signature: Buffer, buffer: Buffer) {
+    var pub = this.getPublicKey();
+
+    return Key.verify(signature, buffer, pub);
+  }
+
   private getFingerPrint() {
     return Crypto.hash160(Key.getPublicKey(this.masterKey.key)).slice(0, 4);
   }
@@ -128,5 +138,8 @@ export class HDNode {
   static makeRandomSeed() {
     return Crypto.randomBytes(256);
   }
+
+
+
 
 }

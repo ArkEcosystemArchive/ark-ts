@@ -117,8 +117,11 @@ export class Key {
   }
 
   /* Create an ECDSA signature */
-  static sign(hash: Buffer, pri: PrivateKey):Buffer {
-    var sig = secp256k1.sign(hash, pri.privateKey).signature;
+  static sign(hash: Buffer, pri: PrivateKey | Buffer):Buffer {
+    if (!(pri instanceof Buffer))
+      pri = pri.privateKey;
+
+    var sig = secp256k1.sign(hash, pri).signature;
     return secp256k1.signatureExport(sig);
   }
 
