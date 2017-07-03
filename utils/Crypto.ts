@@ -3,6 +3,7 @@ import * as createHash from 'create-hash';
 import * as createHmac from 'create-hmac';
 import * as ecurve from 'ecurve';
 import * as secureRandom from 'secure-random';
+import * as bs58check from 'bs58check';
 
 const curveParams = ecurve.getCurveByName('secp256k1');
 
@@ -39,6 +40,10 @@ export class Crypto {
 
   static randomBytes(size: number):Buffer {
     return secureRandom(size, { type: 'Buffer' });
+  }
+
+  static bs58encode(buffer: Buffer):Buffer {
+    return bs58check.encode(buffer);
   }
 
   static int32toBuffer(size: number):Buffer {

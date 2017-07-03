@@ -1,3 +1,5 @@
+import * as bytebuffer from 'bytebuffer';
+
 import * as model from '../model/models';
 import config from '../config';
 
@@ -59,7 +61,7 @@ export class HDNode {
   }
 
   /**
-   *
+   * Derives a child key from a given parent as outlined by bip32
    *
    * @param {number} index
    * @returns {Bip32}
@@ -121,6 +123,32 @@ export class HDNode {
     return Key.getAddress(pub, Number(this.masterKey.version.toString()));
   }
 
+  /**
+   * Serialize a Key to a 78 byte byte slice
+   *
+   * @returns {Buffer}
+   * @memberof HDNode
+   */
+  public serialize():Buffer {
+    var keyBytes = this.masterKey.key;
+
+    if (this.masterKey.isPrivate) {
+      keyBytes = Buffer.concat([new Buffer(0), keyBytes]);
+    }
+
+    var buffer = new bytebuffer(78, true);
+    buffer.append(this.masterKey.version);
+    buffer.writeInt8(this.masterKey.depth);
+    buffer.append(this.masterKey.fingerPrint);
+    buffer.append(this.masterKey.childNumber);
+    buffer.append(this.masterKey.chainCode);
+    buffer.append(keyBytes);
+
+    var serializedKey = Crypto.bs58encode(buffer.toBuffer());
+
+    return serializedKey;
+  }
+
   public sign(hash: Buffer) {
     return Key.sign(hash, this.masterKey.key);
   }
@@ -138,8 +166,5 @@ export class HDNode {
   static makeRandomSeed() {
     return Crypto.randomBytes(256);
   }
-
-
-
 
 }
