@@ -1,108 +1,93 @@
+import * as model from '../model/models';
 import * as secp256k1 from 'secp256k1';
-import * as bs58check from 'bs58check';
 import * as wif from 'wif';
 
 import { Crypto } from '../utils/Crypto';
 
-import * as model from '../model/models';
-import config from '../config';
+export class PublicKey {
 
-/* Throw new error based on condition */
-function assert(condition: boolean, message: string = "Assertion failed") {
-  if (!condition)
-    throw new Error(message);
-}
+  constructor(public hash: Buffer, public isCompressed: boolean = true, public network?: model.Network) {}
 
-interface PublicKey {
-  publicKey: Buffer,
-  isCompressed: boolean,
-  network: model.Network
-}
-
-interface PrivateKey {
-  privateKey: Buffer,
-  publicKey: PublicKey
-}
-
-export class Key {
-
-  /* Return public key from address */
-  static decodeAddress(address: string) {
-    return bs58check.decode(address);
-  }
-
-  /* Return address from publicKey */
-  static getAddress(pub: PublicKey | Buffer, networkVersion?: number):string {
-    if (!(pub instanceof Buffer)) {
-      networkVersion = pub.network.version;
-      pub = pub.publicKey;
-    }
+  getAddress():string {
+    if (!this.network) throw new Error('Network not defined');
 
     var payload = new Buffer(21);
-    var hash = Crypto.ripemd160(pub);
-    var version = networkVersion;
+    var buf = Crypto.ripemd160(this.hash);
+    payload.writeUInt8(this.network.version, 0);
+    buf.copy(payload, 1);
 
-    payload.writeUInt8(version, 0);
-    hash.copy(payload, 1);
-
-    return bs58check.encode(payload);
+    return Crypto.bs58encode(buf);
   }
 
-  /* Gets public and private key from private key of WIF format. */
-  static getKeysFromWIF(wifString: string, network: model.Network = new model.Network().getDefault()) {
+  toHex() {
+    return this.hash.toString('hex');
+  }
+
+  verifySignature(signature: Buffer, data: Buffer) {
+    var sig = secp256k1.signatureImport(signature);
+    return secp256k1.verify(data, sig, this.hash);
+  }
+
+  static fromAddress(address: string):PublicKey {
+    var hash = Crypto.bs58decode(address);
+    return new PublicKey(hash);
+  }
+
+  static fromHex(hex: string):PublicKey {
+    var buf = new Buffer(hex, 'hex');
+
+    return new PublicKey(buf);
+  }
+
+  static validateAddress(address: string, network: model.Network) {
+    try {
+      var decode = this.fromAddress(address);
+      return decode.hash[0] == network.version;
+    } catch (e) {
+      return false;
+    }
+  }
+
+}
+
+export class PrivateKey {
+
+  constructor(public hash: Buffer, public publicKey?: PublicKey) {
+    this.publicKey = this.getPublicKey();
+  }
+
+  getPublicKey():PublicKey {
+    if (this.publicKey) return this.publicKey;
+
+    var compressed = secp256k1.publicKeyCreate(this.hash);
+    var pub = secp256k1.publicKeyConvert(compressed, true);
+    return new PublicKey(pub);
+  }
+
+  sign(data: Buffer) {
+    var sig = secp256k1.sign(data, this.hash).signature;
+
+    return secp256k1.signatureExport(sig);
+  }
+
+  toHex() {
+    return this.hash.toString('hex');
+  }
+
+  toWIF() {
+    return wif.encode(this.publicKey.network.wif, this.hash, this.publicKey.isCompressed);
+  }
+
+  static fromWIF(wifString: string, network?: model.Network):PrivateKey {
+    if (!network) network = new model.Network().getDefault();
+
     var decoded = wif.decode(wifString);
     var version = decoded.version;
 
-    assert(version == network.wif, 'Unknown network version');
-    var privateKey = decoded.privateKey;
-    var publicKey = this.getPublicKey(privateKey);
-
-    var pub = <PublicKey>{
-      publicKey: publicKey,
-      isCompressed: true,
-      network: network
-    }
-
-    var pri = <PrivateKey>{
-      privateKey: privateKey,
-      publicKey: pub
-    }
-
-    return pri;
+    return new PrivateKey(decoded.privateKey);
   }
 
-  /* Return public and private key from passphrase */
-  static getKeys(passphrase: string | Buffer, network: model.Network = new model.Network().getDefault()) {
-    var privateKey = this.getPrivateKey(passphrase);
-    var publicKey = this.getPublicKey(privateKey);
-
-    var pub = <PublicKey>{
-      publicKey: publicKey,
-      isCompressed: true,
-      network: network
-    }
-
-    var pri = <PrivateKey>{
-      privateKey: privateKey,
-      publicKey: pub
-    }
-
-    return pri;
-  }
-
-  /* Return public key from 32-byte private key or passphrase. */
-  static getPublicKey(privateKey: string | Buffer):Buffer {
-    if (typeof privateKey === 'string')
-      privateKey = this.getPrivateKey(privateKey);
-
-    assert(privateKey.length === 32, "Bad private key");
-    var compressed = secp256k1.publicKeyCreate(privateKey);
-
-    return secp256k1.publicKeyConvert(compressed, true);
-  }
-
-  /* Return 32-byte private key from passphrase */
-  static getPrivateKey(passphrase: string | Buffer):Buffer {
+  static fromSeed(passphrase: string | Buffer):PrivateKey {
     let password;
 
     if (typeof passphrase === 'string') {
@@ -113,45 +98,7 @@ export class Key {
 
     var hash = Crypto.sha256(password);
 
-    return hash;
-  }
-
-  /* Create an ECDSA signature */
-  static sign(hash: Buffer, pri: PrivateKey | Buffer):Buffer {
-    if (!(pri instanceof Buffer))
-      pri = pri.privateKey;
-
-    var sig = secp256k1.sign(hash, pri).signature;
-    return secp256k1.signatureExport(sig);
-  }
-
-  /* Returns WIF format string from PrivateKey */
-  static toWIF(pri: PrivateKey):string {
-    return wif.encode(pri.publicKey.network.wif, pri.privateKey, pri.publicKey.isCompressed);
-  }
-
-  /* Verify if is a valid address. */
-  static validateAddress(address: string, network: model.Network) {
-    try {
-      var decode = this.decodeAddress(address);
-      return decode[0] == network.version;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  /* Verify an ECDSA signature. */
-  static verify(signature: Buffer, data: Buffer, pub: PublicKey | Buffer):boolean {
-    var sig = secp256k1.signatureImport(signature);
-    let pubKey:Buffer;
-
-    if (pub instanceof Buffer) {
-      pubKey = <Buffer>pub;
-    } else {
-      pubKey = pub.publicKey;
-    }
-
-    return secp256k1.verify(data, sig, pubKey);
+    return new PrivateKey(hash);
   }
 
 }

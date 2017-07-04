@@ -42,8 +42,12 @@ export class Crypto {
     return secureRandom(size, { type: 'Buffer' });
   }
 
-  static bs58encode(buffer: Buffer):Buffer {
+  static bs58encode(buffer: Buffer):string {
     return bs58check.encode(buffer);
+  }
+
+  static bs58decode(hash: string):Buffer {
+    return bs58check.decode(hash);
   }
 
   static int32toBuffer(size: number):Buffer {

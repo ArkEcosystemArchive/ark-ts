@@ -2,7 +2,8 @@ import * as bytebuffer from 'bytebuffer';
 
 import * as model from '../model/models';
 
-import { Key } from './Key';
+import { PublicKey, PrivateKey } from './Key';
+
 import { Crypto } from '../utils/Crypto';
 import { Slot } from '../utils/Slot';
 
@@ -16,24 +17,26 @@ function padBytes(value: string, buf: Buffer) {
 
   return buf;
 }
+
 /* Comunicate between transaction and keypair */
 export class Tx {
 
-  private privKey;
-  private secondPrivKey;
+  private privKey:PrivateKey;
+  private secondPrivKey:PrivateKey;
 
   constructor(public transaction: model.Transaction, network: model.Network, private passphrase: string, private secondPassphrase?: string) {
-    this.privKey = Key.getKeys(passphrase, network);
+    this.privKey = PrivateKey.fromSeed(passphrase);
+    this.privKey.publicKey.network = network;
 
     if (secondPassphrase) {
-      this.secondPrivKey = Key.getKeys(secondPassphrase);
+      this.secondPrivKey = PrivateKey.fromSeed(secondPassphrase);
     }
   }
 
   public generate() {
     var tx = this.transaction;
     tx.timestamp = Slot.getTime();
-    tx.senderPublicKey = this.privKey.publicKey.publicKey.toString('hex');
+    tx.senderPublicKey = this.privKey.publicKey.toHex();
 
     if (!tx.amount) {
       tx.amount = 0;
@@ -42,7 +45,7 @@ export class Tx {
     tx.signature = this.sign().toString('hex');
 
     if (this.secondPrivKey && !tx.asset.hasOwnProperty('signature')) { // if is not to create second signature
-      tx.secondSenderPublicKey = this.secondPrivKey.publicKey.publicKey.toString('hex');
+      tx.secondSenderPublicKey = this.secondPrivKey.publicKey.toHex();
       tx.signSignature = this.secondSign().toString('hex');
     }
 
@@ -54,20 +57,20 @@ export class Tx {
   }
 
   public setAddress():void {
-    this.transaction.recipientId = Key.getAddress(this.privKey.publicKey);
+    this.transaction.recipientId = this.privKey.publicKey.getAddress();
   }
 
   public sign():Buffer {
-    return Key.sign(this.toBytes(), this.privKey);
+    return this.privKey.sign(this.toBytes());
   }
 
   public secondSign():Buffer {
-    return Key.sign(this.toBytes(), this.secondPrivKey);
+    return this.secondPrivKey.sign(this.toBytes());
   }
 
   public setAssetSignature() {
     this.transaction.asset = {
-      signature: this.secondPrivKey.publicKey.publicKey.toString('hex')
+      signature: this.secondPrivKey.publicKey.toHex()
     }
   }
 
@@ -84,7 +87,7 @@ export class Tx {
       buf.append(tx.requesterPublicKey, 'hex');
 
     if (typeof tx.recipientId !== 'undefined') {
-      buf.append(Key.decodeAddress(tx.recipientId));
+      buf.append(PublicKey.fromAddress(tx.recipientId).hash);
     } else {
       buf.append(new Buffer(21));
     }
@@ -162,18 +165,18 @@ export class Tx {
   public verify():boolean {
     var txBytes = Crypto.hash256(this.toBytes());
     var signBytes = new Buffer(this.transaction.signature, 'hex');
-    var pubBytes = new Buffer(this.transaction.senderPublicKey, 'hex');
+    var pub = PublicKey.fromHex(this.transaction.senderPublicKey);
 
-    return Key.verify(txBytes, signBytes, pubBytes);
+    return pub.verify(txBytes, signBytes);
   }
 
   /* Verify an ECDSA second signature from transaction */
   public secondVerify():boolean {
     var txBytes = Crypto.hash256(this.toBytes());
     var signBytes = new Buffer(this.transaction.signSignature, 'hex');
-    var pubBytes = new Buffer(this.transaction.secondSenderPublicKey, 'hex');
+    var pub = PublicKey.fromHex(this.transaction.secondSenderPublicKey);
 
-    return Key.verify(txBytes, signBytes, pubBytes);
+    return pub.verify(txBytes, signBytes);
   }
 
   /* returns calculated ID of transaction - hashed 256 */
