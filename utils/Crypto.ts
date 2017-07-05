@@ -2,7 +2,7 @@ import * as bigi from 'bigi';
 import * as createHash from 'create-hash';
 import * as createHmac from 'create-hmac';
 import * as ecurve from 'ecurve';
-import * as secureRandom from 'secure-random';
+import * as randomBytes from 'randombytes';
 import * as bs58check from 'bs58check';
 
 const curveParams = ecurve.getCurveByName('secp256k1');
@@ -38,8 +38,8 @@ export class Crypto {
     return createHmac('sha512', key).update(buffer).digest();
   }
 
-  static randomBytes(size: number):Buffer {
-    return secureRandom(size, { type: 'Buffer' });
+  static randomSeed(size: number):Buffer {
+    return randomBytes(size);
   }
 
   static bs58encode(buffer: Buffer):string {
@@ -53,15 +53,14 @@ export class Crypto {
   static int32toBuffer(size: number):Buffer {
     var buf = new Buffer(4);
     buf.writeInt32BE(size, 0);
-
     return buf;
   }
 
-  static validatePrivateKey(key: Buffer) {
+  static validateKey(key: Buffer) {
     var buf = bigi.fromBuffer(key);
     assert(Number(buf.signum()) > 0, 'Private key must be greather than 0');
     assert(Number(buf.compareTo(curveParams.n)) <= 0, 'Private key must be less than the curve order');
-    assert(buf.byteLength() != 32, 'Private key must be equals to 32 byte');
+    // assert(buf.byteLength() != 32, 'Private key must be equals to 32 byte');
 
     return true;
   }
@@ -73,12 +72,16 @@ export class Crypto {
     return keyBigi.add(privKeyBigi).mod(curveParams.n).toBuffer(32);
   }
 
-  static expandPublicKey(key: Buffer, pubKey: Buffer) {
-    var expanded = curveParams.G.multiply(key).add(pubKey);
-    assert(curveParams.isInfinity(expanded), 'Public key is invalid');
-    return expanded;
+  static addPublicKeys(key: Buffer, pubKey: Buffer):Buffer {
+    var keyBigi = bigi.fromBuffer(key);
+    var pubKeyBigi = bigi.fromBuffer(pubKey);
+
+    var keyPoint = curveParams.G.multiply(keyBigi);
+    var pubKeyPoint = curveParams.G.multiply(pubKeyBigi);
+
+    var expanded = keyPoint.add(pubKeyPoint);
+
+    return expanded.getEncoded(true);
   }
-
-
 
 }
