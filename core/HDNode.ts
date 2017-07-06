@@ -18,11 +18,13 @@ export class HDNode {
   isPrivate: boolean;
   key: PrivateKey; // 33 bytes
   version: Buffer; // 4 bytes,
-  network: Object;
+  network: string;
 
   constructor() {}
 
   childKey(index: number) {
+    var networkConfig = config.networks[this.network].bip32;
+
     var hardenedChild = index >= HIGHEST_BIT;
     var childIndexBytes = Crypto.int32toBuffer(index);
 
@@ -56,16 +58,24 @@ export class HDNode {
     childKey.isPrivate = this.isPrivate;
     childKey.network = this.network;
 
+    let newKey:PrivateKey;
+
     if (this.isPrivate) {
-      childKey.version = Crypto.int32toBuffer(this.network["private"]);
+      childKey.version = Crypto.int32toBuffer(networkConfig["private"]);
       childKey.fingerPrint = this.getFingerPrint();
-      childKey.key = Crypto.addPrivateKeys(iL, this.key.hash);
+      var priv = Crypto.addPrivateKeys(iL, this.key.hash);
+      newKey = new PrivateKey(priv);
     } else {
-      childKey.version = Crypto.int32toBuffer(this.network["public"]);
+      childKey.version = Crypto.int32toBuffer(networkConfig["public"]);
       childKey.fingerPrint = Crypto.hash160(this.getPublicHash());
-      var newKey = Crypto.addPublicKeys(iL, this.getPublicHash());
-      childKey.key = new PrivateKey(null, newKey);
+      var pub = Crypto.addPublicKeys(iL, this.getPublicHash());
+      newKey = new PrivateKey(null, pub);
     }
+
+    var networkCapitalize = this.network.charAt(0).toUpperCase() + this.network.slice(1);
+    newKey.publicKey.network = new model.Network().getDefault(model.NetworkType[networkCapitalize]);
+
+    childKey.key = newKey;
 
     return childKey;
   }
@@ -78,7 +88,7 @@ export class HDNode {
     var keyBytes;
 
     if (this.isPrivate) {
-      keyBytes = Buffer.concat([new Buffer(0), this.key.hash]);
+      keyBytes = Buffer.concat([new Buffer(1), this.key.hash]);
     } else {
       keyBytes = this.getPublicHash();
     }
@@ -90,6 +100,8 @@ export class HDNode {
     buffer.append(this.childNumber);
     buffer.append(this.chainCode);
     buffer.append(keyBytes);
+
+    buffer.flip();
 
     var serializedKey = Crypto.bs58encode(buffer.toBuffer());
 
@@ -134,7 +146,7 @@ export class HDNode {
     wallet.isPrivate = true;
     wallet.key = new PrivateKey(keyBytes);
     wallet.version = Crypto.int32toBuffer(networkConfig["private"]);
-    wallet.network = networkConfig;
+    wallet.network = networkName;
 
     return wallet;
   }
@@ -144,7 +156,7 @@ export class HDNode {
     var networkConfig = config.networks[networkName].bip32;
 
     var buffer = Crypto.bs58decode(hash);
-    if (buffer.length !== 78) throw new Error('Invalid buffer length')
+    if (buffer.length !== 78) throw new Error('Invalid buffer length');
 
     var version = buffer.readUInt32BE(0);
 
@@ -152,9 +164,9 @@ export class HDNode {
       throw new Error('Invalid network version');
 
     var depth = buffer[4];
-    var parentFingerprint = buffer.readUInt32BE(5);
+    var parentFingerprint = buffer.slice(5, 9);
 
-    if (depth === 0 && parentFingerprint !== 0x00000000) {
+    if (depth === 0 && parentFingerprint.toString('hex') !== '00000000') {
       throw new Error('Invalid parent fingerprint');
     }
 
@@ -179,9 +191,13 @@ export class HDNode {
     var wallet = new HDNode;
     wallet.depth = depth;
     wallet.childNumber = Crypto.int32toBuffer(index);
-    wallet.fingerPrint = Crypto.int32toBuffer(parentFingerprint);
+    wallet.fingerPrint = parentFingerprint;
     wallet.key = key;
     wallet.chainCode = chainCode;
+    wallet.network = networkName;
+
+    var networkCapitalize = networkName.charAt(0).toUpperCase() + networkName.slice(1);
+    wallet.key.publicKey.network = new model.Network().getDefault(model.NetworkType[networkCapitalize]);
 
     return wallet;
   }

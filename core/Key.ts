@@ -52,7 +52,7 @@ export class PublicKey {
 
 export class PrivateKey {
 
-  private publicKey: PublicKey;
+  public publicKey: PublicKey;
 
   constructor(public hash?: Buffer, publicKey?: PublicKey | Buffer) {
     if (publicKey instanceof Buffer) {
