@@ -1,6 +1,7 @@
-import * as model from '../model/models';
 import * as secp256k1 from 'secp256k1';
 import * as wif from 'wif';
+
+import * as model from '../model/models';
 
 import { Crypto } from '../utils/Crypto';
 
@@ -8,11 +9,32 @@ export class PublicKey {
 
   constructor(public hash: Buffer, public isCompressed: boolean = true, public network?: model.Network) {}
 
-  getAddress():string {
-    if (!this.network) throw new Error('Network not defined');
+  public static fromAddress(address: string): PublicKey {
+    const hash = Crypto.bs58decode(address);
+    return new PublicKey(hash);
+  }
 
-    var payload = new Buffer(21);
-    var buf = Crypto.ripemd160(this.hash);
+  public static fromHex(hex: string): PublicKey {
+    const buf = new Buffer(hex, 'hex');
+    return new PublicKey(buf);
+  }
+
+public static validateAddress(address: string, network: model.Network) {
+    try {
+      const decode = this.fromAddress(address);
+      return decode.hash[0] === network.version;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  getAddress(): string {
+    if (!this.network) {
+      throw new Error('Network not defined');
+    }
+
+    const payload = new Buffer(21);
+    const buf = Crypto.ripemd160(this.hash);
     payload.writeUInt8(this.network.version, 0);
     buf.copy(payload, 1);
 
@@ -24,28 +46,8 @@ export class PublicKey {
   }
 
   verifySignature(signature: Buffer, data: Buffer) {
-    var sig = secp256k1.signatureImport(signature);
+    const sig = secp256k1.signatureImport(signature);
     return secp256k1.verify(data, sig, this.hash);
-  }
-
-  static fromAddress(address: string):PublicKey {
-    var hash = Crypto.bs58decode(address);
-    return new PublicKey(hash);
-  }
-
-  static fromHex(hex: string):PublicKey {
-    var buf = new Buffer(hex, 'hex');
-
-    return new PublicKey(buf);
-  }
-
-  static validateAddress(address: string, network: model.Network) {
-    try {
-      var decode = this.fromAddress(address);
-      return decode.hash[0] == network.version;
-    } catch (e) {
-      return false;
-    }
   }
 
 }
@@ -64,49 +66,54 @@ export class PrivateKey {
     }
   }
 
-  getPublicKey():PublicKey {
-    if (this.publicKey) return this.publicKey;
+  public static fromWIF(wifString: string, network?: model.Network): PrivateKey {
+    if (!network) {
+      network = new model.Network().getDefault();
+    }
 
-    var compressed = secp256k1.publicKeyCreate(this.hash);
-    var pub = secp256k1.publicKeyConvert(compressed, true);
-    return new PublicKey(pub);
-  }
-
-  sign(data: Buffer) {
-    var sig = secp256k1.sign(data, this.hash).signature;
-
-    return secp256k1.signatureExport(sig);
-  }
-
-  toHex() {
-    return this.hash.toString('hex');
-  }
-
-  toWIF() {
-    return wif.encode(this.publicKey.network.wif, this.hash, this.publicKey.isCompressed);
-  }
-
-  static fromWIF(wifString: string, network?: model.Network):PrivateKey {
-    if (!network) network = new model.Network().getDefault();
-
-    var decoded = wif.decode(wifString);
-    var version = decoded.version;
+    const decoded = wif.decode(wifString);
+    const version = decoded.version;
 
     return new PrivateKey(decoded.privateKey);
   }
 
-  static fromSeed(passphrase: string | Buffer):PrivateKey {
+public static fromSeed(passphrase: string | Buffer): PrivateKey {
     let password;
 
     if (typeof passphrase === 'string') {
       password = new Buffer(passphrase, 'utf-8');
     } else {
-      password = <Buffer>passphrase;
+      password = <Buffer> passphrase;
     }
 
-    var hash = Crypto.sha256(password);
+    const hash = Crypto.sha256(password);
 
     return new PrivateKey(hash);
+  }
+
+public getPublicKey(): PublicKey {
+    if (this.publicKey) {
+      return this.publicKey;
+    }
+
+    const compressed = secp256k1.publicKeyCreate(this.hash);
+    const pub = secp256k1.publicKeyConvert(compressed, true);
+
+    return new PublicKey(pub);
+  }
+
+  public sign(data: Buffer) {
+    const sig = secp256k1.sign(data, this.hash).signature;
+
+    return secp256k1.signatureExport(sig);
+  }
+
+  public toHex() {
+    return this.hash.toString('hex');
+  }
+
+  public toWIF() {
+    return wif.encode(this.publicKey.network.wif, this.hash, this.publicKey.isCompressed);
   }
 
 }

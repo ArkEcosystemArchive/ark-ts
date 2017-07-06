@@ -6,6 +6,10 @@ export class BlockApi {
 
   constructor(private http: Http) {}
 
+  public static networkFees(network: Network) {
+    return new Http(network).get('/blocks/getfees', null, model.BlockFees);
+  }
+
   get(params: model.BlockQueryParams) {
     return this.http.get('/blocks/get', params, model.BlockResponse);
   }
@@ -20,10 +24,6 @@ export class BlockApi {
 
   blockchainHeight() {
     return this.http.get('/blocks', null, model.BlockHeight);
-  }
-
-  static networkFees(network: Network) {
-    return new Http(network).get('/blocks/getfees', null, model.BlockFees);
   }
 
 }

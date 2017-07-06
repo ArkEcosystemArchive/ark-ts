@@ -15,19 +15,22 @@ export class DelegateApi {
 
   voters(params: model.DelegateQueryParams) {
     /* To find voters directly by model */
-    if (params.delegate && params.delegate instanceof model.Delegate)
-      params = {publicKey: params.delegate.publicKey}
+    if (params.delegate && params.delegate instanceof model.Delegate) {
+      params = {publicKey: params.delegate.publicKey};
+    }
 
     return this.http.get('/delegates/voters', params, model.DelegateVoters);
   }
 
   forgedData(params: model.DelegateQueryParams) {
     /* To find result directly by model */
-    if (params.delegate)
-      params.generatorPublicKey = params.delegate.publicKey
+    if (params.delegate) {
+      params.generatorPublicKey = params.delegate.publicKey;
+    }
 
-    if (params.publicKey && !params.generatorPublicKey)
-      params.generatorPublicKey = params.publicKey
+    if (params.publicKey && !params.generatorPublicKey) {
+      params.generatorPublicKey = params.publicKey;
+    }
 
     return this.http.get('/delegates/forging/getForgedByAccount', params, model.ForgedDetails);
   }

@@ -1,0 +1,51 @@
+{
+  "extends": [
+    "tslint:recommended"
+  ],
+  "rules": {
+    "indent": [
+      true,
+      "spaces"
+    ],
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "no-angle-bracket-type-assertion": false,
+    "new-parens": false,
+    "no-string-literal": false,
+    "max-classes-per-file": [
+      false
+    ],
+    "member-access": [
+      "check-accessor"
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "static-field",
+          "instance-field",
+          "constructor",
+          "public-static-method",
+          "private-static-method",
+          "public-instance-method",
+          "private-instance-method"
+        ]
+      }
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "one-line": [
+      true,
+      "check-open-brace",
+      "check-catch",
+      "check-else",
+      "check-finally",
+      "check-whitespace"
+    ],
+    "semicolon": [true, "always"]
+  }
+}

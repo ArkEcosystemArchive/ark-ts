@@ -2,10 +2,10 @@ import { Http } from '../services/Http';
 import * as model from '../model/models';
 
 import { AccountApi } from './AccountApi';
-import { DelegateApi } from './DelegateApi';
-import { PeerApi } from './PeerApi';
-import { LoaderApi } from './LoaderApi';
 import { BlockApi } from './BlockApi';
+import { DelegateApi } from './DelegateApi';
+import { LoaderApi } from './LoaderApi';
+import { PeerApi } from './PeerApi';
 import { TransactionApi } from './TransactionApi';
 
 export class Client {
@@ -18,7 +18,7 @@ export class Client {
   public transaction: TransactionApi;
 
   constructor(network: model.Network) {
-    var request = new Http(network);
+    const request = new Http(network);
 
     this.account = new AccountApi(request);
     this.delegate = new DelegateApi(request);

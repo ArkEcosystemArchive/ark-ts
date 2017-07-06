@@ -6,63 +6,63 @@ import * as model from '../model/Transaction';
 import { Http } from '../services/Http';
 import { BlockApi } from './BlockApi';
 
+import { PrivateKey, PublicKey } from '../core/Key';
 import { Tx } from '../core/Tx';
-import { Key } from '../core/Key';
 
 export class TransactionApi {
 
   constructor(private http: Http) {}
 
   /* Transaction used to transfer amounts to specific address */
-  createTransaction(params: model.TransactionSend):Observable<model.Transaction> {
-    return Observable.create((observer:any) => {
+  createTransaction(params: model.TransactionSend): Observable<model.Transaction> {
+    return Observable.create((observer: any) => {
 
-      if (!Key.validateAddress(params.recipientId, this.http.network)) {
-        observer.error('Wrong recipientId')
+      if (!PublicKey.validateAddress(params.recipientId, this.http.network)) {
+        observer.error('Wrong recipientId');
       }
 
-      BlockApi.networkFees(this.http.network).subscribe(blocks => {
-        var fees = blocks.fees;
-        var data = <model.Transaction>{
-          type: model.TransactionType.SendArk,
-          recipientId: params.recipientId,
+      BlockApi.networkFees(this.http.network).subscribe((blocks) => {
+        const fees = blocks.fees;
+        let data = <model.Transaction> {
           amount: params.amount,
           fee: fees.send,
-          vendorField: params.vendorField
+          recipientId: params.recipientId,
+          type: model.TransactionType.SendArk,
+          vendorField: params.vendorField,
         };
 
-        var tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
+        const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
         data = tx.generate();
 
-        var typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
+        const typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
 
         observer.next(typedTx);
         observer.complete();
       }, (e) => observer.error(e));
-    })
+    });
   }
 
   /* Transaction used to vote for a chosen Delegate */
   createVote(params: model.TransactionVote) {
-    return Observable.create((observer:any) => {
-      BlockApi.networkFees(this.http.network).subscribe(blocks => {
-        var fees = blocks.fees;
-        var updown = model.VoteType[params.type] == 'Add' ? '+' : '-';
+    return Observable.create((observer: any) => {
+      BlockApi.networkFees(this.http.network).subscribe((blocks) => {
+        const fees = blocks.fees;
+        const updown = model.VoteType[params.type] === 'Add' ? '+' : '-';
 
-        var data = <model.Transaction>{
-          type: model.TransactionType.Vote,
-          fee: fees.vote,
-          vendorField: "Delegate vote transaction",
+        let data = <model.Transaction> {
           asset: {
-            votes: updown+params.delegatePublicKey
-          }
+            votes: updown + params.delegatePublicKey,
+          },
+          fee: fees.vote,
+          type: model.TransactionType.Vote,
+          vendorField: 'Delegate vote transaction',
         };
 
-        var tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
+        const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
         tx.setAddress();
         data = tx.generate();
 
-        var typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
+        const typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
 
         observer.next(typedTx);
         observer.complete();
@@ -77,21 +77,21 @@ export class TransactionApi {
         observer.error('Delegate name is too long, 20 characters maximum');
       }
 
-      BlockApi.networkFees(this.http.network).subscribe(blocks => {
-        var fees = blocks.fees;
-        var data = <model.Transaction>{
-          type: model.TransactionType.CreateDelegate,
-          fee: fees.delegate,
-          vendorField: "Create delegate transaction",
+      BlockApi.networkFees(this.http.network).subscribe((blocks) => {
+        const fees = blocks.fees;
+        let data = <model.Transaction> {
           asset: {
-            username: params.username
-          }
-        }
+            username: params.username,
+          },
+          fee: fees.delegate,
+          type: model.TransactionType.CreateDelegate,
+          vendorField: 'Create delegate transaction',
+        };
 
-        var tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
+        const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
         data = tx.generate();
 
-        var typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
+        const typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
 
         observer.next(typedTx);
         observer.complete();
@@ -100,22 +100,22 @@ export class TransactionApi {
   }
 
   /* Transaction used to create second passphrase */
-  createSignature(passphrase:string, secondPassphrase:string) {
-    return Observable.create((observer:any) => {
-      BlockApi.networkFees(this.http.network).subscribe(blocks => {
-        var fees = blocks.fees;
-        var data = <model.Transaction>{
-          type: model.TransactionType.SecondSignature,
+  createSignature(passphrase: string, secondPassphrase: string) {
+    return Observable.create((observer: any) => {
+      BlockApi.networkFees(this.http.network).subscribe((blocks) => {
+        const fees = blocks.fees;
+        let data = <model.Transaction> {
+          asset: {},
           fee: fees.secondsignature,
-          vendorField: "Create second signature",
-          asset: {}
+          type: model.TransactionType.SecondSignature,
+          vendorField: 'Create second signature',
         }
 
-        var tx = new Tx(data, this.http.network, passphrase, secondPassphrase);
+        const tx = new Tx(data, this.http.network, passphrase, secondPassphrase);
         tx.setAssetSignature();
         data = tx.generate();
 
-        var typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
+        const typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
 
         observer.next(typedTx);
         observer.complete();

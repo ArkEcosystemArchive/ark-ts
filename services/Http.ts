@@ -6,10 +6,12 @@ import { TypedJSON } from 'typedjson-npm';
 import * as model from '../model/models';
 
 /* Convert property from interface to JSON */
-function formatParams(params: any) {
-  if (!params) return;
+function formatParams(params: any): any {
+  if (!params) {
+    return;
+  }
 
-  var options = JSON.parse(JSON.stringify(params));
+  const options = JSON.parse(JSON.stringify(params));
 
   return { qs: options };
 }
@@ -26,39 +28,39 @@ export class Http {
   constructor(public network: model.Network) {
     this.baseRequest = RxHR.defaults({
       baseUrl: network.getPeerUrl() + '/api',
-      json: true,
       headers: {
-        'nethash': network.nethash,
-        'version': network.version,
-        'port': network.activePeer.port
-      }
+        nethash: network.nethash,
+        port: network.activePeer.port,
+        version: network.version,
+      },
+      json: true,
     });
   }
 
   getNative(url: string, params?: any, responseType?: any) {
     return RxHR.get(url, formatParams(params))
-               .map(data => formatResponse(data, responseType));
+               .map((data) => formatResponse(data, responseType));
   }
 
   get(url: string, params?: any, responseType?: any) {
     return this.baseRequest.get(url, formatParams(params))
-                           .map(data => formatResponse(data, responseType));
+                           .map((data) => formatResponse(data, responseType));
   }
 
-  post(url: string, data: any, responseType?: any) {
-    var options = {
-      form: data,
-      json: true
+  post(url: string, body: any, responseType?: any) {
+    const options = {
+      form: body,
+      json: true,
     };
 
     return this.baseRequest.post(url, options)
-                           .map(data => formatResponse(data, responseType));;
+                           .map((data) => formatResponse(data, responseType));;
   }
 
   put(url: string, data: any) {
-    var options = {
-      json: data
-    }
+    const options = {
+      json: data,
+    };
 
     return this.baseRequest.put(url, options);
   }
