@@ -52,8 +52,16 @@ export class PublicKey {
 
 export class PrivateKey {
 
-  constructor(public hash: Buffer, public publicKey?: PublicKey) {
-    this.publicKey = this.getPublicKey();
+  private publicKey: PublicKey;
+
+  constructor(public hash?: Buffer, publicKey?: PublicKey | Buffer) {
+    if (publicKey instanceof Buffer) {
+      this.publicKey = new PublicKey(publicKey);
+    }
+
+    if (!publicKey && hash) {
+      this.publicKey = this.getPublicKey();
+    }
   }
 
   getPublicKey():PublicKey {

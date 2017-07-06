@@ -16,7 +16,7 @@ export class HDNode {
   depth: number;
   fingerPrint: Buffer; // 4 bytes
   isPrivate: boolean;
-  key: Buffer; // 33 bytes
+  key: PrivateKey; // 33 bytes
   version: Buffer; // 4 bytes,
   network: Object;
 
@@ -33,12 +33,12 @@ export class HDNode {
 
     if (this.isPrivate) {
       if (hardenedChild) {
-        data = Buffer.concat([new Buffer(1), this.key]);
+        data = Buffer.concat([new Buffer(1), this.key.hash]);
       } else {
         data = this.getPublicHash();
       }
     } else {
-      data = this.key;
+      data = this.key.getPublicKey().hash;
     }
 
     data = Buffer.concat([data, childIndexBytes]);
@@ -59,29 +59,28 @@ export class HDNode {
     if (this.isPrivate) {
       childKey.version = Crypto.int32toBuffer(this.network["private"]);
       childKey.fingerPrint = this.getFingerPrint();
-      childKey.key = Crypto.addPrivateKeys(iL, this.key);
+      childKey.key = Crypto.addPrivateKeys(iL, this.key.hash);
     } else {
       childKey.version = Crypto.int32toBuffer(this.network["public"]);
-      childKey.fingerPrint = Crypto.hash160(this.key);
-      childKey.key = Crypto.addPublicKeys(iL, this.key);
+      childKey.fingerPrint = Crypto.hash160(this.getPublicHash());
+      var newKey = Crypto.addPublicKeys(iL, this.getPublicHash());
+      childKey.key = new PrivateKey(null, newKey);
     }
 
     return childKey;
   }
 
   private getPublicHash():Buffer {
-    if (this.isPrivate) {
-      return new PrivateKey(this.key).publicKey.hash
-    } else {
-      return this.key;
-    }
+    return this.key.getPublicKey().hash;
   }
 
   public serialize():string {
-    var keyBytes = this.key;
+    var keyBytes;
 
     if (this.isPrivate) {
-      keyBytes = Buffer.concat([new Buffer(0), keyBytes]);
+      keyBytes = Buffer.concat([new Buffer(0), this.key.hash]);
+    } else {
+      keyBytes = this.getPublicHash();
     }
 
     var buffer = new bytebuffer(78, true);
@@ -99,14 +98,15 @@ export class HDNode {
 
   public toPublic():HDNode {
     var wallet = new HDNode;
+    wallet.isPrivate = false;
+
     wallet.chainCode = this.chainCode;
     wallet.childNumber = this.childNumber;
     wallet.depth = this.depth;
     wallet.fingerPrint = this.fingerPrint;
-    wallet.isPrivate = false;
     wallet.network = this.network;
     wallet.version = this.version;
-    wallet.key = this.getPublicHash();
+    wallet.key = this.key;
 
     return wallet;
   }
@@ -132,7 +132,7 @@ export class HDNode {
     wallet.depth = 0;
     wallet.fingerPrint = new Buffer(4);
     wallet.isPrivate = true;
-    wallet.key = keyBytes;
+    wallet.key = new PrivateKey(keyBytes);
     wallet.version = Crypto.int32toBuffer(networkConfig["private"]);
     wallet.network = networkConfig;
 
@@ -167,13 +167,13 @@ export class HDNode {
     if (version === networkConfig.private) {
       if (buffer.readUInt8(45) !== 0x00) throw new Error('Invalid private key');
 
-      key = bigi.fromBuffer(buffer.slice(46, 78));
+      key = new PrivateKey(buffer.slice(46, 78));
     } else {
       var curve = Crypto.decodeCurvePoint(buffer.slice(45, 78));
 
       Crypto.validateCurve(curve);
 
-      key = curve;
+      key = new PrivateKey(null, curve);
     }
 
     var wallet = new HDNode;
