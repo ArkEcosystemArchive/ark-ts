@@ -1,4 +1,5 @@
 import * as bytebuffer from 'bytebuffer';
+import * as bigi from 'bigi';
 
 import * as model from '../model/models';
 import config from '../config';
@@ -76,6 +77,40 @@ export class HDNode {
     }
   }
 
+  public serialize():string {
+    var keyBytes = this.key;
+
+    if (this.isPrivate) {
+      keyBytes = Buffer.concat([new Buffer(0), keyBytes]);
+    }
+
+    var buffer = new bytebuffer(78, true);
+    buffer.append(this.version);
+    buffer.writeInt8(this.depth);
+    buffer.append(this.fingerPrint);
+    buffer.append(this.childNumber);
+    buffer.append(this.chainCode);
+    buffer.append(keyBytes);
+
+    var serializedKey = Crypto.bs58encode(buffer.toBuffer());
+
+    return serializedKey;
+  }
+
+  public toPublic():HDNode {
+    var wallet = new HDNode;
+    wallet.chainCode = this.chainCode;
+    wallet.childNumber = this.childNumber;
+    wallet.depth = this.depth;
+    wallet.fingerPrint = this.fingerPrint;
+    wallet.isPrivate = false;
+    wallet.network = this.network;
+    wallet.version = this.version;
+    wallet.key = this.getPublicHash();
+
+    return wallet;
+  }
+
   private getFingerPrint() {
     return Crypto.hash160(this.getPublicHash()).slice(0, 4);
   }
@@ -104,36 +139,49 @@ export class HDNode {
     return wallet;
   }
 
-  public serialize():string {
-    var keyBytes = this.key;
+  static unserialize(hash: string, networkType: model.NetworkType):HDNode {
+    var networkName = model.NetworkType[networkType].toLowerCase();
+    var networkConfig = config.networks[networkName].bip32;
 
-    if (this.isPrivate) {
-      keyBytes = Buffer.concat([new Buffer(0), keyBytes]);
+    var buffer = Crypto.bs58decode(hash);
+    if (buffer.length !== 78) throw new Error('Invalid buffer length')
+
+    var version = buffer.readUInt32BE(0);
+
+    if (version != networkConfig.public && version != networkConfig.private)
+      throw new Error('Invalid network version');
+
+    var depth = buffer[4];
+    var parentFingerprint = buffer.readUInt32BE(5);
+
+    if (depth === 0 && parentFingerprint !== 0x00000000) {
+      throw new Error('Invalid parent fingerprint');
     }
 
-    var buffer = new bytebuffer(78, true);
-    buffer.append(this.version);
-    buffer.writeInt8(this.depth);
-    buffer.append(this.fingerPrint);
-    buffer.append(this.childNumber);
-    buffer.append(this.chainCode);
-    buffer.append(keyBytes);
+    var index = buffer.readUInt32BE(9);
+    if (depth === 0 && index !== 0) throw new Error('Invalid index');
 
-    var serializedKey = Crypto.bs58encode(buffer.toBuffer());
+    var chainCode = buffer.slice(13, 45);
+    let key;
 
-    return serializedKey;
-  }
+    if (version === networkConfig.private) {
+      if (buffer.readUInt8(45) !== 0x00) throw new Error('Invalid private key');
 
-  toPublic():HDNode {
+      key = bigi.fromBuffer(buffer.slice(46, 78));
+    } else {
+      var curve = Crypto.decodeCurvePoint(buffer.slice(45, 78));
+
+      Crypto.validateCurve(curve);
+
+      key = curve;
+    }
+
     var wallet = new HDNode;
-    wallet.chainCode = this.chainCode;
-    wallet.childNumber = this.childNumber;
-    wallet.depth = this.depth;
-    wallet.fingerPrint = this.fingerPrint;
-    wallet.isPrivate = false;
-    wallet.network = this.network;
-    wallet.version = this.version;
-    wallet.key = this.getPublicHash();
+    wallet.depth = depth;
+    wallet.childNumber = Crypto.int32toBuffer(index);
+    wallet.fingerPrint = Crypto.int32toBuffer(parentFingerprint);
+    wallet.key = key;
+    wallet.chainCode = chainCode;
 
     return wallet;
   }

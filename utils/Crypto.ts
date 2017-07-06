@@ -56,6 +56,14 @@ export class Crypto {
     return buf;
   }
 
+  static decodeCurvePoint(buffer: Buffer) {
+    return ecurve.Point.decodeFrom(curveParams, buffer);
+  }
+
+  static validateCurve(buffer: Buffer) {
+    return curveParams.validate(buffer);
+  }
+
   static validateKey(key: Buffer) {
     var buf = bigi.fromBuffer(key);
     assert(Number(buf.signum()) > 0, 'Private key must be greather than 0');
