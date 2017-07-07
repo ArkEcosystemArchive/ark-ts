@@ -1,5 +1,5 @@
+import { JsonMember, JsonObject } from 'typedjson-npm';
 import * as model from './models';
-import { JsonObject, JsonMember } from 'typedjson-npm';
 
 @JsonObject
 export class Block {
@@ -55,7 +55,7 @@ export class Block {
 @JsonObject
 export class BlockQueryParams {
   @JsonMember({ type: Number })
-  id: number
+  id: number;
 }
 
 @JsonObject
@@ -64,7 +64,7 @@ export class BlockResponse {
   success: boolean;
 
   @JsonMember({ elements: Block })
-  blocks: Array<Block>;
+  blocks: Block[];
 
   @JsonMember({ type: Block })
   block: Block;
@@ -102,7 +102,7 @@ export class BlockFees {
   @JsonMember({ type: Boolean })
   success: boolean;
   @JsonMember({ type: Fees })
-  fees: Fees
+  fees: Fees;
 }
 
 @JsonObject

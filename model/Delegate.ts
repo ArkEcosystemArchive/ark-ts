@@ -1,4 +1,4 @@
-import { JsonObject, JsonMember } from 'typedjson-npm';
+import { JsonMember, JsonObject } from 'typedjson-npm';
 
 @JsonObject
 export class Delegate {
@@ -36,7 +36,7 @@ export class DelegateResponse {
   sucess: boolean;
 
   @JsonMember({ elements: Delegate })
-  delegates?: Array<Delegate>;
+  delegates?: Delegate[];
 
   @JsonMember({ type: Delegate })
   delegate?: Delegate;
@@ -73,7 +73,7 @@ interface AccountVoter {
   username: string;
   address: string;
   publicKey: string;
-  balance: string
+  balance: string;
 }
 
 @JsonObject
@@ -82,7 +82,7 @@ export class DelegateVoters {
   sucess: boolean;
 
   @JsonMember({ elements: Object, refersAbstractType: true })
-  accounts: Array<AccountVoter>
+  accounts: AccountVoter[]
 }
 
 @JsonObject

@@ -5,7 +5,7 @@ export enum TransactionType {
   SecondSignature = 1,
   CreateDelegate = 2,
   Vote = 3,
-  MultiSignature = 4
+  MultiSignature = 4,
 }
 
 @JsonObject
@@ -23,7 +23,7 @@ export class Transaction {
   amount?: number;
 
   @JsonMember({ type: Object, refersAbstractType: true })
-  asset?: Object;
+  asset?: object;
 
   @JsonMember({ type: Number })
   fee?: number;
@@ -59,7 +59,7 @@ export class Transaction {
   senderId?: string;
 
   @JsonMember({ type: Number })
-  confirmations?: number
+  confirmations?: number;
 }
 
 @JsonObject
@@ -86,7 +86,7 @@ export class TransactionQueryParams {
   orderBy: string;
 
   @JsonMember({ type: Object, refersAbstractType: true })
-  type: TransactionType
+  type: TransactionType;
 }
 
 @JsonObject
@@ -118,7 +118,7 @@ export class TransactionResponse {
   success: boolean;
 
   @JsonMember({ elements: Transaction })
-  transactions: Array<Transaction>;
+  transactions: Transaction[];
 
   @JsonMember({ type: Transaction })
   transaction: Transaction;
@@ -133,12 +133,12 @@ export class TransactionResponse {
 @JsonObject
 export class TransactionPayload {
   @JsonMember({ elements: Transaction })
-  transactions: Array<Transaction>;
+  transactions: Transaction[];
 }
 
 export enum VoteType {
   Add,
-  Remove
+  Remove,
 }
 
 @JsonObject

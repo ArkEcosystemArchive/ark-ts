@@ -1,5 +1,5 @@
+import { JsonMember, JsonObject } from 'typedjson-npm';
 import * as model from './models';
-import { JsonObject, JsonMember } from 'typedjson-npm';
 
 @JsonObject
 export class Account {
@@ -22,13 +22,13 @@ export class Account {
   secondSignature: number;
 
   @JsonMember({ type: Object })
-  secondPublicKey: Object;
+  secondPublicKey: object;
 
   @JsonMember({ elements: Object, refersAbstractType: true })
-  multiSignatures: Array<Object>;
+  multiSignatures: object[];
 
   @JsonMember({ elements: Object, refersAbstractType: true })
-  uMultiSignatures: Array<Object>;
+  uMultiSignatures: object[];
 }
 
 @JsonObject
@@ -46,7 +46,7 @@ export class AccountVotesResponse {
   success: boolean;
 
   @JsonMember({ elements: Object, refersAbstractType: true })
-  delegates: Array<model.Delegate>;
+  delegates: model.Delegate[];
 }
 
 @JsonObject

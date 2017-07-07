@@ -1,4 +1,4 @@
-import { JsonObject, JsonMember } from 'typedjson-npm';
+import { JsonMember, JsonObject } from 'typedjson-npm';
 
 @JsonObject
 export class Peer {
@@ -27,10 +27,10 @@ export class Peer {
 @JsonObject
 export class PeerQueryParams {
   @JsonMember({ type: String })
-  status?:string;
+  status?: string;
 
   @JsonMember({ type: String })
-  os?:string;
+  os?: string;
 
   @JsonMember({ type: String })
   shared?: string;
@@ -60,7 +60,7 @@ export class PeerResponse {
   success: boolean;
 
   @JsonMember({ elements: Peer })
-  peers: Array<Peer>;
+  peers: Peer[];
 
   @JsonMember({ type: Peer })
   peer: Peer;

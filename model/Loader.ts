@@ -1,4 +1,4 @@
-import { JsonObject, JsonMember } from 'typedjson-npm';
+import { JsonMember, JsonObject } from 'typedjson-npm';
 
 @JsonObject
 export class LoaderStatus {
