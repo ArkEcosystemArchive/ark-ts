@@ -1,3 +1,10 @@
+/**
+ * @module services
+ */
+/** Http calls from peer url. */
+
+import { Observable } from 'rxjs/Observable';
+
 import { RxHR, RxHttpRequest } from '@akanass/rx-http-request';
 import 'rxjs/add/operator/map';
 
@@ -5,7 +12,9 @@ import { TypedJSON } from 'typedjson-npm';
 
 import * as model from '../model/models';
 
-/* Convert property from interface to JSON */
+/**
+ * Convert property from interface to JSON
+ */
 function formatParams(params: any): any {
   if (!params) {
     return;
@@ -16,16 +25,18 @@ function formatParams(params: any): any {
   return { qs: options };
 }
 
-/* Convert JSON response to specific interface */
+/**
+ * Convert JSON response to specific interface.
+ */
 function formatResponse(response: any, responseType: any) {
   return TypedJSON.parse(response.body, responseType);
 }
 
-export class Http {
+export default class Http {
 
   private baseRequest: RxHttpRequest;
 
-  constructor(public network: model.Network) {
+  public constructor(public network: model.Network) {
     this.baseRequest = RxHR.defaults({
       baseUrl: network.getPeerUrl() + '/api',
       headers: {
@@ -37,27 +48,27 @@ export class Http {
     });
   }
 
-  getNative(url: string, params?: any, responseType?: any) {
+  public getNative<T>(url: string, params?: any, responseType?: T): Observable<T> {
     return RxHR.get(url, formatParams(params))
                .map((data) => formatResponse(data, responseType));
   }
 
-  get(url: string, params?: any, responseType?: any) {
+  public get<T>(url: string, params?: any, responseType?: T): Observable<T> {
     return this.baseRequest.get(url, formatParams(params))
                            .map((data) => formatResponse(data, responseType));
   }
 
-  post(url: string, body: any, responseType?: any) {
+  public post<T>(url: string, body: any, responseType?: T): Observable<T> {
     const options = {
       form: body,
       json: true,
     };
 
     return this.baseRequest.post(url, options)
-                           .map((data) => formatResponse(data, responseType));;
+                           .map((data) => formatResponse(data, responseType));
   }
 
-  put(url: string, data: any) {
+  public put(url: string, data: any) {
     const options = {
       json: data,
     };

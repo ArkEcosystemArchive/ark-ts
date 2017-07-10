@@ -1,3 +1,8 @@
+/**
+ * @module model
+ */
+/** Account model. */
+
 import { JsonMember, JsonObject } from 'typedjson-npm';
 import * as model from './models';
 
@@ -37,7 +42,10 @@ export class AccountResponse {
   success: boolean;
 
   @JsonMember({ type: Account })
-  account: Account;
+  account?: Account;
+
+  @JsonMember({ type: String })
+  publicKey?: string;
 }
 
 @JsonObject

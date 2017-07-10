@@ -1,14 +1,21 @@
-import { Http } from '../services/Http';
+/**
+ * @module api
+ * @preferred
+ *
+ * Comunicate between peer and api
+ */ /** */
+
 import * as model from '../model/models';
+import Http from '../services/Http';
 
-import { AccountApi } from './AccountApi';
-import { BlockApi } from './BlockApi';
-import { DelegateApi } from './DelegateApi';
-import { LoaderApi } from './LoaderApi';
-import { PeerApi } from './PeerApi';
-import { TransactionApi } from './TransactionApi';
+import AccountApi from './AccountApi';
+import BlockApi from './BlockApi';
+import DelegateApi from './DelegateApi';
+import LoaderApi from './LoaderApi';
+import PeerApi from './PeerApi';
+import TransactionApi from './TransactionApi';
 
-export class Client {
+export default class Client {
 
   public account: AccountApi;
   public delegate: DelegateApi;

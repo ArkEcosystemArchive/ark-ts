@@ -1,4 +1,9 @@
-import { JsonObject, JsonMember } from 'typedjson-npm';
+/**
+ * @module model
+ */
+/** Transaction model. */
+
+import { JsonMember, JsonObject } from 'typedjson-npm';
 
 export enum TransactionType {
   SendArk = 0,
@@ -127,7 +132,7 @@ export class TransactionResponse {
   count: string;
 
   @JsonMember({ type: String })
-  error: string
+  error: string;
 }
 
 @JsonObject

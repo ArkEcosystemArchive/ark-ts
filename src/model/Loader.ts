@@ -1,34 +1,39 @@
+/**
+ * @module model
+ */
+/** Loader model. */
+
 import { JsonMember, JsonObject } from 'typedjson-npm';
 
 @JsonObject
 export class LoaderStatus {
   @JsonMember({ type: Boolean })
-  sucess: boolean;
+  public sucess: boolean;
 
   @JsonMember({ type: Boolean })
-  loaded: false;
+  public loaded: false;
 
   @JsonMember({ type: Number })
-  now: number;
+  public now: number;
 
   @JsonMember({ type: Number })
-  blocksCount: number;
+  public blocksCount: number;
 }
 
 @JsonObject
 export class LoaderStatusSync {
   @JsonMember({ type: Boolean })
-  sucess: boolean;
+  public sucess: boolean;
 
   @JsonMember({ type: Boolean })
-  syncing: false;
+  public syncing: false;
 
   @JsonMember({ type: Number })
-  blocks: number;
+  public blocks: number;
 
   @JsonMember({ type: Number })
-  height: number;
+  public height: number;
 
   @JsonMember({ type: String })
-  id: string;
+  public id: string;
 }

@@ -1,3 +1,8 @@
+/**
+ * @module utils
+ */
+/** Crypto related functions. */
+
 import * as bigi from 'bigi';
 import * as bs58check from 'bs58check';
 import * as createHash from 'create-hash';
@@ -13,7 +18,7 @@ function assert(condition: boolean, message: string = 'Assertion failed') {
   }
 }
 
-export class Crypto {
+export default class Crypto {
 
   static ripemd160(buffer: Buffer): Buffer {
     return createHash('rmd160').update(buffer).digest();

@@ -1,26 +1,39 @@
+/**
+ * @module api
+ */
+/** Peer related API calls. */
+
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
 
 import * as model from '../model/models';
-import { Http } from '../services/Http';
-import { LoaderApi } from './LoaderApi';
+import Http from '../services/Http';
+import LoaderApi from './LoaderApi';
 
 import config from '../config';
 
-export class PeerApi {
+export default class PeerApi {
 
   constructor(private http: Http) {}
 
+  /**
+   * Get peer by ip and port.
+   */
   public get(params: model.PeerQueryParams) {
-    return this.http.get('/peers/get', params, model.PeerResponse);
+    return this.http.get<model.PeerResponse>('/peers/get', params);
   }
 
+  /**
+   * Get peers list by parameters.
+   */
   public list(params?: model.PeerQueryParams) {
-    return this.http.get('/peers', params, model.PeerResponse);
+    return this.http.get<model.PeerResponse>('/peers', params);
   }
 
-  /* Return the better peer based on synced blocks */
+  /**
+   * Find good peer ordered by synchronized blocks.
+   */
   public findGoodPeer(): Observable<model.Peer> {
     return Observable.create((observer) => {
       const networkType = model.NetworkType[this.http.network.type].toLowerCase();
@@ -38,7 +51,7 @@ export class PeerApi {
             blockList.push([element, status.blocks]);
 
             // when find a good peer or at the end
-            if (status.blocks == 0 || peersList.length -1 == index) {
+            if (status.blocks === 0 || peersList.length - 1 === index) {
               blockList.sort((a, b) => a[1] < b[1] ? 1 : -1); // sort by better to the worst
               const host = blockList[0][0].split(':');
 
@@ -50,8 +63,8 @@ export class PeerApi {
               observer.complete();
             }
           }, (e) => Observable.empty());
-      })
-    })
+      });
+    });
   }
 
 }

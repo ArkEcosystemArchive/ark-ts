@@ -1,3 +1,8 @@
+/**
+ * @module model
+ */
+/** Block model. */
+
 import { JsonMember, JsonObject } from 'typedjson-npm';
 import * as model from './models';
 

@@ -7,6 +7,7 @@
     "allowJs": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "outDir": "./lib",
     "typeRoots": [
       "node_modules/@types/",
       "node_modules/@upe/"
@@ -14,14 +15,14 @@
     "types":[
       "node",
       "typedjson",
-      "chai",
-      "mocha"
+      "rx",
+      "rx-http-request"
     ]
   },
   "exclude": [
     "node_modules"
   ],
   "include": [
-    "model/**/*"
+    "src/**/*"
   ]
 }

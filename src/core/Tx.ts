@@ -1,11 +1,16 @@
+/**
+ * @module core
+ */
+/** Comunicate between transaction and keypair. */
+
 import * as bytebuffer from 'bytebuffer';
 
 import * as model from '../model/models';
 
 import { PrivateKey, PublicKey } from './Key';
 
-import { Crypto } from '../utils/Crypto';
-import { Slot } from '../utils/Slot';
+import Crypto from '../utils/Crypto';
+import Slot from '../utils/Slot';
 
 function padBytes(value: string, buf: Buffer) {
   const valBuffer = new Buffer(value);
@@ -18,18 +23,23 @@ function padBytes(value: string, buf: Buffer) {
   return buf;
 }
 
-/* Comunicate between transaction and keypair */
-export class Tx {
+export default class Tx {
+  public transaction: model.Transaction;
 
+  private passphrase: string;
+  private secondPassphrase: string;
   private privKey: PrivateKey;
   private secondPrivKey: PrivateKey;
 
   constructor(
-    public transaction: model.Transaction,
+    transaction: model.Transaction,
     network: model.Network,
-    private passphrase: string,
-    private secondPassphrase?: string) {
+    passphrase: string,
+    secondPassphrase?: string) {
 
+    this.transaction = transaction;
+    this.passphrase = passphrase;
+    this.secondPassphrase = secondPassphrase;
     this.privKey = PrivateKey.fromSeed(passphrase);
     this.privKey.publicKey.network = network;
 
@@ -38,6 +48,10 @@ export class Tx {
     }
   }
 
+  /**
+   * Generate transaction
+   * Call all steps to generate a id.
+   */
   public static fromBytes(hash: string) {
     const buf = new bytebuffer.fromHex(hash, true, false);
     const type = buf.readByte();
@@ -72,6 +86,10 @@ export class Tx {
 
   }
 
+  /**
+   * Generate transaction
+   * Call all steps to generate a id.
+   */
   public generate() {
     const tx = this.transaction;
     tx.timestamp = Slot.getTime();
@@ -95,25 +113,40 @@ export class Tx {
     return tx;
   }
 
+  /**
+   * Set address by current publicKey.
+   * To reference transaction without a recipient.
+   */
   public setAddress(): void {
     this.transaction.recipientId = this.privKey.publicKey.getAddress();
   }
 
+  /**
+   * Sign transaction.
+   */
   public sign(): Buffer {
     return this.privKey.sign(this.toBytes());
   }
 
+  /**
+   * Sign transaction with second passphrase.
+   */
   public secondSign(): Buffer {
     return this.secondPrivKey.sign(this.toBytes());
   }
 
+  /**
+   * Set asset to create second passphrase in current Tranasction.
+   */
   public setAssetSignature(): void {
     this.transaction.asset = {
       signature: this.secondPrivKey.publicKey.toHex(),
     };
   }
 
-  /* returns bytearray of the Transaction object to be signed and send to blockchain */
+  /**
+   * Returns bytearray of the Transaction object to be signed and send to blockchain
+   */
   public toBytes(): Buffer {
     const tx = this.transaction;
     const buf = new bytebuffer(undefined, true);
@@ -167,7 +200,9 @@ export class Tx {
     return txBytes;
   }
 
-  /* Verify an ECDSA signature from transaction */
+  /**
+   * Verify an ECDSA signature from transaction
+   */
   public verify(): boolean {
     const txBytes = Crypto.hash256(this.toBytes());
     const signBytes = new Buffer(this.transaction.signature, 'hex');
@@ -176,7 +211,9 @@ export class Tx {
     return pub.verifySignature(txBytes, signBytes);
   }
 
-  /* Verify an ECDSA second signature from transaction */
+  /**
+   * Verify an ECDSA second signature from transaction.
+   */
   public secondVerify(): boolean {
     const txBytes = Crypto.hash256(this.toBytes());
     const signBytes = new Buffer(this.transaction.signSignature, 'hex');
@@ -185,7 +222,9 @@ export class Tx {
     return pub.verifySignature(txBytes, signBytes);
   }
 
-  /* returns calculated ID of transaction - hashed 256 */
+  /**
+   * Returns calculated ID of transaction - hashed 256.
+   */
   public getId() {
     return this.toBytes();
   }

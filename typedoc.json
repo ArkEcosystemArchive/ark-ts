@@ -1,0 +1,17 @@
+{
+  "mode": "modules",
+  "out": "docs",
+  "name": "ark-tsc",
+  "theme": "default",
+  "ignoreCompilerErrors": "true",
+  "emitDecoratorMetadata": "true",
+  "experimentalDecorators": "true",
+  "excludePrivate": true,
+  "target": "ES6",
+  "moduleResolution": "node",
+  "preserveConstEnums": "true",
+  "stripInternal": "true",
+  "suppressExcessPropertyErrors": "true",
+  "suppressImplicitAnyIndexErrors": "true",
+  "module": "commonjs"
+}

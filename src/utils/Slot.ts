@@ -1,27 +1,36 @@
+/**
+ * @module utils
+ */
+/** Time to interact with blockchain. */
+
 import config from '../config';
 
-export class Slot {
+export default class Slot {
 
   /*
   * Return time slot difference in secods.
   * This timestamp is added to the transaction.
   */
-  static getTime(): number {
+  public static getTime(): number {
     const now = (new Date()).getTime();
     const time = config.blockchain.date.getTime();
 
     return Math.floor((now - time) / 1000);
   }
 
-  /* Calculates duration between now and provided timestamp */
-  static getDurationTime(timestamp: number): number {
+  /**
+   * Calculates duration between now and provided timestamp
+   */
+  public static getDurationTime(timestamp: number): number {
     const now = (new Date()).getTime();
 
     return Math.floor((now - timestamp) / 1000);
   }
 
-  /* GetTransactionTime from timestamp */
-  static getTransactionTime(timestamp: number): Date {
+  /**
+   * Get transaction time from timestamp
+   */
+  public static getTransactionTime(timestamp: number): Date {
     const time = config.blockchain.date.getTime() + timestamp;
 
     return new Date(time);

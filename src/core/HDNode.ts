@@ -1,10 +1,15 @@
+/**
+ * @module core
+ */
+/** HD Wallet. */
+
 import * as bigi from 'bigi';
 import * as bytebuffer from 'bytebuffer';
 
 import config from '../config';
 import * as model from '../model/models';
 
-import { Crypto } from '../utils/Crypto';
+import Crypto from '../utils/Crypto';
 import { PrivateKey, PublicKey } from './Key';
 
 const MASTER_SECRET: string = 'Bitcoin seed';

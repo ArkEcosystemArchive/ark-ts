@@ -1,3 +1,8 @@
+/**
+ * @module model
+ */
+/** Delegate model. */
+
 import { JsonMember, JsonObject } from 'typedjson-npm';
 
 @JsonObject
@@ -82,7 +87,7 @@ export class DelegateVoters {
   sucess: boolean;
 
   @JsonMember({ elements: Object, refersAbstractType: true })
-  accounts: AccountVoter[]
+  accounts: AccountVoter[];
 }
 
 @JsonObject

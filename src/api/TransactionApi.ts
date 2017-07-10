@@ -1,20 +1,27 @@
+/**
+ * @module api
+ */
+/** Transaction related API calls. */
+
 import { Observable } from 'rxjs/Observable';
 import { TypedJSON } from 'typedjson-npm';
 
 import * as model from '../model/Transaction';
 
-import { Http } from '../services/Http';
-import { BlockApi } from './BlockApi';
+import Http from '../services/Http';
+import BlockApi from './BlockApi';
 
 import { PrivateKey, PublicKey } from '../core/Key';
-import { Tx } from '../core/Tx';
+import Tx from '../core/Tx';
 
-export class TransactionApi {
+export default class TransactionApi {
 
   constructor(private http: Http) {}
 
-  /* Transaction used to transfer amounts to specific address */
-  createTransaction(params: model.TransactionSend): Observable<model.Transaction> {
+  /**
+   * Transaction used to transfer amounts to specific address.
+   */
+  public createTransaction(params: model.TransactionSend): Observable<model.Transaction> {
     return Observable.create((observer: any) => {
 
       if (!PublicKey.validateAddress(params.recipientId, this.http.network)) {
@@ -42,8 +49,10 @@ export class TransactionApi {
     });
   }
 
-  /* Transaction used to vote for a chosen Delegate */
-  createVote(params: model.TransactionVote) {
+  /**
+   * Transaction used to vote for a chosen Delegate.
+   */
+  public createVote(params: model.TransactionVote) {
     return Observable.create((observer: any) => {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
@@ -70,9 +79,11 @@ export class TransactionApi {
     });
   }
 
-  /* Transaction used to register as a Delegate */
-  createDelegate(params: model.TransactionDelegate) {
-    return Observable.create((observer:any) => {
+  /**
+   * Transaction used to register as a Delegate.
+   */
+  public createDelegate(params: model.TransactionDelegate) {
+    return Observable.create((observer: any) => {
       if (params.username.length > 20) {
         observer.error('Delegate name is too long, 20 characters maximum');
       }
@@ -99,8 +110,10 @@ export class TransactionApi {
     });
   }
 
-  /* Transaction used to create second passphrase */
-  createSignature(passphrase: string, secondPassphrase: string) {
+  /**
+   * Transaction used to create second passphrase.
+   */
+  public createSignature(passphrase: string, secondPassphrase: string) {
     return Observable.create((observer: any) => {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
@@ -109,7 +122,7 @@ export class TransactionApi {
           fee: fees.secondsignature,
           type: model.TransactionType.SecondSignature,
           vendorField: 'Create second signature',
-        }
+        };
 
         const tx = new Tx(data, this.http.network, passphrase, secondPassphrase);
         tx.setAssetSignature();
@@ -123,24 +136,36 @@ export class TransactionApi {
     });
   }
 
-  post(params: model.TransactionPayload) {
-    return this.http.post('/peer/transactions', params, model.TransactionResponse);
+  public post(params: model.TransactionPayload) {
+    return this.http.post<model.TransactionResponse>('/peer/transactions', params);
   }
 
-  get(params: model.TransactionQueryParams) {
-    return this.http.get('/transactions/get', params, model.TransactionResponse);
+  /**
+   * Transaction matched by id.
+   */
+  public get(params: model.TransactionQueryParams) {
+    return this.http.get<model.TransactionResponse>('/transactions/get', params);
   }
 
-  getUnconfirmed(params: model.TransactionQueryParams) {
-    return this.http.get('/transactions/unconfirmed/get', params, model.TransactionResponse);
+  /**
+   * Get unconfirmed transaction by id.
+   */
+  public getUnconfirmed(params: model.TransactionQueryParams) {
+    return this.http.get<model.TransactionResponse>('/transactions/unconfirmed/get', params);
   }
 
-  list(params?: model.TransactionQueryParams) {
-    return this.http.get('/transactions', params, model.TransactionResponse);
+  /**
+   * Transactions list matched by provided parameters.
+   */
+  public list(params?: model.TransactionQueryParams) {
+    return this.http.get<model.TransactionResponse>('/transactions', params);
   }
 
-  listUnconfirmed(params?: model.TransactionQueryParams) {
-    return this.http.get('/transactions/unconfirmed', params, model.TransactionResponse);
+  /**
+   * Transactions unconfirmed list matched by provided parameters.
+   */
+  public listUnconfirmed(params?: model.TransactionQueryParams) {
+    return this.http.get<model.TransactionResponse>('/transactions/unconfirmed', params);
   }
 
 }

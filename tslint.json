@@ -5,7 +5,8 @@
   "rules": {
     "indent": [
       true,
-      "spaces"
+      "spaces",
+      2
     ],
     "interface-name": [
       true,
@@ -46,6 +47,13 @@
       "check-finally",
       "check-whitespace"
     ],
-    "semicolon": [true, "always"]
+    "semicolon": [true, "always"],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-operator",
+      "check-separator",
+      "check-typecast"
+    ]
   }
 }

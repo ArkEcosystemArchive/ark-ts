@@ -1,6 +1,9 @@
 {
   "name": "ark-tsc",
   "version": "0.1.0",
+  "scripts": {
+    "build-docs": "rimraf docs && typedoc --options typedoc.json src/"
+  },
   "dependencies": {
     "@akanass/rx-http-request": "^2.3.0",
     "@types/bigi": "^1.4.0",
@@ -16,6 +19,7 @@
     "rxjs": "^5.4.1",
     "secp256k1": "^3.3.0",
     "typedjson-npm": "^0.1.7",
+    "typedoc-plugin-external-module-name": "^1.0.9",
     "typescript": "^2.3.4",
     "wif": "^2.0.6"
   },
@@ -24,6 +28,8 @@
     "@types/mocha": "^2.2.41",
     "chai": "^4.0.2",
     "mocha": "^3.4.2",
+    "rimraf": "^2.6.1",
+    "typedoc": "^0.7.1",
     "ts-node": "^3.1.0"
   }
 }

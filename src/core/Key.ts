@@ -1,9 +1,14 @@
+/**
+ * @module core
+ */
+/** Public and Private Keys. */
+
 import * as secp256k1 from 'secp256k1';
 import * as wif from 'wif';
 
 import * as model from '../model/models';
 
-import { Crypto } from '../utils/Crypto';
+import Crypto from '../utils/Crypto';
 
 export class PublicKey {
 
@@ -19,7 +24,7 @@ export class PublicKey {
     return new PublicKey(buf);
   }
 
-public static validateAddress(address: string, network: model.Network) {
+  public static validateAddress(address: string, network: model.Network) {
     try {
       const decode = this.fromAddress(address);
       return decode.hash[0] === network.version;
@@ -28,7 +33,7 @@ public static validateAddress(address: string, network: model.Network) {
     }
   }
 
-  getAddress(): string {
+  public getAddress(): string {
     if (!this.network) {
       throw new Error('Network not defined');
     }
@@ -41,11 +46,11 @@ public static validateAddress(address: string, network: model.Network) {
     return Crypto.bs58encode(buf);
   }
 
-  toHex() {
+  public toHex() {
     return this.hash.toString('hex');
   }
 
-  verifySignature(signature: Buffer, data: Buffer) {
+  public verifySignature(signature: Buffer, data: Buffer) {
     const sig = secp256k1.signatureImport(signature);
     return secp256k1.verify(data, sig, this.hash);
   }
@@ -77,7 +82,7 @@ export class PrivateKey {
     return new PrivateKey(decoded.privateKey);
   }
 
-public static fromSeed(passphrase: string | Buffer): PrivateKey {
+  public static fromSeed(passphrase: string | Buffer): PrivateKey {
     let password;
 
     if (typeof passphrase === 'string') {
@@ -91,7 +96,7 @@ public static fromSeed(passphrase: string | Buffer): PrivateKey {
     return new PrivateKey(hash);
   }
 
-public getPublicKey(): PublicKey {
+  public getPublicKey(): PublicKey {
     if (this.publicKey) {
       return this.publicKey;
     }

@@ -1,3 +1,8 @@
+/**
+ * @module model
+ */
+/** Peer model. */
+
 import { JsonMember, JsonObject } from 'typedjson-npm';
 
 @JsonObject
