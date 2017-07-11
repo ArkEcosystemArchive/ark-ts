@@ -10,13 +10,16 @@
     "outDir": "./lib",
     "typeRoots": [
       "node_modules/@types/",
-      "node_modules/@upe/"
+      "node_modules/@upe/",
+      "node_modules/@akanass/"
     ],
     "types":[
+      "chai",
       "node",
-      "typedjson",
+      "mocha",
       "rx",
-      "rx-http-request"
+      "rx-http-request",
+      "typedjson"
     ]
   },
   "exclude": [

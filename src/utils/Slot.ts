@@ -3,7 +3,7 @@
  */
 /** Time to interact with blockchain. */
 
-import config from '../config';
+import config from '../../config';
 
 export default class Slot {
 
@@ -31,26 +31,26 @@ export default class Slot {
    * Get transaction time from timestamp
    */
   public static getTransactionTime(timestamp: number): Date {
-    const time = config.blockchain.date.getTime() + timestamp;
+    const time = Math.floor(config.blockchain.date.getTime() / 1000) * 1000;
 
-    return new Date(time);
+    return new Date(time + timestamp * 1000);
   }
 
-  static getSlotNumber(epochTime: number = this.getTime()): number {
+  public static getSlotNumber(epochTime: number = this.getTime()): number {
     return Math.floor(epochTime / config.blockchain.interval);
   }
 
-  static getSlotTime(slot: number): number {
+  public static getSlotTime(slot: number): number {
     return slot * config.blockchain.interval;
   }
 
-  static getNextSlot(): number {
+  public static getNextSlot(): number {
     const slot = this.getSlotNumber();
 
     return slot + 1;
   }
 
-  static getLastSlot(nextSlot: number): number {
+  public static getLastSlot(nextSlot: number): number {
     return nextSlot + config.blockchain.delegates;
   }
 

@@ -11,7 +11,7 @@ import * as model from '../model/models';
 import Http from '../services/Http';
 import LoaderApi from './LoaderApi';
 
-import config from '../config';
+import config from '../../config';
 
 export default class PeerApi {
 

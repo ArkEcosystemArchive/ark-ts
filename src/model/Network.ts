@@ -3,7 +3,7 @@
  */
 /** Network model. */
 
-import config from '../config';
+import config from '../../config';
 import * as model from './models';
 
 export enum NetworkType {

@@ -66,20 +66,20 @@ export default class Crypto {
     return ecurve.Point.decodeFrom(curveParams, buffer);
   }
 
-  static validateCurve(buffer: Buffer) {
+  static validateCurve(buffer: Buffer): boolean {
     return curveParams.validate(buffer);
   }
 
-  static validateKey(key: Buffer) {
+  static validateKey(key: Buffer): boolean {
     const buf = bigi.fromBuffer(key);
     assert(Number(buf.signum()) > 0, 'Private key must be greather than 0');
     assert(Number(buf.compareTo(curveParams.n)) <= 0, 'Private key must be less than the curve order');
-    // assert(buf.byteLength() != 32, 'Private key must be equals to 32 byte');
+    assert(key.length === 32, 'Private key must be equals to 32 byte');
 
     return true;
   }
 
-  static addPrivateKeys(key: Buffer, priKey: Buffer) {
+  static addPrivateKeys(key: Buffer, priKey: Buffer): Buffer {
     const keyBigi = bigi.fromBuffer(key);
     const privKeyBigi = bigi.fromBuffer(priKey);
 
