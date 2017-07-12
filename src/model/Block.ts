@@ -59,8 +59,8 @@ export class Block {
 
 @JsonObject
 export class BlockQueryParams {
-  @JsonMember({ type: Number })
-  id: number;
+  @JsonMember({ type: String })
+  id: string;
 }
 
 @JsonObject

@@ -73,7 +73,7 @@ export class PrivateKey {
 
   public static fromWIF(wifString: string, network?: model.Network): PrivateKey {
     if (!network) {
-      network = new model.Network().getDefault();
+      network = model.Network.getDefault();
     }
 
     const decoded = wif.decode(wifString);
