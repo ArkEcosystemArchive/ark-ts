@@ -12,15 +12,15 @@ export enum NetworkType {
 }
 
 export class Network {
-  type: NetworkType;
-  name: string;
-  nethash: string;
-  token: string;
-  symbol: string;
-  version: number;
-  explorer: string;
-  wif?: number;
-  activePeer: model.Peer;
+  public type: NetworkType;
+  public name: string;
+  public nethash: string;
+  public token: string;
+  public symbol: string;
+  public version: number;
+  public explorer: string;
+  public wif?: number;
+  public activePeer: model.Peer;
 
   constructor() {
     // pass
@@ -29,7 +29,7 @@ export class Network {
   /**
    * Get network from default config file based on type.
    */
-  public getDefault(type: NetworkType = NetworkType.Mainnet): Network {
+  public static getDefault(type: NetworkType = NetworkType.Mainnet): Network {
     const item = NetworkType[type].toLowerCase();
     const networks = config.networks;
 
