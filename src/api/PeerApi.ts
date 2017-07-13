@@ -20,7 +20,8 @@ export default class PeerApi {
   /**
    * Get peer by ip and port.
    */
-  public get(params: model.PeerQueryParams) {
+  public get(ip: string, port: number) {
+    const params = {ip, port};
     return this.http.get<model.PeerResponse>('/peers/get', params);
   }
 
@@ -45,9 +46,8 @@ export default class PeerApi {
 
       peersList.forEach((element, index) => {
         loader
-          .synchronisationStatus(`http://${element}/api`)
+          .synchronisationStatus(`http://${element}`)
           .subscribe((status) => {
-
             blockList.push([element, status.blocks]);
 
             // when find a good peer or at the end

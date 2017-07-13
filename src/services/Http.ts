@@ -32,7 +32,7 @@ function formatResponse(response: any, responseType: any) {
   try {
     return TypedJSON.parse(response.body, responseType);
   } catch (e) {
-    throw new Error('Invalid response.');
+    throw new Error(response.body);
   }
 }
 
@@ -42,7 +42,7 @@ export default class Http {
 
   public constructor(public network: model.Network) {
     this.baseRequest = RxHR.defaults({
-      baseUrl: network.getPeerUrl() + '/api',
+      baseUrl: network.getPeerUrl(),
       headers: {
         nethash: network.nethash,
         port: network.activePeer.port,
@@ -58,13 +58,13 @@ export default class Http {
   }
 
   public get<T>(url: string, params?: any, responseType?: T): Observable<T> {
-    return this.baseRequest.get(url, formatParams(params))
+    return this.baseRequest.get(`/api${url}`, formatParams(params))
                            .map((data) => formatResponse(data, responseType));
   }
 
   public post<T>(url: string, body: any, responseType?: T): Observable<T> {
     const options = {
-      form: body,
+      body,
       json: true,
     };
 

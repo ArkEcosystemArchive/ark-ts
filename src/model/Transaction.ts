@@ -70,28 +70,28 @@ export class Transaction {
 @JsonObject
 export class TransactionQueryParams {
   @JsonMember({ type: String })
-  id: string;
+  id?: string;
 
   @JsonMember({ type: String })
-  blockId: string;
+  blockId?: string;
 
   @JsonMember({ type: String })
-  senderId: string;
+  senderId?: string;
 
   @JsonMember({ type: String })
-  recipientId: string;
+  recipientId?: string;
 
   @JsonMember({ type: Number })
-  limit: number;
+  limit?: number;
 
   @JsonMember({ type: Number })
-  offset: number;
+  offset?: number;
 
   @JsonMember({ type: String })
-  orderBy: string;
+  orderBy?: string;
 
   @JsonMember({ type: Object, refersAbstractType: true })
-  type: TransactionType;
+  type?: TransactionType;
 }
 
 @JsonObject

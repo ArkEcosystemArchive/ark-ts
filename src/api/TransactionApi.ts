@@ -136,21 +136,27 @@ export default class TransactionApi {
     });
   }
 
-  public post(params: model.TransactionPayload) {
+  /**
+   * Post transaction to broadcast
+   */
+  public post(transaction: model.Transaction) {
+    const params = {transactions: [transaction]};
     return this.http.post<model.TransactionResponse>('/peer/transactions', params);
   }
 
   /**
    * Transaction matched by id.
    */
-  public get(params: model.TransactionQueryParams) {
+  public get(id: string) {
+    const params = {id};
     return this.http.get<model.TransactionResponse>('/transactions/get', params);
   }
 
   /**
    * Get unconfirmed transaction by id.
    */
-  public getUnconfirmed(params: model.TransactionQueryParams) {
+  public getUnconfirmed(id: string) {
+    const params = {id};
     return this.http.get<model.TransactionResponse>('/transactions/unconfirmed/get', params);
   }
 
