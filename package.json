@@ -1,10 +1,20 @@
 {
   "name": "ark-tsc",
   "version": "0.1.0",
+  "description": "A TypeScript module which provides an wrapper for the Ark API.",
   "scripts": {
     "build-docs": "rimraf docs && typedoc --options typedoc.json src/",
     "test": "mocha --opts .mocharc"
   },
+  "keywords": [
+    "ark",
+    "api",
+    "blockchain",
+    "crypto",
+    "typescript"
+  ],
+  "author": "Lúcio Rubens <lucio@ark.io>",
+  "license": "MIT",
   "dependencies": {
     "@akanass/rx-http-request": "^2.3.0",
     "@types/bigi": "^1.4.0",
