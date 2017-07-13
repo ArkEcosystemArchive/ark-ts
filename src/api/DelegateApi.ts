@@ -49,7 +49,7 @@ export default class DelegateApi {
       params.generatorPublicKey = params.publicKey;
     }
 
-    return this.http.get('/delegates/forging/getForgedByAccount', params, model.ForgedDetails);
+    return this.http.get<model.ForgedDetails>('/delegates/forging/getForgedByAccount', params);
   }
 
 }

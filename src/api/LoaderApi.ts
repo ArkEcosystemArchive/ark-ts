@@ -22,7 +22,7 @@ export default class LoaderApi {
    */
   public synchronisationStatus(fromPeerUrl?: string) {
     if (fromPeerUrl) {
-      return this.http.getNative<model.LoaderStatusSync>(`${fromPeerUrl}/loader/status/sync`, null);
+      return this.http.getNative<model.LoaderStatusSync>(`${fromPeerUrl}/api/loader/status/sync`, null);
     }
 
     return this.http.get<model.LoaderStatusSync>('/loader/status/sync', null);

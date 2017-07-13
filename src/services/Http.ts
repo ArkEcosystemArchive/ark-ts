@@ -29,7 +29,11 @@ function formatParams(params: any): any {
  * Convert JSON response to specific interface.
  */
 function formatResponse(response: any, responseType: any) {
-  return TypedJSON.parse(response.body, responseType);
+  try {
+    return TypedJSON.parse(response.body, responseType);
+  } catch (e) {
+    throw new Error('Invalid response.');
+  }
 }
 
 export default class Http {
