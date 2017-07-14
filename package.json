@@ -1,5 +1,5 @@
 {
-  "name": "ark-tsc",
+  "name": "ark-ts",
   "version": "0.1.0",
   "description": "An ARK API wrapper, written in TypeScript to interact with ARK blockchain.",
   "main": "./lib/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/luciorubeens/ark-tsc.git"
+    "url": "git+https://github.com/luciorubeens/ark-ts.git"
   },
   "keywords": [
     "ark",

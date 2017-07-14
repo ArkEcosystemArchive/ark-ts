@@ -21,7 +21,7 @@ TSARK is a library client designed to facilitate how you interact with the ARK b
 TSARK is avaliable from `npm`.
 
 ```bash
-npm i ark-tsc --save
+npm i ark-ts --save
 ```
 ## Usage
 
@@ -32,7 +32,7 @@ For the best TypeScript experience, you should either use [Visual Studio Code](h
 > Get delegate list from Devnet network.
 
 ```js
-import { Client, Network, NetworkType } from 'ark-tsc';
+import { Client, Network, NetworkType } from 'ark-ts';
 
 const devnet = Network.getDefault(NetworkType.Devnet);
 const client = new Client(devnet);
@@ -45,7 +45,7 @@ client.delegate.list().subscribe((list) => {
 > Get address from passphrase.
 
 ```js
-import { PrivateKey } from 'ark-tsc/core';
+import { PrivateKey } from 'ark-ts/core';
 
 // if no specify a second param, default is mainnet
 const key = PrivateKey.fromSeed('my secret passphrase');

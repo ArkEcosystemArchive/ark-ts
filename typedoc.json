@@ -1,7 +1,7 @@
 {
   "mode": "modules",
   "out": "docs",
-  "name": "ark-tsc",
+  "name": "ark-ts",
   "theme": "default",
   "ignoreCompilerErrors": "true",
   "emitDecoratorMetadata": "true",
