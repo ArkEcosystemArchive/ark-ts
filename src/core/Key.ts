@@ -43,7 +43,15 @@ export class PublicKey {
     payload.writeUInt8(this.network.version, 0);
     buf.copy(payload, 1);
 
-    return Crypto.bs58encode(buf);
+    return Crypto.bs58encode(payload);
+  }
+
+  /**
+   * Set a network to publicKey
+   * Useful to get address from specific version
+   */
+  public setNetwork(network: model.Network): void {
+    this.network = network;
   }
 
   public toHex() {
@@ -59,7 +67,7 @@ export class PublicKey {
 
 export class PrivateKey {
 
-  public publicKey: PublicKey;
+  private publicKey: PublicKey;
 
   constructor(public hash?: Buffer, publicKey?: PublicKey | Buffer) {
     if (publicKey instanceof Buffer) {
@@ -71,7 +79,10 @@ export class PrivateKey {
     }
   }
 
-  public static fromWIF(wifString: string, network?: model.Network): PrivateKey {
+  public static fromWIF(
+    wifString: string,
+    network: model.Network = model.Network.getDefault(model.NetworkType.Mainnet),
+  ): PrivateKey {
     if (!network) {
       network = model.Network.getDefault();
     }
@@ -82,7 +93,10 @@ export class PrivateKey {
     return new PrivateKey(decoded.privateKey);
   }
 
-  public static fromSeed(passphrase: string | Buffer): PrivateKey {
+  public static fromSeed(
+    passphrase: string | Buffer,
+    network: model.Network = model.Network.getDefault(model.NetworkType.Mainnet),
+  ): PrivateKey {
     let password;
 
     if (typeof passphrase === 'string') {
@@ -92,8 +106,10 @@ export class PrivateKey {
     }
 
     const hash = Crypto.sha256(password);
+    const newKey = new PrivateKey(hash);
 
-    return new PrivateKey(hash);
+    newKey.getPublicKey().setNetwork(network);
+    return newKey;
   }
 
   public getPublicKey(): PublicKey {
@@ -104,7 +120,8 @@ export class PrivateKey {
     const compressed = secp256k1.publicKeyCreate(this.hash);
     const pub = secp256k1.publicKeyConvert(compressed, true);
 
-    return new PublicKey(pub);
+    this.publicKey = new PublicKey(pub);
+    return this.publicKey;
   }
 
   public sign(data: Buffer) {

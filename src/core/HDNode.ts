@@ -107,7 +107,7 @@ public static unserialize(hash: string, networkType: model.NetworkType): HDNode 
     wallet.network = networkName;
 
     const networkCapitalize = networkName.charAt(0).toUpperCase() + networkName.slice(1);
-    wallet.key.publicKey.network = model.Network.getDefault(model.NetworkType[networkCapitalize]);
+    wallet.key.getPublicKey().network = model.Network.getDefault(model.NetworkType[networkCapitalize]);
 
     return wallet;
   }
@@ -168,7 +168,7 @@ public static unserialize(hash: string, networkType: model.NetworkType): HDNode 
     }
 
     const networkCapitalize = this.network.charAt(0).toUpperCase() + this.network.slice(1);
-    newKey.publicKey.network = model.Network.getDefault(model.NetworkType[networkCapitalize]);
+    newKey.getPublicKey().setNetwork(model.Network.getDefault(model.NetworkType[networkCapitalize]));
 
     childKey.key = newKey;
 

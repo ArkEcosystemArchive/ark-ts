@@ -41,7 +41,7 @@ export default class Tx {
     this.passphrase = passphrase;
     this.secondPassphrase = secondPassphrase;
     this.privKey = PrivateKey.fromSeed(passphrase);
-    this.privKey.publicKey.network = network;
+    this.privKey.getPublicKey().setNetwork(network);
 
     if (secondPassphrase) {
       this.secondPrivKey = PrivateKey.fromSeed(secondPassphrase);
@@ -93,7 +93,7 @@ export default class Tx {
   public generate(): model.Transaction {
     const tx = this.transaction;
     tx.timestamp = Slot.getTime();
-    tx.senderPublicKey = this.privKey.publicKey.toHex();
+    tx.senderPublicKey = this.privKey.getPublicKey().toHex();
 
     if (!tx.amount) {
       tx.amount = 0;
@@ -102,7 +102,7 @@ export default class Tx {
     tx.signature = this.sign().toString('hex');
 
     if (this.secondPrivKey && !tx.asset.hasOwnProperty('signature')) { // if is not to create second signature
-      tx.secondSenderPublicKey = this.secondPrivKey.publicKey.toHex();
+      tx.secondSenderPublicKey = this.secondPrivKey.getPublicKey().toHex();
       tx.signSignature = this.secondSign().toString('hex');
     }
 
@@ -118,7 +118,7 @@ export default class Tx {
    * To reference transaction without a recipient.
    */
   public setAddress(): void {
-    this.transaction.recipientId = this.privKey.publicKey.getAddress();
+    this.transaction.recipientId = this.privKey.getPublicKey().getAddress();
   }
 
   /**
@@ -140,7 +140,7 @@ export default class Tx {
    */
   public setAssetSignature(): void {
     this.transaction.asset = {
-      signature: this.secondPrivKey.publicKey.toHex(),
+      signature: this.secondPrivKey.getPublicKey().toHex(),
     };
   }
 
@@ -178,7 +178,7 @@ export default class Tx {
 
     if (tx.asset && Object.keys(tx.asset).length > 0) {
       const asset = tx.asset[Object.keys(tx.asset)[0]];
-      if (tx.type == model.TransactionType.CreateDelegate) {
+      if (tx.type === model.TransactionType.CreateDelegate) {
         buf.append(padBytes(asset, new Buffer(20)), 'utf-8');
       } else {
         buf.append(new Buffer(asset, 'utf-8'));
