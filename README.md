@@ -1,13 +1,15 @@
-![TSARK Logo](http://i.imgur.com/OJjwPpU.png)
+![TSARK Logo](http://i.imgur.com/dm3JlUs.png)
 
-> A wrapper for the ARK API, written with TypeScript.
+# TSARK
 
-TSARK is an library client designed to facilitate how you interact with the ARK blockchain.
+> An ARK API wrapper, written in TypeScript to interact with ARK blockchain.
+
+TSARK is a library client designed to facilitate how you interact with the ARK blockchain.
 
 ## Why TypeScript
 
   * TypeScript is is a superset of JavaScript which mainly offers optional static typing, classes, and interfaces. The learning curve is not that steep.
-  * Types are optional, TSARK has compiled to ES6 so you can work with both, ECMAScript or TypeScript.
+  * Types are optional, TSARK compiles into ES6 so you can work with both, ECMAScript or TypeScript.
   * A better development experience, including auto-complete and fully documented.
 
 ## Documentation
@@ -18,14 +20,14 @@ TSARK is an library client designed to facilitate how you interact with the ARK 
 
 TSARK is avaliable from `npm`.
 
-```js
+```bash
 npm i ark-tsc --save
 ```
 ## Usage
 
 For the best TypeScript experience, you should either use [Visual Studio Code](http://code.visualstudio.com/), or a [plug-in for your favorite text editor](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support).
 
-### Basic Example
+### Basic Examples
 
 > Get delegate list from Devnet network.
 
@@ -39,17 +41,28 @@ client.delegate.list().subscribe((list) => {
   console.log(list);
 });
 ```
-For more examples please see documentation or in the tests on each directory.
+
+> Get address from passphrase.
+
+```js
+import { PrivateKey } from 'ark-tsc/core';
+
+// if no specify a second param, default is mainnet
+const key = PrivateKey.fromSeed('my secret passphrase');
+console.log(key.getPublicKey().getAddress()); // AaWU6X3pGdtSCK3s9weo9tjth64F3hixgT
+```
+
+For more examples please see documentation or look for tests in each directory.
 
 ## Running the tests
 
-```js
+```bash
 npm run test
 ```
 
 ## Contributing
 
-  * Submit bugs and help us verify fixes as they are checked in.
+  * If you find any bugs, submit an 'issue' or open 'pull-request', helping us catch and fix them.
   * Engage with other users and developers on [ARK Slack](https://ark.io/slack/).
   * Join the #development channel on Slack or contact our developer Lúcio (@lorenzo).
   * [Contribute bounties](./CONTRIBUTING.md).
