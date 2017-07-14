@@ -9,6 +9,10 @@
     "test": "mocha --opts .mocharc",
     "build-ts": "rimraf lib && tsc -p ./"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luciorubeens/ark-tsc.git"
+  },
   "keywords": [
     "ark",
     "api",
