@@ -16,8 +16,7 @@ function padBytes(value: string, buf: Buffer) {
   const valBuffer = new Buffer(value);
 
   if (valBuffer.length <= buf.length) {
-    buf.fill(0);
-    valBuffer.copy(buf, buf.length - valBuffer.length);
+    valBuffer.copy(buf, 0);
   }
 
   return buf;
@@ -125,14 +124,14 @@ export default class Tx {
    * Sign transaction.
    */
   public sign(): Buffer {
-    return this.privKey.sign(this.toBytes());
+    return this.privKey.sign(this.getHash(true, true));
   }
 
   /**
    * Sign transaction with second passphrase.
    */
   public secondSign(): Buffer {
-    return this.secondPrivKey.sign(this.toBytes());
+    return this.secondPrivKey.sign(this.getHash(false, false));
   }
 
   /**
@@ -147,12 +146,13 @@ export default class Tx {
   /**
    * Returns bytearray of the Transaction object to be signed and send to blockchain
    */
-  public toBytes(): Buffer {
+  public toBytes(skipSignature: boolean = false, skipSecondSignature: boolean = false): Buffer {
     const tx = this.transaction;
     const buf = new bytebuffer(undefined, true);
 
     buf.writeByte(tx.type);
     buf.writeInt(tx.timestamp);
+
     buf.append(tx.senderPublicKey, 'hex');
 
     if (tx.requesterPublicKey) {
@@ -185,47 +185,50 @@ export default class Tx {
       }
     }
 
-    if (tx.signature) {
+    if (!skipSignature && tx.signature) {
       buf.append(tx.signature, 'hex');
     }
 
-    if (tx.signSignature) {
+    if (!skipSecondSignature && tx.signSignature) {
       buf.append(tx.signSignature, 'hex');
     }
 
     buf.flip();
 
-    const txBytes = Crypto.hash256(buf.toBuffer());
+    const txBytes = buf.toBuffer();
 
     return txBytes;
+  }
+
+  public getHash(skipSignature: boolean = false, skipSecondSignature: boolean = false) {
+    return Crypto.sha256(this.toBytes(skipSignature, skipSecondSignature));
   }
 
   /**
    * Verify an ECDSA signature from transaction
    */
   public verify(): boolean {
-    const txBytes = Crypto.hash256(this.toBytes());
+    const txBytes = this.getHash(true, true);
     const signBytes = new Buffer(this.transaction.signature, 'hex');
-    const pub = PublicKey.fromHex(this.transaction.senderPublicKey);
 
-    return pub.verifySignature(txBytes, signBytes);
+    return this.privKey.getPublicKey().verifySignature(signBytes, txBytes);
   }
 
   /**
    * Verify an ECDSA second signature from transaction.
    */
   public secondVerify(): boolean {
-    const txBytes = Crypto.hash256(this.toBytes());
+    const txBytes = Crypto.hash256(this.getHash(false, false));
     const signBytes = new Buffer(this.transaction.signSignature, 'hex');
     const pub = PublicKey.fromHex(this.transaction.secondSenderPublicKey);
 
-    return pub.verifySignature(txBytes, signBytes);
+    return pub.verifySignature(signBytes, txBytes);
   }
 
   /**
    * Returns calculated ID of transaction - hashed 256.
    */
   public getId() {
-    return this.toBytes();
+    return this.getHash();
   }
 }

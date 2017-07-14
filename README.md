@@ -14,7 +14,7 @@ TSARK is a library client designed to facilitate how you interact with the ARK b
 
 ## Documentation
 
-> [API documentation](#) is hosted on github pages, and is generated from [TypeDoc](https://github.com/TypeStrong/typedoc).
+> [API documentation](#) is hosted on github pages, and is generated from [TypeDoc](/TypeStrong/typedoc).
 
 ## Installation
 
@@ -62,7 +62,7 @@ npm run test
 
 ## Contributing
 
-  * If you find any bugs, submit an 'issue' or open 'pull-request', helping us catch and fix them.
+  * If you find any bugs, submit an [issue](../../issues) or open [pull-request](../../pulls), helping us catch and fix them.
   * Engage with other users and developers on [ARK Slack](https://ark.io/slack/).
   * Join the #development channel on Slack or contact our developer Lúcio (@lorenzo).
   * [Contribute bounties](./CONTRIBUTING.md).
@@ -73,4 +73,4 @@ npm run test
 
 ## License
 
-TSARK is licensed under the MIT License - see the [LICENSE.md](./LICENSE) file for details.
+TSARK is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

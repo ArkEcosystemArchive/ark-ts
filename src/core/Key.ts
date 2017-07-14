@@ -126,8 +126,8 @@ export class PrivateKey {
 
   public sign(data: Buffer) {
     const sig = secp256k1.sign(data, this.hash).signature;
-
-    return secp256k1.signatureExport(sig);
+    const exp = secp256k1.signatureExport(sig);
+    return exp;
   }
 
   public toHex() {

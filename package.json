@@ -1,7 +1,7 @@
 {
   "name": "ark-tsc",
   "version": "0.1.0",
-  "description": "A TypeScript module which provides an wrapper for the Ark API.",
+  "description": "An ARK API wrapper, written in TypeScript to interact with ARK blockchain.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
@@ -17,7 +17,7 @@
     "ark",
     "api",
     "blockchain",
-    "crypto",
+    "cryptocurrency",
     "typescript"
   ],
   "author": "Lúcio Rubens <lucio@ark.io>",

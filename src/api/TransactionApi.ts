@@ -60,7 +60,7 @@ export default class TransactionApi {
 
         let data = <model.Transaction> {
           asset: {
-            votes: updown + params.delegatePublicKey,
+            votes: [updown + params.delegatePublicKey],
           },
           fee: fees.vote,
           type: model.TransactionType.Vote,

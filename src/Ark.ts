@@ -2,7 +2,7 @@ import * as api from './api';
 import { Network } from './model/Network';
 import Http from './services/Http';
 
-export default class Ark {
+export default class Client {
 
   public account: api.AccountApi;
   public delegate: api.DelegateApi;
