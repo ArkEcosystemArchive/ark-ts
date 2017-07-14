@@ -1,0 +1,223 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ark-tsc</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">ark-tsc</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> ark-tsc</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p><img src="http://i.imgur.com/dm3JlUs.png" alt="TSARK Logo"></p>
+				<h1 id="tsark">TSARK</h1>
+				<blockquote>
+					<p>An ARK API wrapper, written in TypeScript to interact with ARK blockchain.</p>
+				</blockquote>
+				<p>TSARK is a library client designed to facilitate how you interact with the ARK blockchain.</p>
+				<h2 id="why-typescript">Why TypeScript</h2>
+				<ul>
+					<li>TypeScript is is a superset of JavaScript which mainly offers optional static typing, classes, and interfaces. The learning curve is not that steep.</li>
+					<li>Types are optional, TSARK compiles into ES6 so you can work with both, ECMAScript or TypeScript.</li>
+					<li>A better development experience, including auto-complete and fully documented.</li>
+				</ul>
+				<h2 id="documentation">Documentation</h2>
+				<blockquote>
+					<p><a href="#">API documentation</a> is hosted on github pages, and is generated from <a href="https://github.com/TypeStrong/typedoc">TypeDoc</a>.</p>
+				</blockquote>
+				<h2 id="installation">Installation</h2>
+				<p>TSARK is avaliable from <code>npm</code>.</p>
+				<pre><code class="lang-bash">npm i ark-tsc --save
+</code></pre>
+				<h2 id="usage">Usage</h2>
+				<p>For the best TypeScript experience, you should either use <a href="http://code.visualstudio.com/">Visual Studio Code</a>, or a <a href="https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support">plug-in for your favorite text editor</a>.</p>
+				<h3 id="basic-examples">Basic Examples</h3>
+				<blockquote>
+					<p>Get delegate list from Devnet network.</p>
+				</blockquote>
+				<pre><code class="lang-js"><span class="hljs-keyword">import</span> { Client, Network, NetworkType } <span class="hljs-keyword">from</span> <span class="hljs-string">'ark-tsc'</span>;
+
+<span class="hljs-keyword">const</span> devnet = Network.getDefault(NetworkType.Devnet);
+<span class="hljs-keyword">const</span> client = <span class="hljs-keyword">new</span> Client(devnet);
+
+client.delegate.list().subscribe(<span class="hljs-function">(<span class="hljs-params">list</span>) =&gt;</span> {
+  <span class="hljs-built_in">console</span>.log(list);
+});
+</code></pre>
+				<blockquote>
+					<p>Get address from passphrase.</p>
+				</blockquote>
+				<pre><code class="lang-js"><span class="hljs-keyword">import</span> { PrivateKey } <span class="hljs-keyword">from</span> <span class="hljs-string">'ark-tsc/core'</span>;
+
+<span class="hljs-comment">// if no specify a second param, default is mainnet</span>
+<span class="hljs-keyword">const</span> key = PrivateKey.fromSeed(<span class="hljs-string">'my secret passphrase'</span>);
+<span class="hljs-built_in">console</span>.log(key.getPublicKey().getAddress()); <span class="hljs-comment">// AaWU6X3pGdtSCK3s9weo9tjth64F3hixgT</span>
+</code></pre>
+				<p>For more examples please see documentation or look for tests in each directory.</p>
+				<h2 id="running-the-tests">Running the tests</h2>
+				<pre><code class="lang-bash">npm run <span class="hljs-built_in">test</span>
+</code></pre>
+				<h2 id="contributing">Contributing</h2>
+				<ul>
+					<li>If you find any bugs, submit an <a href="../../issues">issue</a> or open <a href="../../pulls">pull-request</a>, helping us catch and fix them.</li>
+					<li>Engage with other users and developers on <a href="https://ark.io/slack/">ARK Slack</a>.</li>
+					<li>Join the #development channel on Slack or contact our developer Lúcio (@lorenzo).</li>
+					<li><a href="./CONTRIBUTING.md">Contribute bounties</a>.</li>
+				</ul>
+				<h2 id="credits">Credits</h2>
+				<p><strong>Lúcio Rubens</strong> - <a href="https://github.com/luciorubeens">@luciorubeens</a>;</p>
+				<h2 id="license">License</h2>
+				<p>TSARK is licensed under the MIT License - see the <a href="./LICENSE">LICENSE</a> file for details.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_ark_.html">"<wbr>Ark"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/api.html">api</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/core.html">core</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/model.html">model</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/services.html">services</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/utils.html">utils</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

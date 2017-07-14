@@ -1,4 +1,5 @@
 src/
+docs/
 node_modules/
 tsconfig.js
 typedoc.json
