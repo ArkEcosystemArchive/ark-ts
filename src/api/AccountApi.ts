@@ -3,6 +3,8 @@
  */
 /** Account related API calls. */
 
+import { Observable } from 'rxjs/Observable';
+
 import * as model from '../model/Account';
 import Http from '../services/Http';
 

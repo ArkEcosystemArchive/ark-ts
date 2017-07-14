@@ -7,10 +7,6 @@ import { Transaction, VoteType } from '../../model/Transaction';
 
 import { expect } from 'chai';
 
-import 'rxjs/add/observable/empty';
-import 'rxjs/add/operator/catch';
-import { Observable } from 'rxjs/Observable';
-
 /* tslint:disable:no-unused-expression */
 
 describe('TransactionApi', () => {

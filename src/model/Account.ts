@@ -4,7 +4,7 @@
 /** Account model. */
 
 import { JsonMember, JsonObject } from 'typedjson-npm';
-import * as model from './models';
+import { Delegate } from './Delegate';
 
 @JsonObject
 export class Account {
@@ -54,7 +54,7 @@ export class AccountVotesResponse {
   success: boolean;
 
   @JsonMember({ elements: Object, refersAbstractType: true })
-  delegates: model.Delegate[];
+  delegates: Delegate[];
 }
 
 @JsonObject

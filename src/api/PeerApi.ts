@@ -7,11 +7,11 @@ import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
 
-import * as model from '../model/models';
+import * as model from '../model';
 import Http from '../services/Http';
 import LoaderApi from './LoaderApi';
 
-import config from '../../config';
+import config from '../config';
 
 export default class PeerApi {
 
@@ -20,7 +20,7 @@ export default class PeerApi {
   /**
    * Get peer by ip and port.
    */
-  public get(ip: string, port: number) {
+  public get(ip: string, port: number): Observable<model.PeerResponse> {
     const params = {ip, port};
     return this.http.get<model.PeerResponse>('/peers/get', params);
   }
@@ -28,7 +28,7 @@ export default class PeerApi {
   /**
    * Get peers list by parameters.
    */
-  public list(params?: model.PeerQueryParams) {
+  public list(params?: model.PeerQueryParams): Observable<model.PeerResponse> {
     return this.http.get<model.PeerResponse>('/peers', params);
   }
 

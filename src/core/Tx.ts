@@ -5,7 +5,7 @@
 
 import * as bytebuffer from 'bytebuffer';
 
-import * as model from '../model/models';
+import * as model from '../model';
 
 import { PrivateKey, PublicKey } from './Key';
 
@@ -90,7 +90,7 @@ export default class Tx {
    * Generate transaction
    * Call all steps to generate a id.
    */
-  public generate() {
+  public generate(): model.Transaction {
     const tx = this.transaction;
     tx.timestamp = Slot.getTime();
     tx.senderPublicKey = this.privKey.publicKey.toHex();

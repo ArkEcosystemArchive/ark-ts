@@ -4,7 +4,6 @@
 /** Block model. */
 
 import { JsonMember, JsonObject } from 'typedjson-npm';
-import * as model from './models';
 
 @JsonObject
 export class Block {

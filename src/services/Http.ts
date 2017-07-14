@@ -5,12 +5,12 @@
 
 import { Observable } from 'rxjs/Observable';
 
-import { RxHR, RxHttpRequest } from '@akanass/rx-http-request';
+import { RxHR, RxHttpRequest, RxHttpRequestResponse } from '@akanass/rx-http-request';
 import 'rxjs/add/operator/map';
 
 import { TypedJSON } from 'typedjson-npm';
 
-import * as model from '../model/models';
+import * as model from '../model';
 
 /**
  * Convert property from interface to JSON

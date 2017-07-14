@@ -74,7 +74,7 @@ export class DelegateQueryParams {
   generatorPublicKey?: string;
 }
 
-interface AccountVoter {
+export interface AccountVoter {
   username: string;
   address: string;
   publicKey: string;

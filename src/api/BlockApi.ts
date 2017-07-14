@@ -3,6 +3,8 @@
  */
 /** Blocks related API calls. */
 
+import { Observable } from 'rxjs/Observable';
+
 import * as model from '../model/Block';
 import { Network } from '../model/Network';
 import Http from '../services/Http';

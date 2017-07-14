@@ -6,7 +6,7 @@
 import * as secp256k1 from 'secp256k1';
 import * as wif from 'wif';
 
-import * as model from '../model/models';
+import * as model from '../model';
 
 import Crypto from '../utils/Crypto';
 

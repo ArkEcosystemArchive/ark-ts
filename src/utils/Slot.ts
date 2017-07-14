@@ -3,7 +3,7 @@
  */
 /** Time to interact with blockchain. */
 
-import config from '../../config';
+import config from '../config';
 
 export default class Slot {
 

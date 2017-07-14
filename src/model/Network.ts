@@ -3,8 +3,8 @@
  */
 /** Network model. */
 
-import config from '../../config';
-import * as model from './models';
+import config from '../config';
+import { Peer } from './Peer';
 
 export enum NetworkType {
   Mainnet,
@@ -20,7 +20,7 @@ export class Network {
   public version: number;
   public explorer: string;
   public wif?: number;
-  public activePeer: model.Peer;
+  public activePeer: Peer;
 
   constructor() {
     // pass
@@ -47,7 +47,7 @@ export class Network {
   /**
    * Set peer to current network.
    */
-  public setPeer(peer: model.Peer) {
+  public setPeer(peer: Peer) {
     this.activePeer = peer;
   }
 

@@ -6,8 +6,8 @@
 import * as bigi from 'bigi';
 import * as bytebuffer from 'bytebuffer';
 
-import config from '../../config';
-import * as model from '../model/models';
+import config from '../config';
+import * as model from '../model';
 
 import Crypto from '../utils/Crypto';
 import { PrivateKey, PublicKey } from './Key';
