@@ -14,7 +14,7 @@ TSARK is a library client designed to facilitate how you interact with the ARK b
 
 ## Documentation
 
-> [API documentation](#) is hosted on github pages, and is generated from [TypeDoc](https://github.com/TypeStrong/typedoc).
+> [API documentation](https://arkecosystem.github.io/ark-ts/) is hosted on github pages, and is generated from [TypeDoc](https://github.com/TypeStrong/typedoc).
 
 ## Installation
 
