@@ -7,7 +7,7 @@
   "scripts": {
     "build-docs": "rimraf docs && typedoc --options typedoc.json src/",
     "test": "mocha --opts .mocharc",
-    "prepublish": "tsc -p ./"
+    "build-ts": "rimraf lib && tsc -p ./"
   },
   "keywords": [
     "ark",
@@ -19,9 +19,9 @@
   "author": "Lúcio Rubens <lucio@ark.io>",
   "license": "MIT",
   "dependencies": {
-    "@akanass/rx-http-request": "^2.3.0",
+    "@akanass/rx-http-request": "^2.4.0",
     "@types/bigi": "^1.4.0",
-    "@types/node": "^8.0.3",
+    "@types/node": "^8.0.12",
     "@types/rx": "^4.1.1",
     "@upe/typedjson": "^0.2.2",
     "bigi": "^1.4.2",
@@ -40,8 +40,7 @@
   "devDependencies": {
     "@types/chai": "^4.0.1",
     "@types/mocha": "^2.2.41",
-    "chai": "^4.0.2",
-    "chai-properties": "^1.2.1",
+    "chai": "^4.1.0",
     "mocha": "^3.4.2",
     "rimraf": "^2.6.1",
     "source-map-support": "^0.4.15",

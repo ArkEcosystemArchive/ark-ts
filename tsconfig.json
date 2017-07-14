@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
+    "declaration": true,
     "module": "commonjs",
     "target": "es6",
     "noImplicitAny": false,
-    "sourceMap": false,
-    "allowJs": true,
+    "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "outDir": "./lib",
@@ -23,9 +23,11 @@
     ]
   },
   "exclude": [
-    "node_modules"
+    "lib/",
+    "node_modules",
+    "src/**/*.spec.ts"
   ],
   "include": [
-    "src/**/*"
+    "src/**/*.ts"
   ]
 }
