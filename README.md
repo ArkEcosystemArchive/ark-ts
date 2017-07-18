@@ -45,7 +45,7 @@ client.delegate.list().subscribe((list) => {
 > Get address from passphrase.
 
 ```js
-import { PrivateKey } from 'ark-ts/core';
+import { PrivateKey } from 'ark-ts/lib/core';
 
 // if no specify a second param, default is mainnet
 const key = PrivateKey.fromSeed('my secret passphrase');
