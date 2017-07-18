@@ -13,6 +13,16 @@ export default class LoaderApi {
   constructor(private http: Http) {}
 
   /**
+   * Get configuration info of peer
+   */
+  public autoConfigure(fromPeerUrl?: string) {
+    if (fromPeerUrl) {
+      return this.http.getNative<model.LoaderAutoConfigure>(`${fromPeerUrl}/api/loader/autoconfigure`, null);
+    }
+
+    return this.http.get<model.LoaderAutoConfigure>('/loader/autoconfigure', null);
+  }
+  /**
    * Get status blockchain.
    */
   public loadingStatus() {

@@ -37,3 +37,30 @@ export class LoaderStatusSync {
   @JsonMember({ type: String })
   public id: string;
 }
+
+@JsonObject
+export class LoaderNetworkResponse {
+  @JsonMember({ type: String })
+  public nethash: string;
+
+  @JsonMember({ type: String })
+  public token: string;
+
+  @JsonMember({ type: String })
+  public symbol: string;
+
+  @JsonMember({ type: String })
+  public explorer: string;
+
+  @JsonMember({ type: String })
+  public version: string;
+}
+
+@JsonObject
+export class LoaderAutoConfigure {
+  @JsonMember({ type: Boolean })
+  public success: boolean;
+
+  @JsonMember({ elements: LoaderNetworkResponse })
+  public network: LoaderNetworkResponse[];
+}

@@ -21,6 +21,19 @@ describe('LoaderApi', () => {
   it('should have properties', () => {
     expect(api).to.have.property('loadingStatus');
     expect(api).to.have.property('synchronisationStatus');
+    expect(api).to.have.property('autoConfigure');
+  });
+
+  it('should return success from autoConfigure', () => {
+    return api.autoConfigure().forEach((response) => {
+      expect(response).to.have.property('success', true);
+    });
+  });
+
+  it('should return success from autoConfigure (manual peer url)', () => {
+    return api.autoConfigure('http://167.114.29.40:4002').forEach((response) => {
+      expect(response).to.have.property('success', true);
+    });
   });
 
   it('should return sucess from loadingStatus', () => {
