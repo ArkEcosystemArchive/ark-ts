@@ -27,6 +27,29 @@ export class Network {
   }
 
   /**
+   * Get list of all defaults networks.
+   */
+  public static getAll(): Network[] {
+    const networks = config.networks;
+    const list = [];
+
+    Object.keys(networks).forEach((item) => {
+      const name = networks[item];
+      const {peers, ...defaultNetwork} = name; // to remove peers list
+
+      const network = new Network();
+      Object.assign(network, defaultNetwork);
+
+      const type = NetworkType[item.charAt(0).toUpperCase() + item.substr(1).toLowerCase()];
+      network.type = type;
+
+      list.push(network);
+    });
+
+    return list;
+  }
+
+  /**
    * Get network from default config file based on type.
    */
   public static getDefault(type: NetworkType = NetworkType.Mainnet): Network {

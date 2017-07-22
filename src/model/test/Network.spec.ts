@@ -64,4 +64,8 @@ describe('Network', () => {
     expect(network.getPeerUrl()).to.be.a('string').and.not.empty;
   });
 
+  it('should return array of two Networks', () => {
+    expect(Network.getAll()).to.be.an('array').and.to.have.lengthOf(2);
+  });
+
 });
