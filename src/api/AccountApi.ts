@@ -16,28 +16,28 @@ export default class AccountApi {
    * Returns account information of an address.
    */
   public get(params: model.AccountQueryParams) {
-    return this.http.get<model.AccountResponse>('/accounts', params);
+    return this.http.get<model.AccountResponse>('/accounts', params, model.AccountResponse);
   }
 
   /**
    * Get the balance of an account.
    */
   public balance(params: model.AccountQueryParams) {
-    return this.http.get<model.AccountResponse>('/accounts/getBalance', params);
+    return this.http.get<model.AccountResponse>('/accounts/getBalance', params, model.AccountResponse);
   }
 
   /**
    * Get the public key of an account. If the account does not exist the API call will return an error.
    */
   public publicKey(params: model.AccountQueryParams) {
-    return this.http.get<model.AccountResponse>('/accounts/getPublicKey', params);
+    return this.http.get<model.AccountResponse>('/accounts/getPublicKey', params, model.AccountResponse);
   }
 
   /**
    * Get votes by account address.
    */
   public votes(params: model.AccountQueryParams) {
-    return this.http.get<model.AccountVotesResponse>('/accounts/delegates', params);
+    return this.http.get<model.AccountVotesResponse>('/accounts/delegates', params, model.AccountVotesResponse);
   }
 
 }

@@ -4,7 +4,8 @@
 /** Transaction related API calls. */
 
 import { Observable } from 'rxjs/Observable';
-import { TypedJSON } from 'typedjson-npm';
+
+import {deserialize, serialize} from 'json-typescript-mapper';
 
 import * as model from '../model/Transaction';
 
@@ -41,7 +42,7 @@ export default class TransactionApi {
         const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
         data = tx.generate();
 
-        const typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
+        const typedTx = deserialize(model.Transaction, serialize(data));
 
         observer.next(typedTx);
         observer.complete();
@@ -71,7 +72,7 @@ export default class TransactionApi {
         tx.setAddress();
         data = tx.generate();
 
-        const typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
+        const typedTx = deserialize(model.Transaction, serialize(data));
 
         observer.next(typedTx);
         observer.complete();
@@ -102,7 +103,7 @@ export default class TransactionApi {
         const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
         data = tx.generate();
 
-        const typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
+        const typedTx = deserialize(model.Transaction, serialize(data));
 
         observer.next(typedTx);
         observer.complete();
@@ -128,7 +129,7 @@ export default class TransactionApi {
         tx.setAssetSignature();
         data = tx.generate();
 
-        const typedTx = TypedJSON.parse(TypedJSON.stringify(data), model.Transaction);
+        const typedTx = deserialize(model.Transaction, serialize(data));
 
         observer.next(typedTx);
         observer.complete();
@@ -141,7 +142,7 @@ export default class TransactionApi {
    */
   public post(transaction: model.Transaction) {
     const params = {transactions: [transaction]};
-    return this.http.post<model.TransactionResponse>('/peer/transactions', params);
+    return this.http.post<model.TransactionResponse>('/peer/transactions', params, model.TransactionResponse);
   }
 
   /**
@@ -149,7 +150,7 @@ export default class TransactionApi {
    */
   public get(id: string) {
     const params = {id};
-    return this.http.get<model.TransactionResponse>('/transactions/get', params);
+    return this.http.get<model.TransactionResponse>('/transactions/get', params, model.TransactionResponse);
   }
 
   /**
@@ -157,21 +158,21 @@ export default class TransactionApi {
    */
   public getUnconfirmed(id: string) {
     const params = {id};
-    return this.http.get<model.TransactionResponse>('/transactions/unconfirmed/get', params);
+    return this.http.get<model.TransactionResponse>('/transactions/unconfirmed/get', params, model.TransactionResponse);
   }
 
   /**
    * Transactions list matched by provided parameters.
    */
   public list(params?: model.TransactionQueryParams) {
-    return this.http.get<model.TransactionResponse>('/transactions', params);
+    return this.http.get<model.TransactionResponse>('/transactions', params, model.TransactionResponse);
   }
 
   /**
    * Transactions unconfirmed list matched by provided parameters.
    */
   public listUnconfirmed(params?: model.TransactionQueryParams) {
-    return this.http.get<model.TransactionResponse>('/transactions/unconfirmed', params);
+    return this.http.get<model.TransactionResponse>('/transactions/unconfirmed', params, model.TransactionResponse);
   }
 
 }

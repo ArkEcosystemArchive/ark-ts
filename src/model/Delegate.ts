@@ -3,104 +3,147 @@
  */
 /** Delegate model. */
 
-import { JsonMember, JsonObject } from 'typedjson-npm';
+import { JsonProperty } from 'json-typescript-mapper';
 
-@JsonObject
 export class Delegate {
-  @JsonMember({ type: String })
+  @JsonProperty('username')
   username: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('address')
   address: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('publicKey')
   publicKey: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('vote')
   vote: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('producedblocks')
   producedBlocks: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('missedblocks')
   missedBlocks: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('rate')
   rate: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('approval')
   approval: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('productivity')
   productivity: number;
+
+  constructor() {
+    this.address = void 0;
+    this.approval = void 0;
+    this.missedBlocks = void 0;
+    this.producedBlocks = void 0;
+    this.productivity = void 0;
+    this.publicKey = void 0;
+    this.rate = void 0;
+    this.username = void 0;
+    this.vote = void 0;
+  }
 }
 
-@JsonObject
 export class DelegateResponse {
-  @JsonMember({ type: Boolean })
-  sucess: boolean;
+  @JsonProperty('success')
+  success: boolean;
 
-  @JsonMember({ elements: Delegate })
+  @JsonProperty({clazz: Delegate, name: 'delegates'})
   delegates?: Delegate[];
 
-  @JsonMember({ type: Delegate })
+  @JsonProperty({clazz: Delegate, name: 'delegate'})
   delegate?: Delegate;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('totalCount')
   totalCount: number;
+
+  constructor() {
+    this.success = void 0;
+    this.delegates = void 0;
+    this.delegate = void 0;
+    this.totalCount = void 0;
+  }
 }
 
-@JsonObject
 export class DelegateQueryParams {
-  @JsonMember({ type: String })
+  @JsonProperty('username')
   username?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('publicKey')
   publicKey?: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('offset')
   offset?: number;
 
-  @JsonMember({ type: String })
+  @JsonProperty('orderBy')
   orderBy?: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('limit')
   limit?: number;
 
-  @JsonMember({ type: Delegate })
+  @JsonProperty({clazz: Delegate, name: 'delegate'})
   delegate?: Delegate;
 
-  @JsonMember({ type: String })
+  @JsonProperty('generatorPublicKey')
   generatorPublicKey?: string;
+
+  constructor() {
+    this.username = void 0;
+    this.publicKey = void 0;
+    this.offset = void 0;
+    this.orderBy = void 0;
+    this.limit = void 0;
+    this.delegate = void 0;
+    this.generatorPublicKey = void 0;
+  }
 }
 
-export interface AccountVoter {
+export class AccountVoter {
   username: string;
   address: string;
   publicKey: string;
   balance: string;
+
+  constructor() {
+    this.username = void 0;
+    this.address = void 0;
+    this.publicKey = void 0;
+    this.balance = void 0;
+  }
 }
 
-@JsonObject
 export class DelegateVoters {
-  @JsonMember({ type: Boolean })
-  sucess: boolean;
+  @JsonProperty('success')
+  success: boolean;
 
-  @JsonMember({ elements: Object, refersAbstractType: true })
+  @JsonProperty({clazz: AccountVoter, name: 'accounts'})
   accounts: AccountVoter[];
+
+  constructor() {
+    this.success = void 0;
+    this.accounts = void 0;
+  }
 }
 
-@JsonObject
 export class ForgedDetails {
-  @JsonMember({ type: Boolean })
-  sucess: boolean;
+  @JsonProperty('success')
+  success: boolean;
 
-  @JsonMember({ type: String })
+  @JsonProperty('fees')
   fees: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('rewards')
   rewards: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('forged')
   forged: string;
+
+  constructor() {
+    this.success = void 0;
+    this.fees = void 0;
+    this.rewards = void 0;
+    this.forged = void 0;
+  }
 }

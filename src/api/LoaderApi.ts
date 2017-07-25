@@ -17,16 +17,17 @@ export default class LoaderApi {
    */
   public autoConfigure(fromPeerUrl?: string) {
     if (fromPeerUrl) {
-      return this.http.getNative<model.LoaderAutoConfigure>(`${fromPeerUrl}/api/loader/autoconfigure`, null);
+      return this.http.getNative<model.LoaderAutoConfigure>(
+        `${fromPeerUrl}/api/loader/autoconfigure`, null, model.LoaderAutoConfigure);
     }
 
-    return this.http.get<model.LoaderAutoConfigure>('/loader/autoconfigure', null);
+    return this.http.get<model.LoaderAutoConfigure>('/loader/autoconfigure', null, model.LoaderAutoConfigure);
   }
   /**
    * Get status blockchain.
    */
   public loadingStatus() {
-    return this.http.get<model.LoaderStatus>('/loader/status', null);
+    return this.http.get<model.LoaderStatus>('/loader/status', null, model.LoaderStatus);
   }
 
   /**
@@ -34,10 +35,11 @@ export default class LoaderApi {
    */
   public synchronisationStatus(fromPeerUrl?: string) {
     if (fromPeerUrl) {
-      return this.http.getNative<model.LoaderStatusSync>(`${fromPeerUrl}/api/loader/status/sync`, null);
+      return this.http.getNative<model.LoaderStatusSync>(
+        `${fromPeerUrl}/api/loader/status/sync`, null, model.LoaderStatusSync);
     }
 
-    return this.http.get<model.LoaderStatusSync>('/loader/status/sync', null);
+    return this.http.get<model.LoaderStatusSync>('/loader/status/sync', null, model.LoaderStatusSync);
   }
 
 }

@@ -22,14 +22,14 @@ export default class PeerApi {
    */
   public get(ip: string, port: number): Observable<model.PeerResponse> {
     const params = {ip, port};
-    return this.http.get<model.PeerResponse>('/peers/get', params);
+    return this.http.get<model.PeerResponse>('/peers/get', params, model.PeerResponse);
   }
 
   /**
    * Get peers list by parameters.
    */
   public list(params?: model.PeerQueryParams): Observable<model.PeerResponse> {
-    return this.http.get<model.PeerResponse>('/peers', params);
+    return this.http.get<model.PeerResponse>('/peers', params, model.PeerResponse);
   }
 
   /**

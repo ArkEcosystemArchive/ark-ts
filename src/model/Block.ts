@@ -3,120 +3,163 @@
  */
 /** Block model. */
 
-import { JsonMember, JsonObject } from 'typedjson-npm';
+import { JsonProperty } from 'json-typescript-mapper';
 
-@JsonObject
 export class Block {
-  @JsonMember({ type: Number })
+  @JsonProperty('id')
   id: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('version')
   version: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('timestamp')
   timestamp: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('height')
   height: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('previousBlock')
   previousBlock: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('numberOfTransactions')
   numberOfTransactions: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('totalAmount')
   totalAmount: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('totalFee')
   totalFee: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('reward')
   reward: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('payloadLength')
   payloadLength: number;
 
-  @JsonMember({ type: String })
+  @JsonProperty('payloadHash')
   payloadHash: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('generatorPublicKey')
   generatorPublicKey: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('generatorId')
   generatorId: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('blockSignature')
   blockSignature: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('confirmations')
   confirmations: number;
 
-  @JsonMember({ type: String })
+  @JsonProperty('totalForged')
   totalForged: string;
+
+  constructor() {
+    this.version = void 0;
+    this.blockSignature = void 0;
+    this.confirmations = void 0;
+    this.generatorId = void 0;
+    this.generatorPublicKey = void 0;
+    this.generatorId = void 0;
+    this.height = void 0;
+    this.id = void 0;
+    this.numberOfTransactions = void 0;
+    this.payloadHash = void 0;
+    this.payloadLength = void 0;
+    this.previousBlock = void 0;
+    this.reward = void 0;
+    this.timestamp = void 0;
+    this.totalAmount = void 0;
+    this.totalFee = void 0;
+    this.totalForged = void 0;
+  }
 }
 
-@JsonObject
 export class BlockQueryParams {
-  @JsonMember({ type: String })
   id: string;
 }
 
-@JsonObject
 export class BlockResponse {
-  @JsonMember({ type: Boolean })
+  @JsonProperty('success')
   success: boolean;
 
-  @JsonMember({ elements: Block })
-  blocks: Block[];
+  @JsonProperty({clazz: Block, name: 'blocks'})
+  blocks?: Block[];
 
-  @JsonMember({ type: Block })
-  block: Block;
+  @JsonProperty({clazz: Block, name: 'block'})
+  block?: Block;
+
+  constructor() {
+    this.success = void 0;
+    this.blocks = void 0;
+    this.block = void 0;
+  }
 }
 
-@JsonObject
 export class BlockFee {
-  @JsonMember({ type: Boolean })
+  @JsonProperty('success')
   success: boolean;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('fee')
   fee: number;
+
+  constructor() {
+    this.success = void 0;
+    this.fee = void 0;
+  }
 }
 
-@JsonObject
 export class Fees {
-  @JsonMember({ type: Number })
+  @JsonProperty('send')
   send: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('vote')
   vote: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('secondsignature')
   secondsignature: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('delegate')
   delegate: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('multisignature')
   multisignature: number;
+
+  constructor() {
+    this.send = void 0;
+    this.vote = void 0;
+    this.secondsignature = void 0;
+    this.delegate = void 0;
+    this.multisignature = void 0;
+  }
 }
 
-@JsonObject
 export class BlockFees {
-  @JsonMember({ type: Boolean })
+  @JsonProperty('success')
   success: boolean;
-  @JsonMember({ type: Fees })
+
+  @JsonProperty({clazz: Fees, name: 'fees'})
   fees: Fees;
+
+  constructor() {
+    this.success = void 0;
+    this.fees = void 0;
+  }
 }
 
-@JsonObject
 export class BlockHeight {
-  @JsonMember({ type: Boolean })
+  @JsonProperty('success')
   success: boolean;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('height')
   height: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('id')
   id: number;
+
+  constructor() {
+    this.success = void 0;
+    this.height = void 0;
+    this.id = void 0;
+  }
 }

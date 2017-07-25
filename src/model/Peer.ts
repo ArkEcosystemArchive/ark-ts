@@ -3,70 +3,66 @@
  */
 /** Peer model. */
 
-import { JsonMember, JsonObject } from 'typedjson-npm';
+import { JsonProperty } from 'json-typescript-mapper';
 
-@JsonObject
 export class Peer {
-  @JsonMember({ type: String })
+  @JsonProperty('ip')
   ip: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('port')
   port: number;
 
-  @JsonMember({ type: String })
+  @JsonProperty('version')
   version?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('os')
   os?: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('height')
   height?: number;
 
-  @JsonMember({ type: String })
+  @JsonProperty('status')
   status?: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('delay')
   delay?: number;
+
+  constructor() {
+    this.delay = void 0;
+    this.height = void 0;
+    this.ip = void 0;
+    this.os = void 0;
+    this.port = void 0;
+    this.status = void 0;
+    this.version = void 0;
+  }
 }
 
-@JsonObject
 export class PeerQueryParams {
-  @JsonMember({ type: String })
   status?: string;
-
-  @JsonMember({ type: String })
   os?: string;
-
-  @JsonMember({ type: String })
   shared?: string;
-
-  @JsonMember({ type: String })
   version?: string;
-
-  @JsonMember({ type: Number })
   limit?: number;
-
-  @JsonMember({ type: String })
   orderBy?: string;
-
-  @JsonMember({ type: Number })
   offset?: number;
-
-  @JsonMember({ type: String })
   ip?: string;
-
-  @JsonMember({ type: Number })
   port?: number;
 }
 
-@JsonObject
 export class PeerResponse {
-  @JsonMember({ type: Boolean })
+  @JsonProperty('success')
   success: boolean;
 
-  @JsonMember({ elements: Peer })
+  @JsonProperty({clazz: Peer, name: 'peers'})
   peers: Peer[];
 
-  @JsonMember({ type: Peer })
+  @JsonProperty({clazz: Peer, name: 'peer'})
   peer: Peer;
+
+  constructor() {
+    this.success = void 0;
+    this.peers = void 0;
+    this.peer = void 0;
+  }
 }

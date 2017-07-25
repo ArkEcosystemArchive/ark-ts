@@ -3,62 +3,80 @@
  */
 /** Account model. */
 
-import { JsonMember, JsonObject } from 'typedjson-npm';
+import { JsonProperty } from 'json-typescript-mapper';
 import { Delegate } from './Delegate';
 
-@JsonObject
 export class Account {
-  @JsonMember({ type: String })
+  @JsonProperty('address')
   address: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('unconfirmedBalance')
   unconfirmedBalance: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('balance')
   balance: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('publicKey')
   publicKey: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('unconfirmedSignature')
   unconfirmedSignature: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('secondSignature')
   secondSignature: number;
 
-  @JsonMember({ type: Object })
+  @JsonProperty({clazz: Object, name: 'secondSignature'})
   secondPublicKey: object;
 
-  @JsonMember({ elements: Object, refersAbstractType: true })
+  @JsonProperty({clazz: Object, name: 'multiSignatures'})
   multiSignatures: object[];
 
-  @JsonMember({ elements: Object, refersAbstractType: true })
+  @JsonProperty({clazz: Object, name: 'u_multisignatures'})
   uMultiSignatures: object[];
+
+  constructor() {
+    this.address = void 0;
+    this.unconfirmedBalance = void 0;
+    this.balance = void 0;
+    this.publicKey = void 0;
+    this.unconfirmedSignature = void 0;
+    this.secondSignature = void 0;
+    this.secondPublicKey = void 0;
+    this.multiSignatures = void 0;
+    this.uMultiSignatures = void 0;
+  }
 }
 
-@JsonObject
 export class AccountResponse {
-  @JsonMember({ type: Boolean })
+  @JsonProperty('success')
   success: boolean;
 
-  @JsonMember({ type: Account })
+  @JsonProperty({clazz: Account, name: 'account'})
   account?: Account;
 
-  @JsonMember({ type: String })
+  @JsonProperty('publicKey')
   publicKey?: string;
+
+  constructor() {
+    this.success = void 0;
+    this.account = void 0;
+    this.publicKey = void 0;
+  }
 }
 
-@JsonObject
 export class AccountVotesResponse {
-  @JsonMember({ type: Boolean })
+  @JsonProperty('success')
   success: boolean;
 
-  @JsonMember({ elements: Object, refersAbstractType: true })
+  @JsonProperty({clazz: Delegate, name: 'delegates'})
   delegates: Delegate[];
+
+  constructor() {
+    this.success = void 0;
+    this.delegates = void 0;
+  }
 }
 
-@JsonObject
 export class AccountQueryParams {
-  @JsonMember({ type: String })
   address: string;
 }

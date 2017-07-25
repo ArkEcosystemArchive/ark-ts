@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { RxHR, RxHttpRequest, RxHttpRequestResponse } from '@akanass/rx-http-request';
 import 'rxjs/add/operator/map';
 
-import { TypedJSON } from 'typedjson-npm';
+import {deserialize, serialize} from 'json-typescript-mapper';
 
 import * as model from '../model';
 
@@ -30,7 +30,12 @@ function formatParams(params: any): any {
  */
 function formatResponse(response: any, responseType: any) {
   try {
-    return TypedJSON.parse(response.body, responseType);
+    let result: typeof responseType;
+    const body = typeof response.body === 'string' ? JSON.parse(response.body) : response.body;
+
+    result = deserialize(responseType, body);
+
+    return result;
   } catch (e) {
     throw new Error(response.body);
   }
@@ -52,17 +57,17 @@ export default class Http {
     });
   }
 
-  public getNative<T>(url: string, params?: any, responseType?: T): Observable<T> {
+  public getNative<T>(url: string, params: any = {}, responseType?: new() => T): Observable<T> {
     return RxHR.get(url, formatParams(params))
                .map((data) => formatResponse(data, responseType));
   }
 
-  public get<T>(url: string, params?: any, responseType?: T): Observable<T> {
+  public get<T>(url: string, params: any = {}, responseType?: new() => T): Observable<T> {
     return this.baseRequest.get(`/api${url}`, formatParams(params))
                            .map((data) => formatResponse(data, responseType));
   }
 
-  public post<T>(url: string, body: any, responseType?: T): Observable<T> {
+  public post<T>(url: string, body: any, responseType?: new() => T): Observable<T> {
     const options = {
       body,
       json: true,

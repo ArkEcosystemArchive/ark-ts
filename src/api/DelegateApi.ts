@@ -16,14 +16,14 @@ export default class DelegateApi {
    * Get delegate by username.
    */
   public get(params: model.DelegateQueryParams) {
-    return this.http.get<model.DelegateResponse>('/delegates/get', params);
+    return this.http.get<model.DelegateResponse>('/delegates/get', params, model.DelegateResponse);
   }
 
   /**
    * Get delegates list.
    */
   public list(params?: model.DelegateQueryParams) {
-    return this.http.get<model.DelegateResponse>('/delegates', params);
+    return this.http.get<model.DelegateResponse>('/delegates', params, model.DelegateResponse);
   }
 
   /**
@@ -35,7 +35,7 @@ export default class DelegateApi {
       params = {publicKey: params.delegate.publicKey};
     }
 
-    return this.http.get<model.DelegateVoters>('/delegates/voters', params);
+    return this.http.get<model.DelegateVoters>('/delegates/voters', params, model.DelegateVoters);
   }
 
   /**
@@ -51,7 +51,7 @@ export default class DelegateApi {
       params.generatorPublicKey = params.publicKey;
     }
 
-    return this.http.get<model.ForgedDetails>('/delegates/forging/getForgedByAccount', params);
+    return this.http.get<model.ForgedDetails>('/delegates/forging/getForgedByAccount', params, model.ForgedDetails);
   }
 
 }

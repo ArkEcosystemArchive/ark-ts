@@ -39,7 +39,7 @@ describe('DelegateApi', () => {
 
   it('should return sucess from voters', () => {
     return api.voters({
-      publicKey: '021e6d971e5885a3147ddf1e45bf5c8d0887ad9fc659e24bdf95c2c9607e7e3fe8'
+      publicKey: '03bd4f16e39aaba5cba6a87b7498b08ce540f279be367e68ae96fb05dfabe203ad'
     }).forEach((response) => {
       expect(response).to.have.property('success', true);
     });
@@ -47,7 +47,7 @@ describe('DelegateApi', () => {
 
   it('should return instance of ForgedDetails from forgedData', () => {
     return api.forgedData({
-      publicKey: '021e6d971e5885a3147ddf1e45bf5c8d0887ad9fc659e24bdf95c2c9607e7e3fe8'
+      publicKey: '03bd4f16e39aaba5cba6a87b7498b08ce540f279be367e68ae96fb05dfabe203ad'
     }).forEach((response) => {
       expect(response).to.be.property('success', true);
     });

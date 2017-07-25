@@ -3,7 +3,7 @@
  */
 /** Transaction model. */
 
-import { JsonMember, JsonObject } from 'typedjson-npm';
+import { JsonProperty } from 'json-typescript-mapper';
 
 export enum TransactionType {
   SendArk = 0,
@@ -13,131 +13,147 @@ export enum TransactionType {
   MultiSignature = 4,
 }
 
-@JsonObject
 export class Transaction {
-  @JsonMember({ type: String })
+  @JsonProperty('id')
   id?: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('timestamp')
   timestamp?: number;
 
-  @JsonMember({ type: String })
+  @JsonProperty('recipientId')
   recipientId?: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('amount')
   amount?: number;
 
-  @JsonMember({ type: Object, refersAbstractType: true })
+  @JsonProperty({clazz: Object, name: 'asset'})
   asset?: object;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('fee')
   fee?: number;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('type')
   type?: TransactionType;
 
-  @JsonMember({ type: String })
+  @JsonProperty('vendorField')
   vendorField?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('signature')
   signature?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('signSignature')
   signSignature?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('senderPublicKey')
   senderPublicKey?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('secondSenderPublicKey')
   secondSenderPublicKey?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('requesterPublicKey')
   requesterPublicKey?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('blockId')
   blockId?: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('height')
   height?: number;
 
-  @JsonMember({ type: String })
+  @JsonProperty('senderId')
   senderId?: string;
 
-  @JsonMember({ type: Number })
+  @JsonProperty('confirmations')
   confirmations?: number;
+
+  constructor() {
+    this.amount = void 0;
+    this.asset = void 0;
+    this.blockId = void 0;
+    this.confirmations = void 0;
+    this.fee = void 0;
+    this.height = void 0;
+    this.id = void 0;
+    this.recipientId = void 0;
+    this.requesterPublicKey = void 0;
+    this.secondSenderPublicKey = void 0;
+    this.senderId = void 0;
+    this.senderPublicKey = void 0;
+    this.signature = void 0;
+    this.signSignature = void 0;
+    this.timestamp = void 0;
+    this.type = void 0;
+    this.vendorField = void 0;
+  }
 }
 
-@JsonObject
 export class TransactionQueryParams {
-  @JsonMember({ type: String })
   id?: string;
-
-  @JsonMember({ type: String })
   blockId?: string;
-
-  @JsonMember({ type: String })
   senderId?: string;
-
-  @JsonMember({ type: String })
   recipientId?: string;
-
-  @JsonMember({ type: Number })
   limit?: number;
-
-  @JsonMember({ type: Number })
   offset?: number;
-
-  @JsonMember({ type: String })
   orderBy?: string;
-
-  @JsonMember({ type: Object, refersAbstractType: true })
   type?: TransactionType;
 }
 
-@JsonObject
 export class TransactionSend {
 
-  @JsonMember({ type: Number })
+  @JsonProperty('amount')
   amount: number;
 
-  @JsonMember({ type: String })
+  @JsonProperty('recipientId')
   recipientId: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('passphrase')
   passphrase: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('publicKey')
   publicKey?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('secondPassphrase')
   secondPassphrase?: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('vendorField')
   vendorField?: string;
 
+  constructor() {
+    this.amount = void 0;
+    this.passphrase = void 0;
+    this.publicKey = void 0;
+    this.recipientId = void 0;
+    this.secondPassphrase = void 0;
+    this.vendorField = void 0;
+  }
 }
 
-@JsonObject
 export class TransactionResponse {
-  @JsonMember({ type: Boolean })
+  @JsonProperty('success')
   success: boolean;
 
-  @JsonMember({ elements: Transaction })
+  @JsonProperty({clazz: Transaction, name: 'transactions'})
   transactions: Transaction[];
 
-  @JsonMember({ type: Transaction })
+  @JsonProperty({clazz: Transaction, name: 'transaction'})
   transaction: Transaction;
 
-  @JsonMember({ type: String })
+  @JsonProperty('count')
   count: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('error')
   error: string;
+
+  constructor() {
+    this.success = void 0;
+    this.transactions = void 0;
+    this.transaction = void 0;
+    this.count = void 0;
+    this.error = void 0;
+  }
 }
 
-@JsonObject
 export class TransactionPayload {
-  @JsonMember({ elements: Transaction })
+  @JsonProperty({clazz: Transaction, name: 'transactions'})
   transactions: Transaction[];
 }
 
@@ -146,29 +162,40 @@ export enum VoteType {
   Remove,
 }
 
-@JsonObject
 export class TransactionVote {
-  @JsonMember({ type: String })
+  @JsonProperty('type')
   type: VoteType;
 
-  @JsonMember({ type: String })
+  @JsonProperty('delegatePublicKey')
   delegatePublicKey: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('passphrase')
   passphrase: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('secondPassphrase')
   secondPassphrase?: string;
+
+  constructor() {
+    this.type = void 0;
+    this.delegatePublicKey = void 0;
+    this.passphrase = void 0;
+    this.secondPassphrase = void 0;
+  }
 }
 
-@JsonObject
 export class TransactionDelegate {
-  @JsonMember({ type: String })
+  @JsonProperty('username')
   username: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('passphrase')
   passphrase: string;
 
-  @JsonMember({ type: String })
+  @JsonProperty('secondPassphrase')
   secondPassphrase?: string;
+
+  constructor() {
+    this.username = void 0;
+    this.passphrase = void 0;
+    this.secondPassphrase = void 0;
+  }
 }

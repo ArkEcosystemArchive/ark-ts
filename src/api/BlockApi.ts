@@ -17,35 +17,35 @@ export default class BlockApi {
    * Get network fees.
    */
   public static networkFees(network: Network) {
-    return new Http(network).get<model.BlockFees>('/blocks/getfees', null);
+    return new Http(network).get<model.BlockFees>('/blocks/getfees', null, model.BlockFees);
   }
 
   /**
    * Get block by id.
    */
   public get(params: model.BlockQueryParams) {
-    return this.http.get<model.BlockResponse>('/blocks/get', params);
+    return this.http.get<model.BlockResponse>('/blocks/get', params, model.BlockResponse);
   }
 
   /**
    *  Get all blocks.
    */
   public list(params?: model.BlockQueryParams) {
-    return this.http.get<model.BlockResponse>('/blocks', params);
+    return this.http.get<model.BlockResponse>('/blocks', params, model.BlockResponse);
   }
 
   /**
    * Get transaction fee for sending "normal" transactions.
    */
   public blockchainFee() {
-    return this.http.get<model.BlockFee>('/blocks/getFee', null);
+    return this.http.get<model.BlockFee>('/blocks/getFee', null, model.BlockFee);
   }
 
   /**
    * Get blockchain height.
    */
   public blockchainHeight() {
-    return this.http.get<model.BlockHeight>('/blocks/getHeight', null);
+    return this.http.get<model.BlockHeight>('/blocks/getHeight', null, model.BlockHeight);
   }
 
 }

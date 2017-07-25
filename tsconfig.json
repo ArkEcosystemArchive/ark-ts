@@ -10,7 +10,6 @@
     "outDir": "./lib",
     "typeRoots": [
       "node_modules/@types/",
-      "node_modules/@upe/",
       "node_modules/@akanass/"
     ],
     "types":[
@@ -18,8 +17,7 @@
       "node",
       "mocha",
       "rx",
-      "rx-http-request",
-      "typedjson"
+      "rx-http-request"
     ]
   },
   "exclude": [
