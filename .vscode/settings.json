@@ -10,5 +10,6 @@
   "search.exclude":{
     "**/node_modules": true
   },
-  "tslint.enable": true
+  "tslint.enable": true,
+  "tslint.exclude": "./node_modules/**/*.ts"
 }

@@ -1,13 +1,16 @@
 {
   "name": "ark-ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An ARK API wrapper, written in TypeScript to interact with ARK blockchain.",
-  "main": "./lib/index.js",
-  "types": "./lib/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "build-docs": "rimraf docs && typedoc --options typedoc.json src/",
+    "build:docs": "rimraf docs && typedoc --options typedoc.json src/",
+    "build:ts": "rimraf lib && tsc -p ./",
+    "build:prod": "npm run build:ts && npm run build:docs && npm run copypackage",
+    "copypackage": "cp package.json ./lib/package.json",
     "test": "mocha --opts .mocharc",
-    "build-ts": "rimraf lib && tsc -p ./"
+    "lint": "tslint src/**/*.ts"
   },
   "repository": {
     "type": "git",
