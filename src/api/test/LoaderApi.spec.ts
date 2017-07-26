@@ -24,6 +24,14 @@ describe('LoaderApi', () => {
     expect(api).to.have.property('autoConfigure');
   });
 
+  it ('should return success from autoConfigure (manual http)', () => {
+    const newHttp = new Http();
+
+    return new LoaderApi(newHttp).autoConfigure('http://167.114.29.40:4002').forEach((response) => {
+      expect(response).to.have.property('success', true);
+    });
+  });
+
   it('should return success from autoConfigure', () => {
     return api.autoConfigure().forEach((response) => {
       expect(response).to.have.property('success', true);

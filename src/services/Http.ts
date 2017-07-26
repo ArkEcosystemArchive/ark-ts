@@ -45,16 +45,21 @@ export default class Http {
 
   private baseRequest: RxHttpRequest;
 
-  public constructor(public network: model.Network) {
-    this.baseRequest = RxHR.defaults({
-      baseUrl: network.getPeerUrl(),
-      headers: {
+  public constructor(public network?: model.Network) {
+    const options = {
+      json: true,
+    };
+
+    if (network) {
+      options['baseUrl'] = network.getPeerUrl();
+      options['headers'] = {
         nethash: network.nethash,
         port: network.activePeer.port,
         version: network.version,
-      },
-      json: true,
-    });
+      };
+    }
+
+    this.baseRequest = RxHR.defaults(options);
   }
 
   public getNative<T>(url: string, params: any = {}, responseType?: new() => T): Observable<T> {
