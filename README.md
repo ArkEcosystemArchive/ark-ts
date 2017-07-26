@@ -4,12 +4,16 @@
 
 > An ARK API wrapper, written in TypeScript to interact with ARK blockchain.
 
+[![npm](https://img.shields.io/npm/dt/ark-ts.svg)]()
+[![npm](https://img.shields.io/npm/v/ark-ts.svg)]()
+[![license](https://img.shields.io/github/license/arkecosystem/ark-ts.svg)]()
+
 TSARK is a library client designed to facilitate how you interact with the ARK blockchain.
 
 ## Why TypeScript
 
   * TypeScript is is a superset of JavaScript which mainly offers optional static typing, classes, and interfaces. The learning curve is not that steep.
-  * Types are optional, TSARK compiles into ES6 so you can work with both, ECMAScript or TypeScript.
+  * Types are optional, TSARK compiles into ES5 so you can work with both, ECMAScript or TypeScript.
   * A better development experience, including auto-complete and fully documented.
 
 ## Documentation
@@ -21,8 +25,15 @@ TSARK is a library client designed to facilitate how you interact with the ARK b
 TSARK is avaliable from `npm`.
 
 ```bash
+yarn add ark-ts
+```
+
+or
+
+```bash
 npm i ark-ts --save
 ```
+
 ## Usage
 
 For the best TypeScript experience, you should either use [Visual Studio Code](http://code.visualstudio.com/), or a [plug-in for your favorite text editor](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support).
@@ -45,7 +56,7 @@ client.delegate.list().subscribe((list) => {
 > Get address from passphrase.
 
 ```js
-import { PrivateKey } from 'ark-ts/lib/core';
+import { PrivateKey } from 'ark-ts/core';
 
 // if no specify a second param, default is mainnet
 const key = PrivateKey.fromSeed('my secret passphrase');

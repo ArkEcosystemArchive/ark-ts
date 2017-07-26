@@ -65,11 +65,14 @@
 				<blockquote>
 					<p>An ARK API wrapper, written in TypeScript to interact with ARK blockchain.</p>
 				</blockquote>
+				<p><a href=""><img src="https://img.shields.io/npm/dt/ark-ts.svg" alt="npm"></a>
+					<a href=""><img src="https://img.shields.io/npm/v/ark-ts.svg" alt="npm"></a>
+				<a href=""><img src="https://img.shields.io/github/license/arkecosystem/ark-ts.svg" alt="license"></a></p>
 				<p>TSARK is a library client designed to facilitate how you interact with the ARK blockchain.</p>
 				<h2 id="why-typescript">Why TypeScript</h2>
 				<ul>
 					<li>TypeScript is is a superset of JavaScript which mainly offers optional static typing, classes, and interfaces. The learning curve is not that steep.</li>
-					<li>Types are optional, TSARK compiles into ES6 so you can work with both, ECMAScript or TypeScript.</li>
+					<li>Types are optional, TSARK compiles into ES5 so you can work with both, ECMAScript or TypeScript.</li>
 					<li>A better development experience, including auto-complete and fully documented.</li>
 				</ul>
 				<h2 id="documentation">Documentation</h2>
@@ -78,6 +81,9 @@
 				</blockquote>
 				<h2 id="installation">Installation</h2>
 				<p>TSARK is avaliable from <code>npm</code>.</p>
+				<pre><code class="lang-bash">yarn add ark-ts
+</code></pre>
+				<p>or</p>
 				<pre><code class="lang-bash">npm i ark-ts --save
 </code></pre>
 				<h2 id="usage">Usage</h2>
@@ -98,7 +104,7 @@ client.delegate.list().subscribe(<span class="hljs-function">(<span class="hljs-
 				<blockquote>
 					<p>Get address from passphrase.</p>
 				</blockquote>
-				<pre><code class="lang-js"><span class="hljs-keyword">import</span> { PrivateKey } <span class="hljs-keyword">from</span> <span class="hljs-string">'ark-ts/lib/core'</span>;
+				<pre><code class="lang-js"><span class="hljs-keyword">import</span> { PrivateKey } <span class="hljs-keyword">from</span> <span class="hljs-string">'ark-ts/core'</span>;
 
 <span class="hljs-comment">// if no specify a second param, default is mainnet</span>
 <span class="hljs-keyword">const</span> key = PrivateKey.fromSeed(<span class="hljs-string">'my secret passphrase'</span>);
