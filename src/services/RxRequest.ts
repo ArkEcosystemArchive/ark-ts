@@ -1,6 +1,7 @@
 /**
- * Based on @waldojeffers/rx-request
+ * @module services
  */
+/** Based on @waldojeffers/rx-request. */
 
 import { Observable } from 'rxjs';
 import * as request from 'request';
