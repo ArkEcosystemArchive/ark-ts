@@ -39,6 +39,9 @@
       true,
       "single"
     ],
+    "ordered-imports": [
+      false
+    ],
     "one-line": [
       true,
       "check-open-brace",

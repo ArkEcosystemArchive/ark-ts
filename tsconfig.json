@@ -15,15 +15,14 @@
     "experimentalDecorators": true,
     "outDir": "./lib",
     "typeRoots": [
-      "node_modules/@types/",
-      "node_modules/@akanass/"
+      "node_modules/@types/"
     ],
     "types":[
       "chai",
       "node",
       "mocha",
-      "rx",
-      "rx-http-request"
+      "request",
+      "rx"
     ]
   },
   "exclude": [
