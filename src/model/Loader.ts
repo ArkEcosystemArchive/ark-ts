@@ -65,7 +65,7 @@ export class LoaderNetworkResponse {
   public explorer: string;
 
   @JsonProperty('version')
-  public version: string;
+  public version: number;
 
   constructor() {
     this.nethash = void 0;
