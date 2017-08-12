@@ -31,6 +31,22 @@ describe('TransactionApi', () => {
     expect(api).to.have.property('listUnconfirmed');
   });
 
+  describe('signature check', () => {
+    it('should correctly sign a send tx', () => {
+      return api.createTransaction({
+        amount: 10,
+        passphrase: 'mysecret',
+        timestamp: 1,
+        recipientId: 'DRKaLgq8jKYQEdN2EJ7aGEh8hMDvMzd3CW',
+      }).forEach((transaction) => {
+        expect(transaction.signature).to.be.deep.eq('3045022100a3bc590b6b80b69070799ffb7fb08ecaff209f834c72a0f28c815d46eb3123b6022029c22350c72d4e42c4f39654629cd3b8d5ac377afdb338457a57bead65e83055');
+        expect(transaction.id).to.be.deep.eq('2b9debcedd717ccfe68e0786c7c3ee244ccec3181c85c709196315643350d61d');
+      });
+    });
+
+  });
+
+
   it('should create a instance of Transaction from createTransaction', () => {
     return api.createTransaction({
       amount: 100000000,
