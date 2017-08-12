@@ -131,8 +131,21 @@ export class TransactionResponse {
   @JsonProperty('success')
   success: boolean;
 
-  @JsonProperty({clazz: Transaction, name: 'transactions'})
-  transactions: Transaction[];
+  @JsonProperty({name: 'transactionIds'})
+  transactionIds: string[];
+
+  constructor() {
+    this.success = void 0;
+    this.transactionIds = void 0;
+  }
+}
+
+export class TransactionFullResponse {
+  @JsonProperty('success')
+  success: boolean;
+
+  @JsonProperty({name: 'transactionIds'})
+  transactionIds: string[];
 
   @JsonProperty({clazz: Transaction, name: 'transaction'})
   transaction: Transaction;
@@ -145,7 +158,7 @@ export class TransactionResponse {
 
   constructor() {
     this.success = void 0;
-    this.transactions = void 0;
+    this.transactionIds = void 0;
     this.transaction = void 0;
     this.count = void 0;
     this.error = void 0;
