@@ -42,6 +42,22 @@ describe('TransactionApi', () => {
     });
   });
 
+  it('should create an instance of transaction with given parameters', () => {
+    return api.createTransaction({
+      amount: 100000000,
+      passphrase: 'my secret',
+      recipientId: address,
+      vendorField: 'Send transaction by ark-tsc',
+    }).forEach((transaction) => {
+      expect(transaction).to.be.instanceOf(Transaction);
+      expect(transaction.amount).to.be.eq(100000000);
+      expect(transaction.recipientId).to.be.eq(address);
+      expect(transaction.vendorField).to.be.eq('Send transaction by ark-tsc');
+      expect(transaction.type).to.be.eq(0);
+
+    });
+  });
+
   it('should create a instance of Transaction from createVote', () => {
     return api.createVote({
       delegatePublicKey: '021e6d971e5885a3147ddf1e45bf5c8d0887ad9fc659e24bdf95c2c9607e7e3fe8',
