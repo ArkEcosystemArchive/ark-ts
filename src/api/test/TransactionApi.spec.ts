@@ -44,6 +44,19 @@ describe('TransactionApi', () => {
       });
     });
 
+    it('should correctly sign a tx with vendorField', () => {
+      return api.createTransaction({
+        amount: 10,
+        passphrase: 'mysecret',
+        timestamp: 1,
+        vendorField: 'hi from vekexasia',
+        recipientId: 'DRKaLgq8jKYQEdN2EJ7aGEh8hMDvMzd3CW',
+      }).forEach((transaction) => {
+        expect(transaction.signature).to.be.deep.eq('3044022035a591c9b8eb42732f1a87f6c535265fdc8015afd5105f1cf31012daeb3fffd50220705ac531bafc15d74ee263223c6346937c5fe31407c100cd732e8fd7780c8072');
+        expect(transaction.id).to.be.deep.eq('6bd6d69320efcf04d442b53034e07d3127905c353412d4a2c2215a115ca4795f');
+      });
+    });
+
   });
 
 
