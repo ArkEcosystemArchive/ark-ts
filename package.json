@@ -5,10 +5,10 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build:docs": "rimraf docs && typedoc --options typedoc.json src/",
-    "build:ts": "rimraf lib && tsc -p ./",
+    "build:docs": "shx rm -r docs && typedoc --options typedoc.json src/",
+    "build:ts": "shx rm -r lib && tsc -p ./",
     "build:prod": "npm run build:ts && npm run build:docs && npm run copypackage",
-    "copypackage": "cp package.json ./lib/package.json",
+    "copypackage": "shx cp package.json ./lib/package.json",
     "test": "mocha --opts .mocharc",
     "lint": "tslint src/**/*.ts"
   },
@@ -52,7 +52,7 @@
     "@types/mocha": "^2.2.41",
     "chai": "^4.1.0",
     "mocha": "^3.4.2",
-    "rimraf": "^2.6.1",
+    "shx": "^0.2.2",
     "source-map-support": "^0.4.15",
     "ts-node": "^3.3.0",
     "tslint": "^5.6.0",
