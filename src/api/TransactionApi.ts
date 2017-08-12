@@ -41,8 +41,7 @@ export default class TransactionApi {
 
         const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
         data = tx.generate();
-
-        const typedTx = deserialize(model.Transaction, serialize(data));
+        const typedTx = deserialize(model.Transaction, data);
 
         observer.next(typedTx);
         observer.complete();
@@ -72,7 +71,7 @@ export default class TransactionApi {
         tx.setAddress();
         data = tx.generate();
 
-        const typedTx = deserialize(model.Transaction, serialize(data));
+        const typedTx = deserialize(model.Transaction, data);
 
         observer.next(typedTx);
         observer.complete();
@@ -103,7 +102,7 @@ export default class TransactionApi {
         const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
         data = tx.generate();
 
-        const typedTx = deserialize(model.Transaction, serialize(data));
+        const typedTx = deserialize(model.Transaction, data);
 
         observer.next(typedTx);
         observer.complete();
@@ -129,7 +128,7 @@ export default class TransactionApi {
         tx.setAssetSignature();
         data = tx.generate();
 
-        const typedTx = deserialize(model.Transaction, serialize(data));
+        const typedTx = deserialize(model.Transaction, data);
 
         observer.next(typedTx);
         observer.complete();
