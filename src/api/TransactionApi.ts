@@ -30,8 +30,8 @@ export default class TransactionApi {
         let data = <model.Transaction> {
           amount: params.amount,
           fee: fees.send,
-          timestamp: params.timestamp,
           recipientId: params.recipientId,
+          timestamp: params.timestamp,
           type: model.TransactionType.SendArk,
           vendorField: params.vendorField,
         };
