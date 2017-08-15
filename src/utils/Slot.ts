@@ -1,10 +1,6 @@
-/**
- * @module utils
- */
-/** Time to interact with blockchain. */
-
 import config from '../config';
 
+/** Time to interact with blockchain. */
 export default class Slot {
 
   /*

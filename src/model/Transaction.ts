@@ -1,8 +1,3 @@
-/**
- * @module model
- */
-/** Transaction model. */
-
 import { JsonProperty } from 'json-typescript-mapper';
 
 export enum TransactionType {
@@ -13,6 +8,7 @@ export enum TransactionType {
   MultiSignature = 4,
 }
 
+/** Transaction model. */
 export class Transaction {
   @JsonProperty('id')
   id?: string;

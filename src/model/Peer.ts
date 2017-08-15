@@ -1,10 +1,6 @@
-/**
- * @module model
- */
-/** Peer model. */
-
 import { JsonProperty } from 'json-typescript-mapper';
 
+/** Peer model. */
 export class Peer {
   @JsonProperty('ip')
   ip: string;

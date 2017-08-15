@@ -1,8 +1,3 @@
-/**
- * @module api
- */
-/** Peer related API calls. */
-
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/operator/catch';
 import { Observable } from 'rxjs/Observable';
@@ -13,6 +8,7 @@ import LoaderApi from './LoaderApi';
 
 import config from '../config';
 
+/** Peer related API calls. */
 export default class PeerApi {
 
   constructor(private http: Http) {}

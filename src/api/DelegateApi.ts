@@ -1,13 +1,9 @@
-/**
- * @module api
- */
-/** Delegate related API calls. */
-
 import { Observable } from 'rxjs/Observable';
 
 import * as model from '../model/Delegate';
 import Http from '../services/Http';
 
+/** Delegate related API calls. */
 export default class DelegateApi {
 
   constructor(private http: Http) {}

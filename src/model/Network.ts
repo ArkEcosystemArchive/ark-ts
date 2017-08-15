@@ -1,8 +1,3 @@
-/**
- * @module model
- */
-/** Network model. */
-
 import config from '../config';
 import { Peer } from './Peer';
 
@@ -11,6 +6,7 @@ export enum NetworkType {
   Devnet,
 }
 
+/** Network model. */
 export class Network {
   public type: NetworkType;
   public name: string;

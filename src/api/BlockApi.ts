@@ -1,14 +1,10 @@
-/**
- * @module api
- */
-/** Blocks related API calls. */
-
 import { Observable } from 'rxjs/Observable';
 
 import * as model from '../model/Block';
 import { Network } from '../model/Network';
 import Http from '../services/Http';
 
+/** Blocks related API calls. */
 export default class BlockApi {
 
   constructor(private http: Http) {}

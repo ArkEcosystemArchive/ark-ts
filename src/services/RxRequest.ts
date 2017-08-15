@@ -1,11 +1,7 @@
-/**
- * @module services
- */
-/** Based on @waldojeffers/rx-request. */
-
 import { Observable } from 'rxjs';
 import * as request from 'request';
 
+/** Based on @waldojeffers/rx-request. */
 export class RxRequest {
 
   private req: request.RequestAPI<request.Request, request.CoreOptions, request.RequiredUriUrl>;

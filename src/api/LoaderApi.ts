@@ -1,13 +1,9 @@
-/**
- * @module api
- */
-/** Loader related API calls. */
-
 import { Observable } from 'rxjs/Observable';
 
 import * as model from '../model/Loader';
 import Http from '../services/Http';
 
+/** Loader related API calls. */
 export default class LoaderApi {
 
   constructor(private http: Http) {}

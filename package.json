@@ -5,7 +5,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "build:docs": "shx rm -r docs && typedoc --options typedoc.json src/",
+    "build:docs": "typedoc --options typedoc.json src/index.ts",
     "build:ts": "shx rm -r lib && tsc -p ./",
     "build:prod": "npm run build:ts && npm run build:docs && npm run copypackage",
     "copypackage": "shx cp package.json ./lib/package.json",

@@ -1,8 +1,3 @@
-/**
- * @module core
- */
-/** Public and Private Keys. */
-
 import * as secp256k1 from 'secp256k1';
 import * as wif from 'wif';
 
@@ -10,6 +5,7 @@ import * as model from '../model';
 
 import Crypto from '../utils/Crypto';
 
+/** Public and private keys. */
 export class PublicKey {
 
   constructor(public hash: Buffer, public isCompressed: boolean = true, public network?: model.Network) {}

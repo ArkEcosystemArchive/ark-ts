@@ -1,8 +1,3 @@
-/**
- * @module core
- */
-/** Comunicate between transaction and keypair. */
-
 import * as bytebuffer from 'bytebuffer';
 
 import * as model from '../model';
@@ -22,6 +17,7 @@ function padBytes(value: string, buf: Buffer) {
   return buf;
 }
 
+/** Communicate between transaction and keypair. */
 export default class Tx {
   public transaction: model.Transaction;
 

@@ -9,9 +9,10 @@
   "excludeNotExported": true,
   "excludePrivate": true,
   "exclude": "**/*.spec.ts",
-  "external-modulemap": ".*\/src\/([\\w\\-_]+)\/",
+  "listInvalidSymbolLinks": true,
   "target": "ES6",
   "moduleResolution": "node",
   "preserveConstEnums": true,
-  "module": "commonjs"
+  "module": "commonjs",
+  "external-modulemap": ".*\/src\/([\\w\\-_]+)\/"
 }

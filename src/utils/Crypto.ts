@@ -1,8 +1,3 @@
-/**
- * @module utils
- */
-/** Crypto related functions. */
-
 import * as bigi from 'bigi';
 import * as bs58check from 'bs58check';
 import * as createHash from 'create-hash';
@@ -12,6 +7,7 @@ import * as randomBytes from 'randombytes';
 
 const curveParams = ecurve.getCurveByName('secp256k1');
 
+/** Crypto related functions. */
 function assert(condition: boolean, message: string = 'Assertion failed') {
   if (!condition) {
     throw new Error(message);

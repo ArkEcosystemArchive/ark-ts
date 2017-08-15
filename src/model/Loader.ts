@@ -1,10 +1,6 @@
-/**
- * @module model
- */
-/** Loader model. */
-
 import { JsonProperty } from 'json-typescript-mapper';
 
+/** Loader model. */
 export class LoaderStatus {
   @JsonProperty('success')
   public success: boolean;

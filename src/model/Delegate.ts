@@ -1,10 +1,6 @@
-/**
- * @module model
- */
-/** Delegate model. */
-
 import { JsonProperty } from 'json-typescript-mapper';
 
+/** Delegate model. */
 export class Delegate {
   @JsonProperty('username')
   username: string;

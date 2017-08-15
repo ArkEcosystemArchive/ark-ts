@@ -1,10 +1,6 @@
-/**
- * @module model
- */
-/** Block model. */
-
 import { JsonProperty } from 'json-typescript-mapper';
 
+/** Block model. */
 export class Block {
   @JsonProperty('id')
   id: number;

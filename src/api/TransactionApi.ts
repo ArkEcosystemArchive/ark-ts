@@ -1,8 +1,3 @@
-/**
- * @module api
- */
-/** Transaction related API calls. */
-
 import { Observable } from 'rxjs/Observable';
 
 import {deserialize, serialize} from 'json-typescript-mapper';
@@ -15,6 +10,7 @@ import BlockApi from './BlockApi';
 import { PrivateKey, PublicKey } from '../core/Key';
 import Tx from '../core/Tx';
 
+/** Transaction related API calls. */
 export default class TransactionApi {
 
   constructor(private http: Http) {}

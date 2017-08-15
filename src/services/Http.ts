@@ -1,8 +1,3 @@
-/**
- * @module services
- */
-/** Http calls from peer url. */
-
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -12,6 +7,7 @@ import { deserialize, serialize } from 'json-typescript-mapper';
 
 import * as model from '../model';
 
+/** Http calls from peer url. */
 export default class Http {
 
   private baseRequest;

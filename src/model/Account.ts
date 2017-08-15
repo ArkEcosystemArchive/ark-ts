@@ -1,11 +1,7 @@
-/**
- * @module model
- */
-/** Account model. */
-
 import { JsonProperty } from 'json-typescript-mapper';
 import { Delegate } from './Delegate';
 
+/** Account model. */
 export class Account {
   @JsonProperty('address')
   address: string;

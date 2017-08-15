@@ -1,13 +1,9 @@
-/**
- * @module api
- */
-/** Account related API calls. */
-
 import { Observable } from 'rxjs/Observable';
 
 import * as model from '../model/Account';
 import Http from '../services/Http';
 
+/** Account related API calls. */
 export default class AccountApi {
 
   constructor(private http: Http) {}
