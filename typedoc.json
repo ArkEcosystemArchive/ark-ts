@@ -8,7 +8,7 @@
   "excludeExternals": true,
   "excludeNotExported": true,
   "excludePrivate": true,
-  "exclude": "**/*.spec.ts",
+  "exclude": "**/*+(e2e|spec|index).ts",
   "listInvalidSymbolLinks": true,
   "target": "ES6",
   "moduleResolution": "node",
