@@ -8,10 +8,11 @@ import Crypto from '../utils/Crypto';
 import Slot from '../utils/Slot';
 
 function padBytes(value: string, buf: Buffer) {
-  const valBuffer = new Buffer(value);
+  const valBuffer = new Buffer(value.length>buf.length? value.substr(0,buf.length) : value);
 
-  if (valBuffer.length <= buf.length) {
-    valBuffer.copy(buf, 0);
+  valBuffer.copy(buf, 0);
+  for (let i=0; i<buf.length-valBuffer.length; i++) {
+    buf.writeInt8(0, i+valBuffer.length);
   }
 
   return buf;
@@ -87,7 +88,7 @@ export default class Tx {
    */
   public generate(): model.Transaction {
     const tx = this.transaction;
-    tx.timestamp = Slot.getTime();
+    tx.timestamp = tx.timestamp || Slot.getTime();
     tx.senderPublicKey = this.privKey.getPublicKey().toHex();
 
     if (!tx.amount) {
@@ -144,7 +145,7 @@ export default class Tx {
    */
   public toBytes(skipSignature: boolean = false, skipSecondSignature: boolean = false): Buffer {
     const tx = this.transaction;
-    const buf = new bytebuffer(undefined, true);
+    const buf = new bytebuffer(1 + 4 + 32 + 8 + 21 + 64 + 64 + 64, true);
 
     buf.writeByte(tx.type);
     buf.writeInt(tx.timestamp);
@@ -162,16 +163,12 @@ export default class Tx {
     }
 
     let padVendor = new Buffer(64);
-
-    if (tx.vendorField) {
-      padVendor = padBytes(tx.vendorField, padVendor);
-    }
+    padVendor = padBytes(tx.vendorField || '', padVendor);
 
     buf.append(padVendor);
 
     buf.writeLong(tx.amount);
     buf.writeLong(tx.fee);
-
     if (tx.asset && Object.keys(tx.asset).length > 0) {
       const asset = tx.asset[Object.keys(tx.asset)[0]];
       if (tx.type === model.TransactionType.CreateDelegate) {

@@ -31,6 +31,35 @@ describe('TransactionApi', () => {
     expect(api).to.have.property('listUnconfirmed');
   });
 
+  describe('signature check', () => {
+    it('should correctly sign a send tx', () => {
+      return api.createTransaction({
+        amount: 10,
+        passphrase: 'mysecret',
+        timestamp: 1,
+        recipientId: 'DRKaLgq8jKYQEdN2EJ7aGEh8hMDvMzd3CW',
+      }).forEach((transaction) => {
+        expect(transaction.signature).to.be.deep.eq('3045022100a3bc590b6b80b69070799ffb7fb08ecaff209f834c72a0f28c815d46eb3123b6022029c22350c72d4e42c4f39654629cd3b8d5ac377afdb338457a57bead65e83055');
+        expect(transaction.id).to.be.deep.eq('2b9debcedd717ccfe68e0786c7c3ee244ccec3181c85c709196315643350d61d');
+      });
+    });
+
+    it('should correctly sign a tx with vendorField', () => {
+      return api.createTransaction({
+        amount: 10,
+        passphrase: 'mysecret',
+        timestamp: 1,
+        vendorField: 'hi from vekexasia',
+        recipientId: 'DRKaLgq8jKYQEdN2EJ7aGEh8hMDvMzd3CW',
+      }).forEach((transaction) => {
+        expect(transaction.signature).to.be.deep.eq('3044022035a591c9b8eb42732f1a87f6c535265fdc8015afd5105f1cf31012daeb3fffd50220705ac531bafc15d74ee263223c6346937c5fe31407c100cd732e8fd7780c8072');
+        expect(transaction.id).to.be.deep.eq('6bd6d69320efcf04d442b53034e07d3127905c353412d4a2c2215a115ca4795f');
+      });
+    });
+
+  });
+
+
   it('should create a instance of Transaction from createTransaction', () => {
     return api.createTransaction({
       amount: 100000000,

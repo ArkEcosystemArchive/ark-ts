@@ -113,6 +113,9 @@ export class TransactionSend {
   @JsonProperty('vendorField')
   vendorField?: string;
 
+  @JsonProperty('timestamp')
+  timestamp?: number;
+
   constructor() {
     this.amount = void 0;
     this.passphrase = void 0;
