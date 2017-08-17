@@ -49,7 +49,7 @@ export class Transaction {
   @JsonProperty('requesterPublicKey')
   requesterPublicKey?: string;
 
-  @JsonProperty('blockId')
+  @JsonProperty('blockid')
   blockId?: string;
 
   @JsonProperty('height')
@@ -126,7 +126,7 @@ export class TransactionSend {
   }
 }
 
-export class TransactionResponse {
+export class TransactionPostResponse {
   @JsonProperty('success')
   success: boolean;
 
@@ -139,12 +139,12 @@ export class TransactionResponse {
   }
 }
 
-export class TransactionFullResponse {
+export class TransactionResponse {
   @JsonProperty('success')
   success: boolean;
 
-  @JsonProperty({name: 'transactionIds'})
-  transactionIds: string[];
+  @JsonProperty({clazz: Transaction, name: 'transactions'})
+  transactions: Transaction[];
 
   @JsonProperty({clazz: Transaction, name: 'transaction'})
   transaction: Transaction;
@@ -157,7 +157,7 @@ export class TransactionFullResponse {
 
   constructor() {
     this.success = void 0;
-    this.transactionIds = void 0;
+    this.transactions = void 0;
     this.transaction = void 0;
     this.count = void 0;
     this.error = void 0;

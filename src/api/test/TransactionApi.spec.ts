@@ -1,4 +1,5 @@
 import TransactionApi from '../TransactionApi';
+import PeerApi from '../PeerApi';
 
 import Http from '../../services/Http';
 
@@ -8,12 +9,21 @@ import { Transaction, VoteType } from '../../model/Transaction';
 import { expect } from 'chai';
 
 /* tslint:disable:no-unused-expression */
+const network = Network.getDefault(NetworkType.Devnet);
+const http = new Http(network);
+
+let api: TransactionApi;
 
 describe('TransactionApi', () => {
-  const network = Network.getDefault(NetworkType.Devnet);
-  const http = new Http(network);
-  const api = new TransactionApi(http);
   const address = 'DLteVA8j6B5DLpFp2Z3XSw1ENGXMjtFQsf';
+
+  before(async () => {
+    const peerApi = new PeerApi(http);
+    const goodPeer = await peerApi.findGoodPeer().take(1).toPromise();
+
+    network.activePeer = goodPeer;
+    api = new TransactionApi(new Http(network));
+  });
 
   it('should be instance of TransactionApi', () => {
     expect(api).to.be.instanceOf(TransactionApi);

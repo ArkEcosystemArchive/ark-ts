@@ -138,7 +138,7 @@ export default class TransactionApi {
    */
   public post(transaction: model.Transaction) {
     const params = {transactions: [transaction]};
-    return this.http.post<model.TransactionResponse>('/peer/transactions', params, model.TransactionResponse);
+    return this.http.post<model.TransactionPostResponse>('/peer/transactions', params, model.TransactionPostResponse);
   }
 
   /**
