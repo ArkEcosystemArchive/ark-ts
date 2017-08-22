@@ -44,4 +44,11 @@ describe('PeerApi', () => {
     });
   });
 
+  it('should return instance of Peer from static findGoodPeer', (done) => {
+    return PeerApi.findGoodPeer().subscribe((peer) => {
+      expect(peer).to.be.instanceOf(Peer);
+      done();
+    });
+  });
+  
 });
