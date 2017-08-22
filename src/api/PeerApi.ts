@@ -16,7 +16,7 @@ export default class PeerApi {
   /**
   * Find good peer ordered by synchronized blocks.
   */
-  public static findGoodPeer(): Observable<model.Peer> {
+  public static findGoodPeer(network: model.Network): Observable<model.Peer> {
     const http = new Http(network);
     return Observable.create((observer) => {
       const networkType = model.NetworkType[http.network.type].toLowerCase();
@@ -68,7 +68,7 @@ export default class PeerApi {
    * Find good peer ordered by synchronized blocks.
    */
   
-  public findGoodPeer(network: model.Network): Observable<model.Peer> {    
+  public findGoodPeer(): Observable<model.Peer> {    
     return Observable.create((observer) => {
       const networkType = model.NetworkType[this.http.network.type].toLowerCase();
       const peersList = config.networks[networkType].peers;
