@@ -12,10 +12,10 @@ import config from '../config';
 export default class PeerApi {
 
   constructor(private http: Http) {}
-  
+
   /**
-  * Find good peer ordered by synchronized blocks.
-  */
+   * Find good peer ordered by synchronized blocks.
+   */
   public static findGoodPeer(network: model.Network): Observable<model.Peer> {
     const http = new Http(network);
     return Observable.create((observer) => {
@@ -48,7 +48,7 @@ export default class PeerApi {
       });
     });
   }
-  
+
   /**
    * Get peer by ip and port.
    */
@@ -67,8 +67,7 @@ export default class PeerApi {
   /**
    * Find good peer ordered by synchronized blocks.
    */
-  
-  public findGoodPeer(): Observable<model.Peer> {    
+  public findGoodPeer(): Observable<model.Peer> {
     return Observable.create((observer) => {
       const networkType = model.NetworkType[this.http.network.type].toLowerCase();
       const peersList = config.networks[networkType].peers;
@@ -98,6 +97,5 @@ export default class PeerApi {
           }, (e) => Observable.empty());
       });
     });
-  } 
-    
+  }
 }

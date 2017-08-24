@@ -45,10 +45,10 @@ describe('PeerApi', () => {
   });
 
   it('should return instance of Peer from static findGoodPeer', (done) => {
-    return PeerApi.findGoodPeer().subscribe((peer) => {
+    return PeerApi.findGoodPeer(network).subscribe((peer) => {
       expect(peer).to.be.instanceOf(Peer);
       done();
     });
   });
-  
+
 });
