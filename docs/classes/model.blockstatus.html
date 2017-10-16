@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AccountResponse | ark-ts</title>
+	<title>BlockStatus | ark-ts</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules/model.html">model</a>
 				</li>
 				<li>
-					<a href="model.accountresponse.html">AccountResponse</a>
+					<a href="model.blockstatus.html">BlockStatus</a>
 				</li>
 			</ul>
-			<h1>Class AccountResponse</h1>
+			<h1>Class BlockStatus</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">AccountResponse</span>
+						<span class="target">BlockStatus</span>
 					</li>
 				</ul>
 			</section>
@@ -80,15 +80,20 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="model.accountresponse.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="model.blockstatus.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.accountresponse.html#account" class="tsd-kind-icon">account</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.accountresponse.html#publickey" class="tsd-kind-icon">public<wbr>Key</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.accountresponse.html#success" class="tsd-kind-icon">success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.blockstatus.html#epoch" class="tsd-kind-icon">epoch</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.blockstatus.html#fee" class="tsd-kind-icon">fee</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.blockstatus.html#height" class="tsd-kind-icon">height</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.blockstatus.html#milestone" class="tsd-kind-icon">milestone</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.blockstatus.html#nethash" class="tsd-kind-icon">nethash</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.blockstatus.html#reward" class="tsd-kind-icon">reward</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.blockstatus.html#success" class="tsd-kind-icon">success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.blockstatus.html#supply" class="tsd-kind-icon">supply</a></li>
 							</ul>
 						</section>
 					</div>
@@ -100,16 +105,16 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Account<wbr>Response<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="model.accountresponse.html" class="tsd-signature-type">AccountResponse</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Block<wbr>Status<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="model.blockstatus.html" class="tsd-signature-type">BlockStatus</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Account.ts#L54">model/Account.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L189">model/Block.ts:189</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="model.accountresponse.html" class="tsd-signature-type">AccountResponse</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="model.blockstatus.html" class="tsd-signature-type">BlockStatus</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -117,22 +122,62 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="account" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> account</h3>
-					<div class="tsd-signature tsd-kind-icon">account<span class="tsd-signature-symbol">:</span> <a href="model.account.html" class="tsd-signature-type">Account</a></div>
+					<a name="epoch" class="tsd-anchor"></a>
+					<h3>epoch</h3>
+					<div class="tsd-signature tsd-kind-icon">epoch<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Date</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Account.ts#L51">model/Account.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L171">model/Block.ts:171</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="publickey" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> public<wbr>Key</h3>
-					<div class="tsd-signature tsd-kind-icon">public<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="fee" class="tsd-anchor"></a>
+					<h3>fee</h3>
+					<div class="tsd-signature tsd-kind-icon">fee<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Account.ts#L54">model/Account.ts:54</a></li>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L177">model/Block.ts:177</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="height" class="tsd-anchor"></a>
+					<h3>height</h3>
+					<div class="tsd-signature tsd-kind-icon">height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L174">model/Block.ts:174</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="milestone" class="tsd-anchor"></a>
+					<h3>milestone</h3>
+					<div class="tsd-signature tsd-kind-icon">milestone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L180">model/Block.ts:180</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="nethash" class="tsd-anchor"></a>
+					<h3>nethash</h3>
+					<div class="tsd-signature tsd-kind-icon">nethash<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L183">model/Block.ts:183</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="reward" class="tsd-anchor"></a>
+					<h3>reward</h3>
+					<div class="tsd-signature tsd-kind-icon">reward<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L186">model/Block.ts:186</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -142,7 +187,17 @@
 					<div class="tsd-signature tsd-kind-icon">success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Account.ts#L48">model/Account.ts:48</a></li>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L168">model/Block.ts:168</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="supply" class="tsd-anchor"></a>
+					<h3>supply</h3>
+					<div class="tsd-signature tsd-kind-icon">supply<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/model/Block.ts#L189">model/Block.ts:189</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -191,27 +246,9 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="model.accountqueryparams.html" class="tsd-kind-icon">Account<wbr>Query<wbr>Params</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="model.accountresponse.html" class="tsd-kind-icon">Account<wbr>Response</a>
-						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="model.accountresponse.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="model.accountresponse.html#account" class="tsd-kind-icon">account</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="model.accountresponse.html#publickey" class="tsd-kind-icon">public<wbr>Key</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="model.accountresponse.html#success" class="tsd-kind-icon">success</a>
-							</li>
-						</ul>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="model.accountvoter.html" class="tsd-kind-icon">Account<wbr>Voter</a>
 					</li>
@@ -236,9 +273,42 @@
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="model.blockresponse.html" class="tsd-kind-icon">Block<wbr>Response</a>
 					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class tsd-parent-kind-external-module">
 						<a href="model.blockstatus.html" class="tsd-kind-icon">Block<wbr>Status</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="model.blockstatus.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.blockstatus.html#epoch" class="tsd-kind-icon">epoch</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.blockstatus.html#fee" class="tsd-kind-icon">fee</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.blockstatus.html#height" class="tsd-kind-icon">height</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.blockstatus.html#milestone" class="tsd-kind-icon">milestone</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.blockstatus.html#nethash" class="tsd-kind-icon">nethash</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.blockstatus.html#reward" class="tsd-kind-icon">reward</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.blockstatus.html#success" class="tsd-kind-icon">success</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.blockstatus.html#supply" class="tsd-kind-icon">supply</a>
+							</li>
+						</ul>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="model.delegate.html" class="tsd-kind-icon">Delegate</a>
 					</li>
