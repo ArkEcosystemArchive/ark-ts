@@ -72,7 +72,10 @@ export class Block {
 }
 
 export class BlockQueryParams {
-  id: string;
+  id?: string;
+  limit?: number;
+  offset?: number;
+  orderBy?: string;
 }
 
 export class BlockResponse {
@@ -157,5 +160,42 @@ export class BlockHeight {
     this.success = void 0;
     this.height = void 0;
     this.id = void 0;
+  }
+}
+
+export class BlockStatus {
+  @JsonProperty('success')
+  success: boolean;
+
+  @JsonProperty('epoch')
+  epoch: Date;
+
+  @JsonProperty('height')
+  height: number;
+
+  @JsonProperty('fee')
+  fee: number;
+
+  @JsonProperty('milestone')
+  milestone: number;
+
+  @JsonProperty('nethash')
+  nethash: string;
+
+  @JsonProperty('reward')
+  reward: number;
+
+  @JsonProperty('supply')
+  supply: number;
+
+  constructor() {
+    this.success = void 0;
+    this.epoch = void 0;
+    this.height = void 0;
+    this.fee = void 0;
+    this.milestone = void 0;
+    this.nethash = void 0;
+    this.reward = void 0;
+    this.supply = void 0;
   }
 }

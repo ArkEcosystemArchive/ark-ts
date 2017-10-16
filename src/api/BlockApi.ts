@@ -44,4 +44,11 @@ export default class BlockApi {
     return this.http.get<model.BlockHeight>('/blocks/getHeight', null, model.BlockHeight);
   }
 
+  /**
+   * Get blockchain status.
+   */
+  public blockchainStatus() {
+    return this.http.get<model.BlockStatus>('/blocks/getStatus', null, model.BlockStatus);
+  }
+
 }
