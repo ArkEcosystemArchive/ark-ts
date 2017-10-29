@@ -78,7 +78,7 @@ describe('TransactionApi', () => {
       amount: 100000000,
       passphrase: 'my secret',
       recipientId: address,
-      vendorField: 'Send transaction by ark-tsc',
+      vendorField: 'Send transaction by kapu-tsc',
     }).forEach((transaction) => {
       expect(transaction).to.be.instanceOf(Transaction);
     });
@@ -89,12 +89,12 @@ describe('TransactionApi', () => {
       amount: 100000000,
       passphrase: 'my secret',
       recipientId: address,
-      vendorField: 'Send transaction by ark-tsc',
+      vendorField: 'Send transaction by kapu-tsc',
     }).forEach((transaction) => {
       expect(transaction).to.be.instanceOf(Transaction);
       expect(transaction.amount).to.be.eq(100000000);
       expect(transaction.recipientId).to.be.eq(address);
-      expect(transaction.vendorField).to.be.eq('Send transaction by ark-tsc');
+      expect(transaction.vendorField).to.be.eq('Send transaction by kapu-tsc');
       expect(transaction.type).to.be.eq(0);
 
     });
@@ -162,7 +162,7 @@ describe('TransactionApi', () => {
       signature: '304402203d971b4e50e27e7fec8fb6d42523b82a70a82af9b9488d8f4aa16cb7936162ea022077e072b21e78cf24b7a9b8b653042dcb218b226f1b18e9a7a8462bc49e48255b',
       timestamp: 9870360,
       type: 0,
-      vendorField: 'Send transaction by ark-tsc'
+      vendorField: 'Send transaction by kapu-tsc'
     };
 
     return api.post(transaction).forEach((response) => {

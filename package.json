@@ -1,7 +1,7 @@
 {
-  "name": "ark-ts",
+  "name": "kapu-ts",
   "version": "0.2.4",
-  "description": "An ARK API wrapper, written in TypeScript to interact with ARK blockchain.",
+  "description": "A KAPU API wrapper, written in TypeScript to interact with KAPU blockchain.",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
@@ -14,20 +14,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arkecosystem/ark-ts.git"
+    "url": "git+https://github.com/nboldrin/kapu-ts.git"
   },
   "bugs": {
-    "url": "https://github.com/ArkEcosystem/ark-ts/issues"
+    "url": "https://github.com/nboldrin/kapu-ts/issues"
   },
-  "homepage": "https://github.com/ArkEcosystem/ark-ts#readme",
+  "homepage": "https://github.com/nboldrin/kapu-ts#readme",
   "keywords": [
-    "ark",
+    "kapu",
     "api",
     "blockchain",
     "cryptocurrency",
     "typescript"
   ],
-  "author": "Lúcio Rubens <lucio@ark.io>",
+  "author": "Nicola Boldrin <>",
   "license": "MIT",
   "dependencies": {
     "@types/bigi": "^1.4.0",

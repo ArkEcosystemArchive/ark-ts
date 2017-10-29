@@ -1,7 +1,7 @@
 import { JsonProperty } from 'json-typescript-mapper';
 
 export enum TransactionType {
-  SendArk = 0,
+  SendKapu = 0,
   SecondSignature = 1,
   CreateDelegate = 2,
   Vote = 3,

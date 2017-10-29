@@ -3,22 +3,22 @@
 export default {
   networks: {
     mainnet: {
-      bip32: {
+      /*bip32: {
         private: 0x2bf4530,
         public: 0x2bf4968,
-      },
+      },*/
       name: 'mainnet',
-      nethash: '6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988',
-      token: 'ARK',
-      symbol: 'Ѧ',
-      version: 0x17,
-      explorer: 'https://explorer.ark.io',
+      nethash: '313ea34c8eb705f79e7bc298b788417ff3f7116c9596f5c9875e769ee2f4ede1',
+      token: 'KAPU',
+      symbol: 'ʞ',
+      version: 0x2D,
+      explorer: 'http://explorer.kapu.one',
       wif: 0xaa,
       activePeer: {
-        ip: 'node1.arknet.cloud',
-        port: 4001,
+        ip: '51.15.198.173',
+        port: 4600,
       },
-      peers: [
+      peers: [/*
         '5.39.9.240:4001',
         '5.39.9.241:4001',
         '5.39.9.242:4001',
@@ -64,7 +64,7 @@ export default {
         '193.70.72.87:4001',
         '193.70.72.88:4001',
         '193.70.72.89:4001',
-        '193.70.72.90:4001',
+        '193.70.72.90:4001',+*/
       ],
     },
     devnet: {
@@ -73,17 +73,17 @@ export default {
         private: 0x04358394,
       },
       name: 'devnet',
-      nethash: '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23',
-      token: 'DARK',
-      symbol: 'DѦ',
-      version: 30,
-      explorer: 'https://dexplorer.ark.io',
-      wif: 0xba,
+      nethash: '167130d695be9f945878237b84e3683c50ced3bbce4e4bf850ef6f9de166535e',
+      token: 'KAPU',
+      symbol: 'ʞ',
+      version: 0x17,
+      explorer: 'http://explorer.kapu.one',
+      /*wif: 0xba,*/
       activePeer: {
-        ip: '104.238.165.129',
-        port: 4002,
+        ip: '51.15.59.104',
+        port: 4001,
       },
-      peers: [
+      peers: [/*
         '45.63.74.5:4002',
         '167.114.29.50:4002',
         '167.114.29.45:4002',
@@ -186,6 +186,7 @@ export default {
         '43.224.34.53:4002',
         '167.114.43.40:4002',
         '138.197.206.43:4002',
+        */
       ],
     },
   },
