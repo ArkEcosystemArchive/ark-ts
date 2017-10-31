@@ -1,7 +1,7 @@
 {
   "mode": "modules",
   "out": "docs",
-  "name": "ark-ts",
+  "name": "kapu-ts",
   "theme": "default",
   "emitDecoratorMetadata": true,
   "experimentalDecorators": true,
