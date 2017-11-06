@@ -141,7 +141,7 @@ export default class TransactionApi {
     const params = {transactions: [transaction]};
 
     if (peer) {
-      const url = `http://${peer.ip}:${peer.port}/api/peer/transactions`;
+      const url = `http://${peer.ip}:${peer.port}/peer/transactions`;
 
       return this.http.postNative<model.TransactionPostResponse>(url, params, model.TransactionPostResponse);
     }

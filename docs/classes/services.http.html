@@ -102,6 +102,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="services.http.html#get" class="tsd-kind-icon">get</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="services.http.html#getnative" class="tsd-kind-icon">get<wbr>Native</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="services.http.html#post" class="tsd-kind-icon">post</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="services.http.html#postnative" class="tsd-kind-icon">post<wbr>Native</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="services.http.html#put" class="tsd-kind-icon">put</a></li>
 							</ul>
 						</section>
@@ -120,7 +121,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/services/Http.ts#L13">services/Http.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/2d1b11e/src/services/Http.ts#L13">services/Http.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -142,7 +143,7 @@
 					<div class="tsd-signature tsd-kind-icon">network<span class="tsd-signature-symbol">:</span> <a href="model.network.html" class="tsd-signature-type">Network</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/services/Http.ts#L15">services/Http.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/2d1b11e/src/services/Http.ts#L15">services/Http.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -159,7 +160,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/services/Http.ts#L38">services/Http.ts:38</a></li>
+									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/2d1b11e/src/services/Http.ts#L38">services/Http.ts:38</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -196,7 +197,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/services/Http.ts#L32">services/Http.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/2d1b11e/src/services/Http.ts#L32">services/Http.ts:32</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -233,7 +234,44 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/services/Http.ts#L43">services/Http.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/2d1b11e/src/services/Http.ts#L43">services/Http.ts:43</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T</h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>url: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>body: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> responseType: <span class="tsd-signature-type">object</span></h5>
+									<ul class="tsd-parameters">
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="postnative" class="tsd-anchor"></a>
+					<h3>post<wbr>Native</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">post<wbr>Native&lt;T&gt;<span class="tsd-signature-symbol">(</span>url<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, responseType<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Observable</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/2d1b11e/src/services/Http.ts#L53">services/Http.ts:53</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -270,7 +308,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/74b5c53/src/services/Http.ts#L53">services/Http.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/2d1b11e/src/services/Http.ts#L62">services/Http.ts:62</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -335,6 +373,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
 								<a href="services.http.html#post" class="tsd-kind-icon">post</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="services.http.html#postnative" class="tsd-kind-icon">post<wbr>Native</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="services.http.html#put" class="tsd-kind-icon">put</a>
