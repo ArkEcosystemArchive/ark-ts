@@ -50,6 +50,15 @@ export default class Http {
                            .map((data) => this.formatResponse(data, responseType));
   }
 
+  public postNative<T>(url: string, body: any, responseType?: new() => T): Observable<T> {
+    const r = new RxRequest({
+      body,
+      json: true,
+    });
+
+    return r.post(url).map((data) => this.formatResponse(data, responseType));
+  }
+
   public put(url: string, data: any) {
     const options = {
       json: data,

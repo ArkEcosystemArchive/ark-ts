@@ -6,6 +6,7 @@ import * as model from '../model/Transaction';
 
 import Http from '../services/Http';
 import BlockApi from './BlockApi';
+import { Peer } from '../model/Peer';
 
 import { PrivateKey, PublicKey } from '../core/Key';
 import Tx from '../core/Tx';
@@ -136,8 +137,15 @@ export default class TransactionApi {
   /**
    * Post transaction to broadcast
    */
-  public post(transaction: model.Transaction) {
+  public post(transaction: model.Transaction, peer?: Peer) {
     const params = {transactions: [transaction]};
+
+    if (peer) {
+      const url = `http://${peer.ip}:${peer.port}/api/peer/transactions`;
+
+      return this.http.postNative<model.TransactionPostResponse>(url, params, model.TransactionPostResponse);
+    }
+
     return this.http.post<model.TransactionPostResponse>('/peer/transactions', params, model.TransactionPostResponse);
   }
 
