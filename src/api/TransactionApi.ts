@@ -70,6 +70,7 @@ export default class TransactionApi {
         data = tx.generate();
 
         const typedTx = deserialize(model.Transaction, data);
+        typedTx.asset = data.asset;
 
         observer.next(typedTx);
         observer.complete();
@@ -101,6 +102,7 @@ export default class TransactionApi {
         data = tx.generate();
 
         const typedTx = deserialize(model.Transaction, data);
+        typedTx.asset = data.asset;
 
         observer.next(typedTx);
         observer.complete();
@@ -127,6 +129,7 @@ export default class TransactionApi {
         data = tx.generate();
 
         const typedTx = deserialize(model.Transaction, data);
+        typedTx.asset = data.asset;
 
         observer.next(typedTx);
         observer.complete();
