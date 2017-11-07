@@ -136,7 +136,9 @@ export default class Tx {
    */
   public setAssetSignature(): void {
     this.transaction.asset = {
-      signature: this.secondPrivKey.getPublicKey().toHex(),
+      signature: {
+        publicKey: this.secondPrivKey.getPublicKey().toHex(),
+      },
     };
   }
 
@@ -145,7 +147,7 @@ export default class Tx {
    */
   public toBytes(skipSignature: boolean = false, skipSecondSignature: boolean = false): Buffer {
     const tx = this.transaction;
-    const buf = new bytebuffer(1 + 4 + 32 + 8 + 21 + 64 + 64 + 64, true);
+    const buf = new bytebuffer(1 + 4 + 32 + 8 + 8 + 21 + 64 + 64 + 64, true);
 
     buf.writeByte(tx.type);
     buf.writeInt(tx.timestamp);
@@ -169,12 +171,15 @@ export default class Tx {
 
     buf.writeLong(tx.amount);
     buf.writeLong(tx.fee);
+
     if (tx.asset && Object.keys(tx.asset).length > 0) {
-      const asset = tx.asset[Object.keys(tx.asset)[0]];
+      const asset = tx.asset;
       if (tx.type === model.TransactionType.CreateDelegate) {
-        buf.append(padBytes(asset, new Buffer(20)), 'utf-8');
-      } else {
-        buf.append(new Buffer(asset, 'utf-8'));
+        buf.append(padBytes(asset['delegate']['username'], new Buffer(20)), 'utf-8');
+      } else if (tx.type === model.TransactionType.SecondSignature) {
+        buf.append(new Buffer(asset['signature']['publicKey'], 'utf-8'));
+      } else if (tx.type === model.TransactionType.Vote) {
+        buf.append(new Buffer(asset['votes'].join(''), 'utf-8'));
       }
     }
 

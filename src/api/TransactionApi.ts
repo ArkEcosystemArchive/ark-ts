@@ -91,7 +91,10 @@ export default class TransactionApi {
         const fees = blocks.fees;
         let data = <model.Transaction> {
           asset: {
-            username: params.username,
+            delegate: {
+              publicKey: params.publicKey,
+              username: params.username,
+            },
           },
           fee: fees.delegate,
           type: model.TransactionType.CreateDelegate,
@@ -129,7 +132,7 @@ export default class TransactionApi {
         data = tx.generate();
 
         const typedTx = deserialize(model.Transaction, data);
-        typedTx.asset = data.asset;
+        typedTx.asset = tx.transaction.asset;
 
         observer.next(typedTx);
         observer.complete();

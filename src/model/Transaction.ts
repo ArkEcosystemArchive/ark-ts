@@ -199,6 +199,9 @@ export class TransactionDelegate {
   @JsonProperty('username')
   username: string;
 
+  @JsonProperty('publicKey')
+  publicKey: string;
+
   @JsonProperty('passphrase')
   passphrase: string;
 
@@ -207,6 +210,7 @@ export class TransactionDelegate {
 
   constructor() {
     this.username = void 0;
+    this.publicKey = void 0;
     this.passphrase = void 0;
     this.secondPassphrase = void 0;
   }
