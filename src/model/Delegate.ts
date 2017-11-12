@@ -85,6 +85,9 @@ export class DelegateQueryParams {
   @JsonProperty('generatorPublicKey')
   generatorPublicKey?: string;
 
+  @JsonProperty('q')
+  q?: string;
+
   constructor() {
     this.username = void 0;
     this.publicKey = void 0;
@@ -93,6 +96,7 @@ export class DelegateQueryParams {
     this.limit = void 0;
     this.delegate = void 0;
     this.generatorPublicKey = void 0;
+    this.q = void 0;
   }
 }
 

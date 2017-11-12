@@ -53,4 +53,11 @@ describe('DelegateApi', () => {
     });
   });
 
+  it('should return success from search', () => {
+    return api.search({
+      q: 'genesis'
+    }).forEach((response) => {
+      expect(response).to.be.property('success', true);
+    });
+  });
 });
