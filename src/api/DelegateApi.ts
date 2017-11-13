@@ -50,4 +50,11 @@ export default class DelegateApi {
     return this.http.get<model.ForgedDetails>('/delegates/forging/getForgedByAccount', params, model.ForgedDetails);
   }
 
+  /**
+   * Search delegates
+   */
+  public search(params: model.DelegateQueryParams) {
+    return this.http.get<model.DelegateResponse>('/delegates/search', params, model.DelegateResponse);
+  }
+
 }
