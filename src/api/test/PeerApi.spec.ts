@@ -51,4 +51,10 @@ describe('PeerApi', () => {
     });
   });
 
+  it('should return sucess from version', () => {
+    return api.version().forEach((response) => {
+      expect(response).to.have.property('success', true);
+    });
+  });
+
 });

@@ -98,4 +98,11 @@ export default class PeerApi {
       });
     });
   }
+
+  /**
+   * Get peer version
+   */
+  public version(params?: model.PeerQueryParams): Observable<model.PeerVersionResponse> {
+    return this.http.get<model.PeerVersionResponse>('/peers/version', params, model.PeerVersionResponse);
+  }
 }

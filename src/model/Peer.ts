@@ -62,3 +62,20 @@ export class PeerResponse {
     this.peer = void 0;
   }
 }
+
+export class PeerVersionResponse {
+  @JsonProperty('success')
+  success: boolean;
+
+  @JsonProperty('version')
+  version: string;
+
+  @JsonProperty('build')
+  build: string;
+
+  constructor() {
+    this.success = void 0;
+    this.version = void 0;
+    this.build = void 0;
+  }
+}
