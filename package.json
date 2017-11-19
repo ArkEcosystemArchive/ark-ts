@@ -48,16 +48,17 @@
     "wif": "^2.0.6"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.1",
-    "@types/mocha": "^2.2.41",
-    "chai": "^4.1.0",
-    "mocha": "^3.4.2",
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.44",
+    "chai": "^4.1.2",
+    "mocha": "^3.5.3",
     "shx": "^0.2.2",
     "source-map-support": "^0.4.15",
     "ts-node": "^3.3.0",
     "tslint": "^5.6.0",
     "typedoc": "^0.8.0",
     "typedoc-plugin-external-module-map": "^0.0.6",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "typings": "^2.1.1"
   }
 }
