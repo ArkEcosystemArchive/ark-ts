@@ -183,10 +183,10 @@ export class TransactionVote {
   delegatePublicKey: string;
 
   @JsonProperty('passphrase')
-  passphrase: string;
+  passphrase: string | PrivateKey;
 
   @JsonProperty('secondPassphrase')
-  secondPassphrase?: string;
+  secondPassphrase?: string | PrivateKey;
 
   constructor() {
     this.type = void 0;
@@ -204,10 +204,10 @@ export class TransactionDelegate {
   publicKey: string;
 
   @JsonProperty('passphrase')
-  passphrase: string;
+  passphrase: string | PrivateKey;
 
   @JsonProperty('secondPassphrase')
-  secondPassphrase?: string;
+  secondPassphrase?: string | PrivateKey;
 
   constructor() {
     this.username = void 0;
