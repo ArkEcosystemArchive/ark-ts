@@ -121,13 +121,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Tx<span class="tsd-signature-symbol">(</span>transaction<span class="tsd-signature-symbol">: </span><a href="model.transaction.html" class="tsd-signature-type">Transaction</a>, network<span class="tsd-signature-symbol">: </span><a href="model.network.html" class="tsd-signature-type">Network</a>, passphrase<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, secondPassphrase<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.tx.html" class="tsd-signature-type">Tx</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Tx<span class="tsd-signature-symbol">(</span>transaction<span class="tsd-signature-symbol">: </span><a href="model.transaction.html" class="tsd-signature-type">Transaction</a>, network<span class="tsd-signature-symbol">: </span><a href="model.network.html" class="tsd-signature-type">Network</a>, key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="core.privatekey.html" class="tsd-signature-type">PrivateKey</a>, secondKey<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="core.privatekey.html" class="tsd-signature-type">PrivateKey</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="core.tx.html" class="tsd-signature-type">Tx</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L28">core/Tx.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L26">core/Tx.ts:26</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -139,10 +139,10 @@
 									<h5>network: <a href="model.network.html" class="tsd-signature-type">Network</a></h5>
 								</li>
 								<li>
-									<h5>passphrase: <span class="tsd-signature-type">string</span></h5>
+									<h5>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="core.privatekey.html" class="tsd-signature-type">PrivateKey</a></h5>
 								</li>
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> secondPassphrase: <span class="tsd-signature-type">string</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> secondKey: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="core.privatekey.html" class="tsd-signature-type">PrivateKey</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="core.tx.html" class="tsd-signature-type">Tx</a></h4>
@@ -158,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">transaction<span class="tsd-signature-symbol">:</span> <a href="model.transaction.html" class="tsd-signature-type">Transaction</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L23">core/Tx.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L23">core/Tx.ts:23</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -175,7 +175,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L89">core/Tx.ts:89</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L94">core/Tx.ts:94</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -198,7 +198,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L201">core/Tx.ts:201</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L206">core/Tx.ts:206</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -224,7 +224,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L229">core/Tx.ts:229</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L234">core/Tx.ts:234</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -246,7 +246,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L130">core/Tx.ts:130</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L135">core/Tx.ts:135</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -268,7 +268,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L218">core/Tx.ts:218</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L223">core/Tx.ts:223</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -290,7 +290,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L116">core/Tx.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L121">core/Tx.ts:121</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -313,7 +313,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L137">core/Tx.ts:137</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L142">core/Tx.ts:142</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -335,7 +335,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L123">core/Tx.ts:123</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L128">core/Tx.ts:128</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -357,7 +357,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L148">core/Tx.ts:148</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L153">core/Tx.ts:153</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -388,7 +388,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L208">core/Tx.ts:208</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L213">core/Tx.ts:213</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -410,7 +410,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/de81d06/src/core/Tx.ts#L51">core/Tx.ts:51</a></li>
+									<li>Defined in <a href="https://github.com/luciorubeens/ark-ts/blob/f2abdf1/src/core/Tx.ts#L56">core/Tx.ts:56</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">

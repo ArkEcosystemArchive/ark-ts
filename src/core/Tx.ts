@@ -22,26 +22,31 @@ function padBytes(value: string, buf: Buffer) {
 export default class Tx {
   public transaction: model.Transaction;
 
-  private passphrase: string;
-  private secondPassphrase: string;
   private privKey: PrivateKey;
   private secondPrivKey: PrivateKey;
 
   constructor(
     transaction: model.Transaction,
     network: model.Network,
-    passphrase: string,
-    secondPassphrase?: string) {
-
+    key: string | PrivateKey,
+    secondKey?: string | PrivateKey,
+  ) {
     this.transaction = transaction;
-    this.passphrase = passphrase;
-    this.secondPassphrase = secondPassphrase;
-    this.privKey = PrivateKey.fromSeed(passphrase);
-    this.privKey.getPublicKey().setNetwork(network);
 
-    if (secondPassphrase) {
-      this.secondPrivKey = PrivateKey.fromSeed(secondPassphrase);
+    if (typeof key === 'string') {
+      key = PrivateKey.fromSeed(key);
     }
+
+    if (secondKey) {
+      if (typeof secondKey === 'string') {
+        secondKey = PrivateKey.fromSeed(secondKey);
+      }
+
+      this.secondPrivKey = secondKey;
+    }
+
+    this.privKey = key;
+    this.privKey.getPublicKey().setNetwork(network);
   }
 
   /**

@@ -7,6 +7,7 @@ import { Network, NetworkType } from '../../model/Network';
 import { Transaction, VoteType } from '../../model/Transaction';
 
 import { expect } from 'chai';
+import { PrivateKey } from '../../index';
 
 /* tslint:disable:no-unused-expression */
 const network = Network.getDefault(NetworkType.Devnet);
@@ -42,6 +43,23 @@ describe('TransactionApi', () => {
   });
 
   describe('signature check', () => {
+
+    it('should correctly sign a tx with PrivateKey', () => {
+      const key = PrivateKey.fromWIF('SCxryiz5hhkfJ4bZ7RGVzkdLqyvU7UfNFaT1ak9Gg9PSeqCAWy3h');
+
+      return api.createTransaction({
+        amount: 10,
+        passphrase: key,
+        recipientId: 'DRKaLgq8jKYQEdN2EJ7aGEh8hMDvMzd3CW',
+        timestamp: 1,
+      }).forEach((transaction) => {
+        // tslint:disable
+        expect(transaction.signature).to.be.deep.eq('3045022100a3bc590b6b80b69070799ffb7fb08ecaff209f834c72a0f28c815d46eb3123b6022029c22350c72d4e42c4f39654629cd3b8d5ac377afdb338457a57bead65e83055');
+        expect(transaction.id).to.be.deep.eq('2b9debcedd717ccfe68e0786c7c3ee244ccec3181c85c709196315643350d61d');
+        // tslint:enable
+      });
+    });
+
     it('should correctly sign a send tx', () => {
       return api.createTransaction({
         amount: 10,
@@ -113,6 +131,7 @@ describe('TransactionApi', () => {
   it('should create a instance of Transaction from createDelegate', () => {
     return api.createDelegate({
       passphrase: 'my secret',
+      publicKey: '03dcd9356b9f4e13a70fed664753e86ddbaf3d362ea8b35b6a9f4325ceda52ca7e',
       username: 'lorenzo',
     }).forEach((transaction) => {
       expect(transaction).to.be.instanceOf(Transaction);
