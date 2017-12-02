@@ -116,7 +116,7 @@ export default class TransactionApi {
   /**
    * Transaction used to create second passphrase.
    */
-  public createSignature(passphrase: string, secondPassphrase: string) {
+  public createSignature(passphrase: string | PrivateKey, secondPassphrase: string) {
     return Observable.create((observer: any) => {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;

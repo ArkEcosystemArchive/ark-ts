@@ -1,6 +1,6 @@
 {
   "name": "ark-ts",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An ARK API wrapper, written in TypeScript to interact with ARK blockchain.",
   "main": "index.js",
   "types": "index.d.ts",

@@ -144,6 +144,13 @@ describe('TransactionApi', () => {
     });
   });
 
+  it('should create a instance of Transaction from createSignature with PrivateKey', () => {
+    return api.createSignature(PrivateKey.fromSeed('my secret'), 'my second secret passphrase')
+      .forEach((transaction) => {
+        expect(transaction).to.be.instanceOf(Transaction);
+      });
+  });
+
   it('should return success from get', () => {
     return api.get('e40ce11cab82736da1cc91191716f3c1f446ca7b6a9f4f93b7120ef105ba06e8').forEach((response) => {
       expect(response).to.have.property('success', true);
