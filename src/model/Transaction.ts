@@ -1,4 +1,5 @@
 import { JsonProperty } from 'json-typescript-mapper';
+import { PrivateKey } from '../index';
 
 export enum TransactionType {
   SendArk = 0,
@@ -102,13 +103,13 @@ export class TransactionSend {
   recipientId: string;
 
   @JsonProperty('passphrase')
-  passphrase: string;
+  passphrase: string | PrivateKey;
 
   @JsonProperty('publicKey')
   publicKey?: string;
 
   @JsonProperty('secondPassphrase')
-  secondPassphrase?: string;
+  secondPassphrase?: string | PrivateKey;
 
   @JsonProperty('vendorField')
   vendorField?: string;
@@ -182,10 +183,10 @@ export class TransactionVote {
   delegatePublicKey: string;
 
   @JsonProperty('passphrase')
-  passphrase: string;
+  passphrase: string | PrivateKey;
 
   @JsonProperty('secondPassphrase')
-  secondPassphrase?: string;
+  secondPassphrase?: string | PrivateKey;
 
   constructor() {
     this.type = void 0;
@@ -203,10 +204,10 @@ export class TransactionDelegate {
   publicKey: string;
 
   @JsonProperty('passphrase')
-  passphrase: string;
+  passphrase: string | PrivateKey;
 
   @JsonProperty('secondPassphrase')
-  secondPassphrase?: string;
+  secondPassphrase?: string | PrivateKey;
 
   constructor() {
     this.username = void 0;
