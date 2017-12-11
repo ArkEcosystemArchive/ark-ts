@@ -62,7 +62,7 @@ export default class TransactionApi {
           },
           fee: fees.vote,
           type: model.TransactionType.Vote,
-          vendorField: 'Delegate vote transaction',
+          vendorField: params.vendorField,
         };
 
         const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
@@ -98,7 +98,7 @@ export default class TransactionApi {
           },
           fee: fees.delegate,
           type: model.TransactionType.CreateDelegate,
-          vendorField: 'Create delegate transaction',
+          vendorField: params.vendorField,
         };
 
         const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
@@ -116,7 +116,7 @@ export default class TransactionApi {
   /**
    * Transaction used to create second passphrase.
    */
-  public createSignature(passphrase: string | PrivateKey, secondPassphrase: string) {
+  public createSignature(passphrase: string | PrivateKey, secondPassphrase: string, vendorField?: string) {
     return Observable.create((observer: any) => {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
@@ -124,7 +124,7 @@ export default class TransactionApi {
           asset: {},
           fee: fees.secondsignature,
           type: model.TransactionType.SecondSignature,
-          vendorField: 'Create second signature',
+          vendorField: vendorField,
         };
 
         const tx = new Tx(data, this.http.network, passphrase, secondPassphrase);

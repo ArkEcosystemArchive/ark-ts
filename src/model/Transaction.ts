@@ -188,11 +188,15 @@ export class TransactionVote {
   @JsonProperty('secondPassphrase')
   secondPassphrase?: string | PrivateKey;
 
+  @JsonProperty('vendorField')
+  vendorField?: string;
+
   constructor() {
     this.type = void 0;
     this.delegatePublicKey = void 0;
     this.passphrase = void 0;
     this.secondPassphrase = void 0;
+    this.vendorField = void 0;
   }
 }
 
@@ -209,10 +213,14 @@ export class TransactionDelegate {
   @JsonProperty('secondPassphrase')
   secondPassphrase?: string | PrivateKey;
 
+  @JsonProperty('vendorField')
+  vendorField?: string;
+
   constructor() {
     this.username = void 0;
     this.publicKey = void 0;
     this.passphrase = void 0;
     this.secondPassphrase = void 0;
+    this.vendorField = void 0;
   }
 }
