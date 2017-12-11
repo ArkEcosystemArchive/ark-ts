@@ -4,7 +4,7 @@ import PeerApi from '../PeerApi';
 import Http from '../../services/Http';
 
 import { Network, NetworkType } from '../../model/Network';
-import { Transaction, VoteType } from '../../model/Transaction';
+import { Transaction, TransactionType, VoteType } from '../../model/Transaction';
 
 import { expect } from 'chai';
 import { PrivateKey } from '../../index';
@@ -119,28 +119,43 @@ describe('TransactionApi', () => {
   });
 
   it('should create a instance of Transaction from createVote', () => {
+    let delegatePublicKey = '021e6d971e5885a3147ddf1e45bf5c8d0887ad9fc659e24bdf95c2c9607e7e3fe8';
     return api.createVote({
-      delegatePublicKey: '021e6d971e5885a3147ddf1e45bf5c8d0887ad9fc659e24bdf95c2c9607e7e3fe8',
+      delegatePublicKey: delegatePublicKey,
       passphrase: 'my secret',
       type: VoteType.Add,
+      vendorField: 'Send vote transaction by ark-tsc',
     }).forEach((transaction) => {
+      console.log(transaction);
       expect(transaction).to.be.instanceOf(Transaction);
+      expect(transaction.type).to.be.eq(TransactionType.Vote);
+      expect(transaction.asset.votes[0]).to.be.eq('+' + delegatePublicKey);
+      expect(transaction.vendorField).to.be.eq('Send vote transaction by ark-tsc');
     });
   });
 
   it('should create a instance of Transaction from createDelegate', () => {
+    let publicKey = '03dcd9356b9f4e13a70fed664753e86ddbaf3d362ea8b35b6a9f4325ceda52ca7e';
+    let username = 'lorenzo';
     return api.createDelegate({
       passphrase: 'my secret',
-      publicKey: '03dcd9356b9f4e13a70fed664753e86ddbaf3d362ea8b35b6a9f4325ceda52ca7e',
-      username: 'lorenzo',
+      publicKey: publicKey,
+      username: username,
+      vendorField: 'Send delegate transaction by ark-tsc',
     }).forEach((transaction) => {
       expect(transaction).to.be.instanceOf(Transaction);
+      expect(transaction.type).to.be.eq(TransactionType.CreateDelegate);
+      expect(transaction.asset.delegate.publicKey).to.be.eq(publicKey);
+      expect(transaction.asset.delegate.username).to.be.eq(username);
+      expect(transaction.vendorField).to.be.eq('Send delegate transaction by ark-tsc');
     });
   });
 
   it('should create a instance of Transaction from createSignature', () => {
-    return api.createSignature('my secret', 'my second secret passphrase').forEach((transaction) => {
+    return api.createSignature('my secret', 'my second secret passphrase', 'Send signature transaction by ark-tsc').forEach((transaction) => {
       expect(transaction).to.be.instanceOf(Transaction);
+      expect(transaction.type).to.be.eq(TransactionType.SecondSignature);
+      expect(transaction.vendorField).to.be.eq('Send signature transaction by ark-tsc');
     });
   });
 
