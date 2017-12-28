@@ -21,7 +21,7 @@ export class Account {
   @JsonProperty('secondSignature')
   secondSignature: number;
 
-  @JsonProperty({clazz: Object, name: 'secondSignature'})
+  @JsonProperty('secondPublicKey')
   secondPublicKey: object;
 
   @JsonProperty({clazz: Object, name: 'multiSignatures'})
