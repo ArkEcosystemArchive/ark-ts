@@ -22,7 +22,7 @@ export class Account {
   secondSignature: number;
 
   @JsonProperty('secondPublicKey')
-  secondPublicKey: object;
+  secondPublicKey: string;
 
   @JsonProperty({clazz: Object, name: 'multiSignatures'})
   multiSignatures: object[];
