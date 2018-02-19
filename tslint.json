@@ -15,12 +15,9 @@
     "no-angle-bracket-type-assertion": false,
     "new-parens": false,
     "no-string-literal": false,
-    "max-classes-per-file": [
-      false
-    ],
-    "member-access": [
-      "check-accessor"
-    ],
+    "max-classes-per-file": [false],
+    "max-line-length": [false],
+    "member-access": [true, "check-accessor"],
     "member-ordering": [
       true,
       {

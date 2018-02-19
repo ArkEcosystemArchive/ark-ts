@@ -8,11 +8,11 @@ import Crypto from '../utils/Crypto';
 import Slot from '../utils/Slot';
 
 function padBytes(value: string, buf: Buffer) {
-  const valBuffer = new Buffer(value.length>buf.length? value.substr(0,buf.length) : value);
+  const valBuffer = new Buffer(value.length > buf.length ? value.substr(0, buf.length) : value);
 
   valBuffer.copy(buf, 0);
-  for (let i=0; i<buf.length-valBuffer.length; i++) {
-    buf.writeInt8(0, i+valBuffer.length);
+  for (let i=0; i < buf.length - valBuffer.length; i++) {
+    buf.writeInt8(0, i + valBuffer.length);
   }
 
   return buf;
@@ -102,7 +102,7 @@ export default class Tx {
 
     tx.signature = this.sign().toString('hex');
 
-    if (this.secondPrivKey && !tx.asset.hasOwnProperty('signature')) { // if is not to create second signature
+    if (this.secondPrivKey && (tx.asset && !tx.asset.hasOwnProperty('signature'))) { // if is not to create second signature
       tx.secondSenderPublicKey = this.secondPrivKey.getPublicKey().toHex();
       tx.signSignature = this.secondSign().toString('hex');
     }
