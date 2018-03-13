@@ -60,6 +60,23 @@ export class AccountResponse {
   }
 }
 
+export class AccountBalanceResponse {
+  @JsonProperty('success')
+  success: boolean;
+
+  @JsonProperty('balance')
+  balance: string;
+
+  @JsonProperty('unconfirmedBalance')
+  unconfirmedBalance: string;
+
+  constructor() {
+    this.success = void 0;
+    this.balance = void 0;
+    this.unconfirmedBalance = void 0;
+  }
+}
+
 export class AccountVotesResponse {
   @JsonProperty('success')
   success: boolean;
