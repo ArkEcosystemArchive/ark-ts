@@ -19,7 +19,7 @@ export default class AccountApi {
    * Get the balance of an account.
    */
   public balance(params: model.AccountQueryParams) {
-    return this.http.get<model.AccountResponse>('/accounts/getBalance', params, model.AccountResponse);
+    return this.http.get<model.AccountBalanceResponse>('/accounts/getBalance', params, model.AccountBalanceResponse);
   }
 
   /**
