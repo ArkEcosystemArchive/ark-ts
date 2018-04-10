@@ -4,6 +4,8 @@ import { Peer } from './Peer';
 export enum NetworkType {
   Mainnet,
   Devnet,
+  Customnet,
+  CustomDevnet
 }
 
 /** Network model. */

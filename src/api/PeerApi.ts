@@ -21,8 +21,17 @@ export default class PeerApi {
       http = new Http(network);
     }
     return Observable.create((observer) => {
+      if (!http.network.type) {
+        observer.error('Cannot find good peer from static peers. No NetworkType specified');
+        return;
+      }
       const networkType = model.NetworkType[http.network.type].toLowerCase();
       const peersList = config.networks[networkType].peers;
+      if (!peersList) {
+        observer.error('Cannot find good peer since there is no static peer list for the specified NetworkType.');
+        return;
+      }
+
       const loader = new LoaderApi(http);
       const blockList = [];
       let completed = false;
