@@ -1,4 +1,4 @@
-![TSARK Logo](http://i.imgur.com/dm3JlUs.png)
+![TSARK Logo](https://i.imgur.com/AyhlVoZ.png)
 
 # TSARK
 
