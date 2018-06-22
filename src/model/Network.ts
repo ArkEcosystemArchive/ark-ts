@@ -17,7 +17,8 @@ export class Network {
   public explorer: string;
   public wif?: number;
   public activePeer: Peer;
-
+  public bip32: string;
+  
   constructor() {
     // pass
   }
