@@ -2,3 +2,6 @@ package-lock.json
 node_modules/
 typings/
 lib/
+
+# Microsoft Visual Studio
+.vs
