@@ -84,12 +84,3 @@ export class LoaderAutoConfigure {
     this.network = void 0;
   }
 }
-
-export class LoaderStatusPing {
-  @JsonProperty('success')
-  public success: boolean;
-
-  constructor() {
-    this.success = void 0;
-  }
-}
