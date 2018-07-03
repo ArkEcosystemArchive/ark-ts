@@ -25,13 +25,13 @@ describe('PeerApi', () => {
     expect(api).to.have.property('findGoodPeer');
   });
 
-  it('should return sucess from get', () => {
-    return api.get('66.228.46.44', 4002).forEach((response) => {
+  it('should return success from get', () => {
+    return api.get('104.238.165.129', 4002).forEach((response) => {
       expect(response).to.have.property('success', true);
     });
   });
 
-  it('should return sucess from list', () => {
+  it('should return success from list', () => {
     return api.list().forEach((response) => {
       expect(response).to.have.property('success', true);
     });
