@@ -62,10 +62,4 @@ describe('LoaderApi', () => {
     });
   });
 
-  it('should return sucess from pingStatus', () => {
-    return api.pingStatus().forEach((response) => {
-      expect(response).to.have.property('success', true);
-    });
-  });
-
 });
