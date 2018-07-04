@@ -7,4 +7,5 @@ before_install:
 - npm install -g typescript@2.4.1
 
 script:
+- npm run lint
 - npm test
