@@ -1,3 +1,5 @@
+**:warning: SOON TO BE DEPRECATED IN FAVOR OF https://github.com/ArkEcosystem/core/tree/master/packages/crypto - PLEASE SUBMIT PULL REQUESTS TO THE CORE V2 REPOSITORY :warning:***
+
 ![TSARK Logo](https://i.imgur.com/AyhlVoZ.png)
 
 # TSARK
