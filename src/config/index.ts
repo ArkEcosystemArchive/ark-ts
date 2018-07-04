@@ -78,7 +78,7 @@ export default {
       symbol: 'DѦ',
       version: 30,
       explorer: 'https://dexplorer.ark.io',
-      wif: 0xba,
+      wif: 0xaa,
       activePeer: {
         ip: '104.238.165.129',
         port: 4002,
