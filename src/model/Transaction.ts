@@ -12,55 +12,55 @@ export enum TransactionType {
 /** Transaction model. */
 export class Transaction {
   @JsonProperty('id')
-  id?: string;
+  public id?: string;
 
   @JsonProperty('timestamp')
-  timestamp?: number;
+  public timestamp?: number;
 
   @JsonProperty('recipientId')
-  recipientId?: string;
+  public recipientId?: string;
 
   @JsonProperty('amount')
-  amount?: number;
+  public amount?: number;
 
   @JsonProperty({clazz: Object, name: 'asset'})
-  asset?: object;
+  public asset?: object;
 
   @JsonProperty('fee')
-  fee?: number;
+  public fee?: number;
 
   @JsonProperty('type')
-  type?: TransactionType;
+  public type?: TransactionType;
 
   @JsonProperty('vendorField')
-  vendorField?: string;
+  public vendorField?: string;
 
   @JsonProperty('signature')
-  signature?: string;
+  public signature?: string;
 
   @JsonProperty('signSignature')
-  signSignature?: string;
+  public signSignature?: string;
 
   @JsonProperty('senderPublicKey')
-  senderPublicKey?: string;
+  public senderPublicKey?: string;
 
   @JsonProperty('secondSenderPublicKey')
-  secondSenderPublicKey?: string;
+  public secondSenderPublicKey?: string;
 
   @JsonProperty('requesterPublicKey')
-  requesterPublicKey?: string;
+  public requesterPublicKey?: string;
 
   @JsonProperty('blockid')
-  blockId?: string;
+  public blockId?: string;
 
   @JsonProperty('height')
-  height?: number;
+  public height?: number;
 
   @JsonProperty('senderId')
-  senderId?: string;
+  public senderId?: string;
 
   @JsonProperty('confirmations')
-  confirmations?: number;
+  public confirmations?: number;
 
   constructor() {
     this.amount = void 0;
@@ -84,38 +84,38 @@ export class Transaction {
 }
 
 export class TransactionQueryParams {
-  id?: string;
-  blockId?: string;
-  senderId?: string;
-  recipientId?: string;
-  limit?: number;
-  offset?: number;
-  orderBy?: string;
-  type?: TransactionType;
+  public id?: string;
+  public blockId?: string;
+  public senderId?: string;
+  public recipientId?: string;
+  public limit?: number;
+  public offset?: number;
+  public orderBy?: string;
+  public type?: TransactionType;
 }
 
 export class TransactionSend {
 
   @JsonProperty('amount')
-  amount: number;
+  public amount: number;
 
   @JsonProperty('recipientId')
-  recipientId: string;
+  public recipientId: string;
 
   @JsonProperty('passphrase')
-  passphrase: string | PrivateKey;
+  public passphrase: string | PrivateKey;
 
   @JsonProperty('publicKey')
-  publicKey?: string;
+  public publicKey?: string;
 
   @JsonProperty('secondPassphrase')
-  secondPassphrase?: string | PrivateKey;
+  public secondPassphrase?: string | PrivateKey;
 
   @JsonProperty('vendorField')
-  vendorField?: string;
+  public vendorField?: string;
 
   @JsonProperty('timestamp')
-  timestamp?: number;
+  public timestamp?: number;
 
   constructor() {
     this.amount = void 0;
@@ -129,10 +129,10 @@ export class TransactionSend {
 
 export class TransactionPostResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({name: 'transactionIds'})
-  transactionIds: string[];
+  public transactionIds: string[];
 
   constructor() {
     this.success = void 0;
@@ -142,19 +142,19 @@ export class TransactionPostResponse {
 
 export class TransactionResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({clazz: Transaction, name: 'transactions'})
-  transactions: Transaction[];
+  public transactions: Transaction[];
 
   @JsonProperty({clazz: Transaction, name: 'transaction'})
-  transaction: Transaction;
+  public transaction: Transaction;
 
   @JsonProperty('count')
-  count: string;
+  public count: string;
 
   @JsonProperty('error')
-  error: string;
+  public error: string;
 
   constructor() {
     this.success = void 0;
@@ -167,7 +167,7 @@ export class TransactionResponse {
 
 export class TransactionPayload {
   @JsonProperty({clazz: Transaction, name: 'transactions'})
-  transactions: Transaction[];
+  public transactions: Transaction[];
 }
 
 export enum VoteType {
@@ -177,19 +177,19 @@ export enum VoteType {
 
 export class TransactionVote {
   @JsonProperty('type')
-  type: VoteType;
+  public type: VoteType;
 
   @JsonProperty('delegatePublicKey')
-  delegatePublicKey: string;
+  public delegatePublicKey: string;
 
   @JsonProperty('passphrase')
-  passphrase: string | PrivateKey;
+  public passphrase: string | PrivateKey;
 
   @JsonProperty('secondPassphrase')
-  secondPassphrase?: string | PrivateKey;
+  public secondPassphrase?: string | PrivateKey;
 
   @JsonProperty('vendorField')
-  vendorField?: string;
+  public vendorField?: string;
 
   constructor() {
     this.type = void 0;
@@ -202,19 +202,19 @@ export class TransactionVote {
 
 export class TransactionDelegate {
   @JsonProperty('username')
-  username: string;
+  public username: string;
 
   @JsonProperty('publicKey')
-  publicKey: string;
+  public publicKey: string;
 
   @JsonProperty('passphrase')
-  passphrase: string | PrivateKey;
+  public passphrase: string | PrivateKey;
 
   @JsonProperty('secondPassphrase')
-  secondPassphrase?: string | PrivateKey;
+  public secondPassphrase?: string | PrivateKey;
 
   @JsonProperty('vendorField')
-  vendorField?: string;
+  public vendorField?: string;
 
   constructor() {
     this.username = void 0;

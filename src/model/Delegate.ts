@@ -3,31 +3,31 @@ import { JsonProperty } from 'json-typescript-mapper';
 /** Delegate model. */
 export class Delegate {
   @JsonProperty('username')
-  username: string;
+  public username: string;
 
   @JsonProperty('address')
-  address: string;
+  public address: string;
 
   @JsonProperty('publicKey')
-  publicKey: string;
+  public publicKey: string;
 
   @JsonProperty('vote')
-  vote: string;
+  public vote: string;
 
   @JsonProperty('producedblocks')
-  producedBlocks: number;
+  public producedBlocks: number;
 
   @JsonProperty('missedblocks')
-  missedBlocks: number;
+  public missedBlocks: number;
 
   @JsonProperty('rate')
-  rate: number;
+  public rate: number;
 
   @JsonProperty('approval')
-  approval: number;
+  public approval: number;
 
   @JsonProperty('productivity')
-  productivity: number;
+  public productivity: number;
 
   constructor() {
     this.address = void 0;
@@ -44,16 +44,16 @@ export class Delegate {
 
 export class DelegateResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({clazz: Delegate, name: 'delegates'})
-  delegates?: Delegate[];
+  public delegates?: Delegate[];
 
   @JsonProperty({clazz: Delegate, name: 'delegate'})
-  delegate?: Delegate;
+  public delegate?: Delegate;
 
   @JsonProperty('totalCount')
-  totalCount: number;
+  public totalCount: number;
 
   constructor() {
     this.success = void 0;
@@ -65,28 +65,28 @@ export class DelegateResponse {
 
 export class DelegateQueryParams {
   @JsonProperty('username')
-  username?: string;
+  public username?: string;
 
   @JsonProperty('publicKey')
-  publicKey?: string;
+  public publicKey?: string;
 
   @JsonProperty('offset')
-  offset?: number;
+  public offset?: number;
 
   @JsonProperty('orderBy')
-  orderBy?: string;
+  public orderBy?: string;
 
   @JsonProperty('limit')
-  limit?: number;
+  public limit?: number;
 
   @JsonProperty({clazz: Delegate, name: 'delegate'})
-  delegate?: Delegate;
+  public delegate?: Delegate;
 
   @JsonProperty('generatorPublicKey')
-  generatorPublicKey?: string;
+  public generatorPublicKey?: string;
 
   @JsonProperty('q')
-  q?: string;
+  public q?: string;
 
   constructor() {
     this.username = void 0;
@@ -101,10 +101,10 @@ export class DelegateQueryParams {
 }
 
 export class AccountVoter {
-  username: string;
-  address: string;
-  publicKey: string;
-  balance: string;
+  public username: string;
+  public address: string;
+  public publicKey: string;
+  public balance: string;
 
   constructor() {
     this.username = void 0;
@@ -116,10 +116,10 @@ export class AccountVoter {
 
 export class DelegateVoters {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({clazz: AccountVoter, name: 'accounts'})
-  accounts: AccountVoter[];
+  public accounts: AccountVoter[];
 
   constructor() {
     this.success = void 0;
@@ -129,16 +129,16 @@ export class DelegateVoters {
 
 export class ForgedDetails {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty('fees')
-  fees: string;
+  public fees: string;
 
   @JsonProperty('rewards')
-  rewards: string;
+  public rewards: string;
 
   @JsonProperty('forged')
-  forged: string;
+  public forged: string;
 
   constructor() {
     this.success = void 0;

@@ -3,52 +3,52 @@ import { JsonProperty } from 'json-typescript-mapper';
 /** Block model. */
 export class Block {
   @JsonProperty('id')
-  id: number;
+  public id: number;
 
   @JsonProperty('version')
-  version: number;
+  public version: number;
 
   @JsonProperty('timestamp')
-  timestamp: number;
+  public timestamp: number;
 
   @JsonProperty('height')
-  height: number;
+  public height: number;
 
   @JsonProperty('previousBlock')
-  previousBlock: number;
+  public previousBlock: number;
 
   @JsonProperty('numberOfTransactions')
-  numberOfTransactions: number;
+  public numberOfTransactions: number;
 
   @JsonProperty('totalAmount')
-  totalAmount: number;
+  public totalAmount: number;
 
   @JsonProperty('totalFee')
-  totalFee: number;
+  public totalFee: number;
 
   @JsonProperty('reward')
-  reward: number;
+  public reward: number;
 
   @JsonProperty('payloadLength')
-  payloadLength: number;
+  public payloadLength: number;
 
   @JsonProperty('payloadHash')
-  payloadHash: string;
+  public payloadHash: string;
 
   @JsonProperty('generatorPublicKey')
-  generatorPublicKey: string;
+  public generatorPublicKey: string;
 
   @JsonProperty('generatorId')
-  generatorId: string;
+  public generatorId: string;
 
   @JsonProperty('blockSignature')
-  blockSignature: string;
+  public blockSignature: string;
 
   @JsonProperty('confirmations')
-  confirmations: number;
+  public confirmations: number;
 
   @JsonProperty('totalForged')
-  totalForged: string;
+  public totalForged: string;
 
   constructor() {
     this.version = void 0;
@@ -72,21 +72,21 @@ export class Block {
 }
 
 export class BlockQueryParams {
-  id?: string;
-  limit?: number;
-  offset?: number;
-  orderBy?: string;
+  public id?: string;
+  public limit?: number;
+  public offset?: number;
+  public orderBy?: string;
 }
 
 export class BlockResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({clazz: Block, name: 'blocks'})
-  blocks?: Block[];
+  public blocks?: Block[];
 
   @JsonProperty({clazz: Block, name: 'block'})
-  block?: Block;
+  public block?: Block;
 
   constructor() {
     this.success = void 0;
@@ -97,10 +97,10 @@ export class BlockResponse {
 
 export class BlockFee {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty('fee')
-  fee: number;
+  public fee: number;
 
   constructor() {
     this.success = void 0;
@@ -110,19 +110,19 @@ export class BlockFee {
 
 export class Fees {
   @JsonProperty('send')
-  send: number;
+  public send: number;
 
   @JsonProperty('vote')
-  vote: number;
+  public vote: number;
 
   @JsonProperty('secondsignature')
-  secondsignature: number;
+  public secondsignature: number;
 
   @JsonProperty('delegate')
-  delegate: number;
+  public delegate: number;
 
   @JsonProperty('multisignature')
-  multisignature: number;
+  public multisignature: number;
 
   constructor() {
     this.send = void 0;
@@ -135,10 +135,10 @@ export class Fees {
 
 export class BlockFees {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({clazz: Fees, name: 'fees'})
-  fees: Fees;
+  public fees: Fees;
 
   constructor() {
     this.success = void 0;
@@ -148,13 +148,13 @@ export class BlockFees {
 
 export class BlockHeight {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty('height')
-  height: number;
+  public height: number;
 
   @JsonProperty('id')
-  id: number;
+  public id: number;
 
   constructor() {
     this.success = void 0;
@@ -165,28 +165,28 @@ export class BlockHeight {
 
 export class BlockStatus {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty('epoch')
-  epoch: Date;
+  public epoch: Date;
 
   @JsonProperty('height')
-  height: number;
+  public height: number;
 
   @JsonProperty('fee')
-  fee: number;
+  public fee: number;
 
   @JsonProperty('milestone')
-  milestone: number;
+  public milestone: number;
 
   @JsonProperty('nethash')
-  nethash: string;
+  public nethash: string;
 
   @JsonProperty('reward')
-  reward: number;
+  public reward: number;
 
   @JsonProperty('supply')
-  supply: number;
+  public supply: number;
 
   constructor() {
     this.success = void 0;

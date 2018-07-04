@@ -3,25 +3,25 @@ import { JsonProperty } from 'json-typescript-mapper';
 /** Peer model. */
 export class Peer {
   @JsonProperty('ip')
-  ip: string;
+  public ip: string;
 
   @JsonProperty('port')
-  port: number;
+  public port: number;
 
   @JsonProperty('version')
-  version?: string;
+  public version?: string;
 
   @JsonProperty('os')
-  os?: string;
+  public os?: string;
 
   @JsonProperty('height')
-  height?: number;
+  public height?: number;
 
   @JsonProperty('status')
-  status?: string;
+  public status?: string;
 
   @JsonProperty('delay')
-  delay?: number;
+  public delay?: number;
 
   constructor() {
     this.delay = void 0;
@@ -35,26 +35,26 @@ export class Peer {
 }
 
 export class PeerQueryParams {
-  status?: string;
-  os?: string;
-  shared?: string;
-  version?: string;
-  limit?: number;
-  orderBy?: string;
-  offset?: number;
-  ip?: string;
-  port?: number;
+  public status?: string;
+  public os?: string;
+  public shared?: string;
+  public version?: string;
+  public limit?: number;
+  public orderBy?: string;
+  public offset?: number;
+  public ip?: string;
+  public port?: number;
 }
 
 export class PeerResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({clazz: Peer, name: 'peers'})
-  peers: Peer[];
+  public peers: Peer[];
 
   @JsonProperty({clazz: Peer, name: 'peer'})
-  peer: Peer;
+  public peer: Peer;
 
   constructor() {
     this.success = void 0;
@@ -65,13 +65,13 @@ export class PeerResponse {
 
 export class PeerVersionResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty('version')
-  version: string;
+  public version: string;
 
   @JsonProperty('build')
-  build: string;
+  public build: string;
 
   constructor() {
     this.success = void 0;
