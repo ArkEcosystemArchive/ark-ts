@@ -73,6 +73,10 @@ For more examples please see documentation or look for tests in each directory.
 npm run test
 ```
 
+## Security
+
+If you discover a security vulnerability within this project, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
+
 ## Contributing
 
   * If you find any bugs, submit an [issue](../../issues) or open [pull-request](../../pulls), helping us catch and fix them.
