@@ -13,7 +13,7 @@ describe('PeerApi', () => {
   const network = Network.getDefault(NetworkType.Devnet);
   const http = new Http(network);
   const api = new PeerApi(http);
-  const address = 'DLteVA8j6B5DLpFp2Z3XSw1ENGXMjtFQsf';
+  const address = 'DPHk9YyDekLZ5NN6Pz42RbP2KEZrkBmkmy';
 
   it('should be instance of PeerApi', () => {
     expect(api).to.be.instanceOf(PeerApi);
@@ -26,7 +26,7 @@ describe('PeerApi', () => {
   });
 
   it('should return success from get', () => {
-    return api.get('104.238.165.129', 4002).forEach((response) => {
+    return api.get('213.32.9.97', 4002).forEach((response) => {
       expect(response).to.have.property('success', true);
     });
   });
