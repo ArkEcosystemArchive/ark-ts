@@ -12,7 +12,7 @@ describe('BlockApi', () => {
   const network = Network.getDefault(NetworkType.Devnet);
   const http = new Http(network);
   const api = new BlockApi(http);
-  const address = 'DLteVA8j6B5DLpFp2Z3XSw1ENGXMjtFQsf';
+  const address = 'DPHk9YyDekLZ5NN6Pz42RbP2KEZrkBmkmy';
 
   it('should have static property', () => {
     expect(BlockApi).to.have.property('networkFees');
@@ -36,7 +36,7 @@ describe('BlockApi', () => {
   });
 
   it('should return sucess from get', () => {
-    return api.get({id: '6787516243162369906'}).forEach((response) => {
+    return api.get({id: '17769865334907828892'}).forEach((response) => {
       expect(response).to.have.property('success', true);
     });
   });
