@@ -79,4 +79,12 @@ export default class PeerApi {
   public version(params?: model.PeerQueryParams): Observable<model.PeerVersionResponse> {
     return this.http.get<model.PeerVersionResponse>('/peers/version', params, model.PeerVersionResponse);
   }
+
+  /**
+   * Get config for version 2 peers.
+   */
+  public getVersion2Config(ip: string, p2pPort: number): Observable<model.PeerVersion2ConfigResponse> {
+    return this.http.getNative<model.PeerVersion2ConfigResponse>(
+        `http://${ip}:${p2pPort}/config`, null, model.PeerVersion2ConfigResponse);
+  }
 }
