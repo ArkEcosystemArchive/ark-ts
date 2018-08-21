@@ -18,7 +18,10 @@ export class Network {
   public wif?: number;
   public activePeer: Peer;
   public bip32: string;
-  
+  public p2pPort: number;
+  public apiPort: number;
+  public isV2: boolean = false;
+
   constructor() {
     // pass
   }
@@ -75,7 +78,7 @@ export class Network {
    * Get formated peer url.
    */
   public getPeerUrl(): string {
-    return `http://${this.activePeer.ip}:${this.activePeer.port}`;
+    return `http://${this.activePeer.ip}:${this.apiPort || this.activePeer.port}`;
   }
 
 }

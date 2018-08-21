@@ -79,6 +79,9 @@ export default {
       version: 30,
       explorer: 'https://dexplorer.ark.io',
       wif: 0xaa,
+      p2pPort: 4002,
+      apiPort: 4003,
+      isV2: true,
       activePeer: {
         ip: '167.114.29.51',
         port: 4003,
