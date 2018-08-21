@@ -11,10 +11,12 @@ import * as model from '../model';
 export default class Http {
 
   private baseRequest;
+  private timeout = 3000
 
   public constructor(public network?: model.Network) {
     const options = {
       json: true,
+      timeout: this.timeout,
     };
 
     if (network) {
@@ -30,7 +32,7 @@ export default class Http {
   }
 
   public getNative<T>(url: string, params: any = {}, responseType?: new() => T): Observable<T> {
-    const r = new RxRequest({ json: true });
+    const r = new RxRequest({ json: true, timeout: this.timeout });
 
     return r.get(url, this.formatParams(params)).map((data) => this.formatResponse(data, responseType));
   }
