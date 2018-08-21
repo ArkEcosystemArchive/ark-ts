@@ -21,11 +21,6 @@ export default class Http {
 
     if (network) {
       options['baseUrl'] = network.getPeerUrl();
-      options['headers'] = {
-        nethash: network.nethash,
-        port: network.activePeer.port,
-        version: network.version,
-      };
     }
 
     this.baseRequest = new RxRequest(options);
