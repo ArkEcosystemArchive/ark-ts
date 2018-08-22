@@ -43,15 +43,33 @@ export default class Http {
       json: true,
     };
 
+    if (/^\/peer/.test(url)) {
+      options['headers'] = {
+        nethash: this.network.nethash,
+        port: this.network.activePeer.port,
+        version: this.network.version,
+      };
+    }
+
     return this.baseRequest.post(url, options)
                            .map((data) => this.formatResponse(data, responseType));
   }
 
   public postNative<T>(url: string, body: any, responseType?: new() => T): Observable<T> {
-    const r = new RxRequest({
+    const options = {
       body,
       json: true,
-    });
+    }
+
+    if (/:\d+\/peer/.test(url)) {
+      options['headers'] = {
+        nethash: this.network.nethash,
+        port: this.network.activePeer.port,
+        version: this.network.version,
+      };
+    }
+
+    const r = new RxRequest(options);
 
     return r.post(url).map((data) => this.formatResponse(data, responseType));
   }
