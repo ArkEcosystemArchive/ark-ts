@@ -20,7 +20,7 @@ export default class Http {
     };
 
     if (network) {
-      options['baseUrl'] = network.getPeerUrl();
+      options['baseUrl'] = network.getPeerAPIUrl();
     }
 
     this.baseRequest = new RxRequest(options);
@@ -44,6 +44,7 @@ export default class Http {
     };
 
     if (/^\/peer/.test(url)) {
+      options['baseUrl'] = this.network.getPeerP2PUrl();
       options['headers'] = {
         nethash: this.network.nethash,
         port: this.network.activePeer.port,

@@ -77,8 +77,15 @@ export class Network {
   /**
    * Get formated peer url.
    */
-  public getPeerUrl(): string {
+  public getPeerAPIUrl(): string {
     return `http://${this.activePeer.ip}:${this.apiPort || this.activePeer.port}`;
+  }
+
+  /**
+   * Get formated peer url.
+   */
+  public getPeerP2PUrl(): string {
+    return `http://${this.activePeer.ip}:${this.p2pPort || this.activePeer.port}`;
   }
 
 }
