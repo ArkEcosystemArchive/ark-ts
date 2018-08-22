@@ -207,8 +207,12 @@ describe('TransactionApi', () => {
     };
 
     return api.post(transaction).forEach((response) => {
-      expect(response.data).to.have.property('invalid');
-      expect(response.data.invalid).to.be.an('array').that.does.include(transaction.id);
+      if (network.isV2) {
+        expect(response).to.have.property('transactionIds');
+        expect(response.transactionIds).to.be.an('array').that.does.not.include(transaction.id);
+      } else {
+        expect(response).to.have.property('success', false);
+      }
     });
   });
 
