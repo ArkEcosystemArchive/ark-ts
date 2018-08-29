@@ -16,7 +16,7 @@ const http = new Http(network);
 let api: TransactionApi;
 
 describe('TransactionApi', () => {
-  const address = 'DPHk9YyDekLZ5NN6Pz42RbP2KEZrkBmkmy';
+  const address = 'DPTj92butfhy527V13bSXMj9SVYZGAVZ1R';
 
   before(async () => {
     const peerApi = new PeerApi(http);
@@ -167,14 +167,14 @@ describe('TransactionApi', () => {
   });
 
   it('should return success from get', () => {
-    return api.get('bb334503e20855f574baacad83cac41114b72ea0aa043fd8626f5a03bf69bb6e').forEach((response) => {
+    return api.get('a5e8ad49c9d8d074490f20cc4de960baa42c5db91f11513ddd7ccd853e5a49d9').forEach((response) => {
       expect(response).to.have.property('success', true);
     });
   });
 
   it('should return false on success field from getUnconfirmed', () => {
     return api.getUnconfirmed(
-      'bb334503e20855f574baacad83cac41114b72ea0aa043fd8626f5a03bf69bb6e',
+      'a5e8ad49c9d8d074490f20cc4de960baa42c5db91f11513ddd7ccd853e5a49d9',
     ).forEach((response) => {
       expect(response).to.have.property('success', false);
     });
@@ -198,7 +198,7 @@ describe('TransactionApi', () => {
       amount: 100000000,
       fee: 10000000,
       id: '5b9be5f9b1280d542e856e84758312780fe0061366592e579cbed8639511cac0',
-      recipientId: 'DPHk9YyDekLZ5NN6Pz42RbP2KEZrkBmkmy',
+      recipientId: 'DPTj92butfhy527V13bSXMj9SVYZGAVZ1R',
       senderPublicKey: '026c75159ccf36ffc639fdfcba7c6e798f90b2767b54b8a99f2eeec534c92a32e9',
       signature: '304402203d971b4e50e27e7fec8fb6d42523b82a70a82af9b9488d8f4aa16cb7936162ea022077e072b21e78cf24b7a9b8b653042dcb218b226f1b18e9a7a8462bc49e48255b',
       timestamp: 9870360,

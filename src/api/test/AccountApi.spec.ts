@@ -12,7 +12,7 @@ describe('AccountApi', () => {
   const network = Network.getDefault(NetworkType.Devnet);
   const http = new Http(network);
   const api = new AccountApi(http);
-  const address = 'DPHk9YyDekLZ5NN6Pz42RbP2KEZrkBmkmy';
+  const address = 'DPTj92butfhy527V13bSXMj9SVYZGAVZ1R';
 
   it('should be instance of AccountApi', () => {
     expect(api).to.be.instanceOf(AccountApi);

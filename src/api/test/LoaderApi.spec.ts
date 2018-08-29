@@ -12,7 +12,7 @@ describe('LoaderApi', () => {
   const network = Network.getDefault(NetworkType.Devnet);
   const http = new Http(network);
   const api = new LoaderApi(http);
-  const address = 'DPHk9YyDekLZ5NN6Pz42RbP2KEZrkBmkmy';
+  const address = 'DPTj92butfhy527V13bSXMj9SVYZGAVZ1R';
   const peerUrl = `http://${network.activePeer.ip}:${network.activePeer.port}`
 
   it('should be instance of LoaderApi', () => {
