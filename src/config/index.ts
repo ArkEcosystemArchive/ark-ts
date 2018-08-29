@@ -74,7 +74,7 @@ export default {
         private: 0x04358394,
       },
       name: 'devnet',
-      nethash: '578e820911f24e039733b45e4882b73e301f813a0d2c31330dafda84534ffa23',
+      nethash: '2a44f340d76ffc3df204c5f38cd355b7496c9065a1ade2ef92071436bd72e867',
       token: 'DARK',
       symbol: 'DѦ',
       version: 30,
