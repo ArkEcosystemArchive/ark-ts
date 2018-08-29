@@ -14,6 +14,7 @@ export default {
       version: 0x17,
       explorer: 'https://explorer.ark.io',
       wif: 0xaa,
+      p2pVersion: '1.1.0',
       activePeer: {
         ip: 'node1.arknet.cloud',
         port: 4001,
@@ -81,6 +82,7 @@ export default {
       wif: 0xaa,
       p2pPort: 4002,
       apiPort: 4003,
+      p2pVersion: '2.0.0',
       isV2: true,
       activePeer: {
         ip: '167.114.29.51',

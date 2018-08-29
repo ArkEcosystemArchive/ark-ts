@@ -48,7 +48,7 @@ export default class Http {
       options['headers'] = {
         nethash: this.network.nethash,
         port: this.network.activePeer.port,
-        version: this.network.version,
+        version: this.network.p2pVersion,
       };
     }
 
@@ -66,7 +66,7 @@ export default class Http {
       options['headers'] = {
         nethash: this.network.nethash,
         port: this.network.activePeer.port,
-        version: this.network.version,
+        version: this.network.p2pVersion,
       };
     }
 

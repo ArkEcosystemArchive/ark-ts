@@ -20,6 +20,7 @@ export class Network {
   public bip32: string;
   public p2pPort: number;
   public apiPort: number;
+  public p2pVersion: string;
   public isV2: boolean = false;
 
   constructor() {
