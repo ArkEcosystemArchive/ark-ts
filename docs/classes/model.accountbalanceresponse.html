@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LoaderStatusPing | ark-ts</title>
+	<title>AccountBalanceResponse | ark-ts</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,10 +55,10 @@
 					<a href="../modules/model.html">model</a>
 				</li>
 				<li>
-					<a href="model.loaderstatusping.html">LoaderStatusPing</a>
+					<a href="model.accountbalanceresponse.html">AccountBalanceResponse</a>
 				</li>
 			</ul>
-			<h1>Class LoaderStatusPing</h1>
+			<h1>Class AccountBalanceResponse</h1>
 		</div>
 	</div>
 </header>
@@ -69,7 +69,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LoaderStatusPing</span>
+						<span class="target">AccountBalanceResponse</span>
 					</li>
 				</ul>
 			</section>
@@ -80,13 +80,15 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="model.loaderstatusping.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="model.accountbalanceresponse.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.loaderstatusping.html#success" class="tsd-kind-icon">success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.accountbalanceresponse.html#balance" class="tsd-kind-icon">balance</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.accountbalanceresponse.html#success" class="tsd-kind-icon">success</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="model.accountbalanceresponse.html#unconfirmedbalance" class="tsd-kind-icon">unconfirmed<wbr>Balance</a></li>
 							</ul>
 						</section>
 					</div>
@@ -98,16 +100,16 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Loader<wbr>Status<wbr>Ping<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="model.loaderstatusping.html" class="tsd-signature-type">LoaderStatusPing</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Account<wbr>Balance<wbr>Response<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="model.accountbalanceresponse.html" class="tsd-signature-type">AccountBalanceResponse</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/f6bb98f/src/model/Loader.ts#L90">model/Loader.ts:90</a></li>
+									<li>Defined in <a href="https://github.com/arkecosystem/ark-ts/blob/7e05cd6/src/model/Account.ts#L71">model/Account.ts:71</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <a href="model.loaderstatusping.html" class="tsd-signature-type">LoaderStatusPing</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="model.accountbalanceresponse.html" class="tsd-signature-type">AccountBalanceResponse</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -115,12 +117,32 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="balance" class="tsd-anchor"></a>
+					<h3>balance</h3>
+					<div class="tsd-signature tsd-kind-icon">balance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/arkecosystem/ark-ts/blob/7e05cd6/src/model/Account.ts#L68">model/Account.ts:68</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="success" class="tsd-anchor"></a>
 					<h3>success</h3>
 					<div class="tsd-signature tsd-kind-icon">success<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ArkEcosystem/ark-ts/blob/f6bb98f/src/model/Loader.ts#L90">model/Loader.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/arkecosystem/ark-ts/blob/7e05cd6/src/model/Account.ts#L65">model/Account.ts:65</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="unconfirmedbalance" class="tsd-anchor"></a>
+					<h3>unconfirmed<wbr>Balance</h3>
+					<div class="tsd-signature tsd-kind-icon">unconfirmed<wbr>Balance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/arkecosystem/ark-ts/blob/7e05cd6/src/model/Account.ts#L71">model/Account.ts:71</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -154,135 +176,27 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/model.networktype.html" class="tsd-kind-icon">Network<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/model.transactiontype.html" class="tsd-kind-icon">Transaction<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-enum tsd-parent-kind-external-module">
-						<a href="../enums/model.votetype.html" class="tsd-kind-icon">Vote<wbr>Type</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.account.html" class="tsd-kind-icon">Account</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.accountqueryparams.html" class="tsd-kind-icon">Account<wbr>Query<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.accountresponse.html" class="tsd-kind-icon">Account<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.accountvoter.html" class="tsd-kind-icon">Account<wbr>Voter</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.accountvotesresponse.html" class="tsd-kind-icon">Account<wbr>Votes<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.block.html" class="tsd-kind-icon">Block</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.blockfee.html" class="tsd-kind-icon">Block<wbr>Fee</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.blockfees.html" class="tsd-kind-icon">Block<wbr>Fees</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.blockheight.html" class="tsd-kind-icon">Block<wbr>Height</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.blockqueryparams.html" class="tsd-kind-icon">Block<wbr>Query<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.blockresponse.html" class="tsd-kind-icon">Block<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.blockstatus.html" class="tsd-kind-icon">Block<wbr>Status</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.delegate.html" class="tsd-kind-icon">Delegate</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.delegatequeryparams.html" class="tsd-kind-icon">Delegate<wbr>Query<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.delegateresponse.html" class="tsd-kind-icon">Delegate<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.delegatevoters.html" class="tsd-kind-icon">Delegate<wbr>Voters</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.fees.html" class="tsd-kind-icon">Fees</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.forgeddetails.html" class="tsd-kind-icon">Forged<wbr>Details</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.loaderautoconfigure.html" class="tsd-kind-icon">Loader<wbr>Auto<wbr>Configure</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.loadernetworkresponse.html" class="tsd-kind-icon">Loader<wbr>Network<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.loaderstatus.html" class="tsd-kind-icon">Loader<wbr>Status</a>
-					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.loaderstatusping.html" class="tsd-kind-icon">Loader<wbr>Status<wbr>Ping</a>
+						<a href="model.accountbalanceresponse.html" class="tsd-kind-icon">Account<wbr>Balance<wbr>Response</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="model.loaderstatusping.html#constructor" class="tsd-kind-icon">constructor</a>
+								<a href="model.accountbalanceresponse.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="model.loaderstatusping.html#success" class="tsd-kind-icon">success</a>
+								<a href="model.accountbalanceresponse.html#balance" class="tsd-kind-icon">balance</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.accountbalanceresponse.html#success" class="tsd-kind-icon">success</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="model.accountbalanceresponse.html#unconfirmedbalance" class="tsd-kind-icon">unconfirmed<wbr>Balance</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.loaderstatussync.html" class="tsd-kind-icon">Loader<wbr>Status<wbr>Sync</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.network.html" class="tsd-kind-icon">Network</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.peer.html" class="tsd-kind-icon">Peer</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.peerqueryparams.html" class="tsd-kind-icon">Peer<wbr>Query<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.peerresponse.html" class="tsd-kind-icon">Peer<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.peerversionresponse.html" class="tsd-kind-icon">Peer<wbr>Version<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.transaction.html" class="tsd-kind-icon">Transaction</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.transactiondelegate.html" class="tsd-kind-icon">Transaction<wbr>Delegate</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.transactionpayload.html" class="tsd-kind-icon">Transaction<wbr>Payload</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.transactionpostresponse.html" class="tsd-kind-icon">Transaction<wbr>Post<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.transactionqueryparams.html" class="tsd-kind-icon">Transaction<wbr>Query<wbr>Params</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.transactionresponse.html" class="tsd-kind-icon">Transaction<wbr>Response</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.transactionsend.html" class="tsd-kind-icon">Transaction<wbr>Send</a>
-					</li>
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="model.transactionvote.html" class="tsd-kind-icon">Transaction<wbr>Vote</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

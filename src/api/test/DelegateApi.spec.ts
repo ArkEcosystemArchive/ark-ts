@@ -12,7 +12,7 @@ describe('DelegateApi', () => {
   const network = Network.getDefault(NetworkType.Devnet);
   const http = new Http(network);
   const api = new DelegateApi(http);
-  const address = 'DLteVA8j6B5DLpFp2Z3XSw1ENGXMjtFQsf';
+  const address = 'DPTj92butfhy527V13bSXMj9SVYZGAVZ1R';
 
   it('should be instance of DelegateApi', () => {
     expect(api).to.be.instanceOf(DelegateApi);

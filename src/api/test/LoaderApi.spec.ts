@@ -12,7 +12,8 @@ describe('LoaderApi', () => {
   const network = Network.getDefault(NetworkType.Devnet);
   const http = new Http(network);
   const api = new LoaderApi(http);
-  const address = 'DLteVA8j6B5DLpFp2Z3XSw1ENGXMjtFQsf';
+  const address = 'DPTj92butfhy527V13bSXMj9SVYZGAVZ1R';
+  const peerUrl = `http://${network.activePeer.ip}:${network.activePeer.port}`
 
   it('should be instance of LoaderApi', () => {
     expect(api).to.be.instanceOf(LoaderApi);
@@ -26,8 +27,7 @@ describe('LoaderApi', () => {
 
   it ('should return success from autoConfigure (manual http)', () => {
     const newHttp = new Http();
-
-    return new LoaderApi(newHttp).autoConfigure('http://167.114.29.40:4002').forEach((response) => {
+    return new LoaderApi(newHttp).autoConfigure(peerUrl).forEach((response) => {
       expect(response).to.have.property('success', true);
     });
   });
@@ -39,7 +39,7 @@ describe('LoaderApi', () => {
   });
 
   it('should return success from autoConfigure (manual peer url)', () => {
-    return api.autoConfigure('http://167.114.29.40:4002').forEach((response) => {
+    return api.autoConfigure(peerUrl).forEach((response) => {
       expect(response).to.have.property('success', true);
     });
   });
@@ -57,7 +57,7 @@ describe('LoaderApi', () => {
   });
 
   it('should return sucess from synchronisationStatus (manual peer url)', () => {
-    return api.synchronisationStatus('http://167.114.29.40:4002').forEach((response) => {
+    return api.synchronisationStatus(peerUrl).forEach((response) => {
       expect(response).to.have.property('success', true);
     });
   });

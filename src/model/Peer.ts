@@ -1,4 +1,4 @@
-import { JsonProperty } from 'json-typescript-mapper';
+import { ICustomConverter, JsonProperty } from 'json-typescript-mapper';
 
 /** Peer model. */
 export class Peer {
@@ -77,5 +77,40 @@ export class PeerVersionResponse {
     this.success = void 0;
     this.version = void 0;
     this.build = void 0;
+  }
+}
+
+const genericConverter: ICustomConverter = {
+  fromJson(data: any): any {
+    return data;
+  },
+  toJson(data: any): any {
+    return JSON.stringify(data);
+  }
+};
+
+export class PeerVersion2ConfigDataResponse {
+  @JsonProperty('version')
+  version: string;
+
+  @JsonProperty({customConverter: genericConverter, name: 'network'})
+  network?: object;
+
+  @JsonProperty({customConverter: genericConverter, name: 'plugins'})
+  plugins?: object;
+
+  constructor() {
+    this.version = void 0;
+    this.network = void 0;
+    this.plugins = void 0;
+  }
+}
+
+export class PeerVersion2ConfigResponse {
+  @JsonProperty({clazz: PeerVersion2ConfigDataResponse, name: 'data'})
+  data: PeerVersion2ConfigDataResponse;
+
+  constructor() {
+    this.data = void 0;
   }
 }

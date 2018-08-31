@@ -16,7 +16,7 @@ const http = new Http(network);
 let api: TransactionApi;
 
 describe('TransactionApi', () => {
-  const address = 'DLteVA8j6B5DLpFp2Z3XSw1ENGXMjtFQsf';
+  const address = 'DPTj92butfhy527V13bSXMj9SVYZGAVZ1R';
 
   before(async () => {
     const peerApi = new PeerApi(http);
@@ -167,14 +167,14 @@ describe('TransactionApi', () => {
   });
 
   it('should return success from get', () => {
-    return api.get('e40ce11cab82736da1cc91191716f3c1f446ca7b6a9f4f93b7120ef105ba06e8').forEach((response) => {
+    return api.get('a5e8ad49c9d8d074490f20cc4de960baa42c5db91f11513ddd7ccd853e5a49d9').forEach((response) => {
       expect(response).to.have.property('success', true);
     });
   });
 
   it('should return false on success field from getUnconfirmed', () => {
     return api.getUnconfirmed(
-      'e40ce11cab82736da1cc91191716f3c1f446ca7b6a9f4f93b7120ef105ba06e8',
+      'a5e8ad49c9d8d074490f20cc4de960baa42c5db91f11513ddd7ccd853e5a49d9',
     ).forEach((response) => {
       expect(response).to.have.property('success', false);
     });
@@ -198,7 +198,7 @@ describe('TransactionApi', () => {
       amount: 100000000,
       fee: 10000000,
       id: '5b9be5f9b1280d542e856e84758312780fe0061366592e579cbed8639511cac0',
-      recipientId: 'DLteVA8j6B5DLpFp2Z3XSw1ENGXMjtFQsf',
+      recipientId: 'DPTj92butfhy527V13bSXMj9SVYZGAVZ1R',
       senderPublicKey: '026c75159ccf36ffc639fdfcba7c6e798f90b2767b54b8a99f2eeec534c92a32e9',
       signature: '304402203d971b4e50e27e7fec8fb6d42523b82a70a82af9b9488d8f4aa16cb7936162ea022077e072b21e78cf24b7a9b8b653042dcb218b226f1b18e9a7a8462bc49e48255b',
       timestamp: 9870360,
@@ -207,7 +207,12 @@ describe('TransactionApi', () => {
     };
 
     return api.post(transaction).forEach((response) => {
-      expect(response).to.have.property('success', false);
+      if (network.isV2) {
+        expect(response).to.have.property('transactionIds');
+        expect(response.transactionIds).to.be.an('array').that.does.not.include(transaction.id);
+      } else {
+        expect(response).to.have.property('success', false);
+      }
     });
   });
 

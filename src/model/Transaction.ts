@@ -127,16 +127,41 @@ export class TransactionSend {
   }
 }
 
+export class TransactionPostDataResponse {
+  @JsonProperty('accept')
+  accept: string[];
+
+  @JsonProperty('excess')
+  excess: string[];
+
+  @JsonProperty('invalid')
+  invalid: string[];
+
+  @JsonProperty('broadcast')
+  broadcast: string[];
+
+  constructor() {
+    this.accept = void 0;
+    this.excess = void 0;
+    this.invalid = void 0;
+    this.broadcast = void 0;
+  }
+}
+
 export class TransactionPostResponse {
   @JsonProperty('success')
   success: boolean;
 
-  @JsonProperty({name: 'transactionIds'})
+  @JsonProperty('transactionIds')
   transactionIds: string[];
+
+  @JsonProperty({clazz: TransactionPostDataResponse, name: 'data'})
+  data: TransactionPostDataResponse;
 
   constructor() {
     this.success = void 0;
     this.transactionIds = void 0;
+    this.data = void 0;
   }
 }
 
