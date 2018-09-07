@@ -28,6 +28,9 @@ export default class TransactionApi {
 
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
+        if (!fees.send) {
+          return observer.error('Missing "send" transaction fee')
+        }
         let data = <model.Transaction> {
           amount: params.amount,
           fee: fees.send,
@@ -54,6 +57,9 @@ export default class TransactionApi {
     return Observable.create((observer: any) => {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
+        if (!fees.vote) {
+          return observer.error('Missing "vote" transaction fee')
+        }
         const updown = model.VoteType[params.type] === 'Add' ? '+' : '-';
 
         let data = <model.Transaction> {
@@ -89,6 +95,9 @@ export default class TransactionApi {
 
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
+        if (!fees.delegate) {
+          return observer.error('Missing "delegate" transaction fee')
+        }
         let data = <model.Transaction> {
           asset: {
             delegate: {
@@ -120,6 +129,9 @@ export default class TransactionApi {
     return Observable.create((observer: any) => {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
+        if (!fees.secondsignature) {
+          return observer.error('Missing "secondsignature" transaction fee')
+        }
         let data = <model.Transaction> {
           asset: {},
           fee: fees.secondsignature,
