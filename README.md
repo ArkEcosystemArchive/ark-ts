@@ -1,3 +1,5 @@
+**:warning: SOON TO BE DEPRECATED IN FAVOR OF https://github.com/ArkEcosystem/core/tree/master/packages/crypto - PLEASE SUBMIT PULL REQUESTS TO THE CORE V2 REPOSITORY :warning:***
+
 ![TSARK Logo](https://i.imgur.com/AyhlVoZ.png)
 
 # TSARK
@@ -70,6 +72,10 @@ For more examples please see documentation or look for tests in each directory.
 ```bash
 npm run test
 ```
+
+## Security
+
+If you discover a security vulnerability within this project, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
 
 ## Contributing
 

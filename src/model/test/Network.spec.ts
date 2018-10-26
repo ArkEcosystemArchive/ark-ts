@@ -61,7 +61,7 @@ describe('Network', () => {
     network.nethash = '6e84d08bd299ed97c212c886c98a57e36545c8f5d645ca7eeae63a8bd62d8988';
 
     network.setPeer(peer);
-    expect(network.getPeerUrl()).to.be.a('string').and.not.empty;
+    expect(network.getPeerAPIUrl()).to.be.a('string').and.not.empty;
   });
 
   it('should return array of two Networks', () => {

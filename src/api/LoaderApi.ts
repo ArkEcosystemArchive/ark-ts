@@ -37,12 +37,4 @@ export default class LoaderApi {
 
     return this.http.get<model.LoaderStatusSync>('/loader/status/sync', null, model.LoaderStatusSync);
   }
-
-  /**
-   * Ping the blockchain.
-   */
-  public pingStatus() {
-    return this.http.get<model.LoaderStatusPing>('/loader/status/ping', null, model.LoaderStatusPing);
-  }
-
 }

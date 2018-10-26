@@ -17,6 +17,11 @@ export class Network {
   public explorer: string;
   public wif?: number;
   public activePeer: Peer;
+  public bip32: string;
+  public p2pPort: number;
+  public apiPort: number;
+  public p2pVersion: string;
+  public isV2: boolean = false;
 
   constructor() {
     // pass
@@ -73,8 +78,15 @@ export class Network {
   /**
    * Get formated peer url.
    */
-  public getPeerUrl(): string {
-    return `http://${this.activePeer.ip}:${this.activePeer.port}`;
+  public getPeerAPIUrl(): string {
+    return `http://${this.activePeer.ip}:${this.apiPort || this.activePeer.port}`;
+  }
+
+  /**
+   * Get formated peer url.
+   */
+  public getPeerP2PUrl(): string {
+    return `http://${this.activePeer.ip}:${this.p2pPort || this.activePeer.port}`;
   }
 
 }

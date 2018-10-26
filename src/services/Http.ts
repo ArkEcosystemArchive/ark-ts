@@ -11,26 +11,23 @@ import * as model from '../model';
 export default class Http {
 
   private baseRequest;
+  private timeout = 3000
 
   public constructor(public network?: model.Network) {
     const options = {
       json: true,
+      timeout: this.timeout,
     };
 
     if (network) {
-      options['baseUrl'] = network.getPeerUrl();
-      options['headers'] = {
-        nethash: network.nethash,
-        port: network.activePeer.port,
-        version: network.version,
-      };
+      options['baseUrl'] = network.getPeerAPIUrl();
     }
 
     this.baseRequest = new RxRequest(options);
   }
 
   public getNative<T>(url: string, params: any = {}, responseType?: new() => T): Observable<T> {
-    const r = new RxRequest({ json: true });
+    const r = new RxRequest({ json: true, timeout: this.timeout });
 
     return r.get(url, this.formatParams(params)).map((data) => this.formatResponse(data, responseType));
   }
@@ -46,15 +43,34 @@ export default class Http {
       json: true,
     };
 
+    if (/^\/peer/.test(url)) {
+      options['baseUrl'] = this.network.getPeerP2PUrl();
+      options['headers'] = {
+        nethash: this.network.nethash,
+        port: this.network.activePeer.port,
+        version: this.network.p2pVersion,
+      };
+    }
+
     return this.baseRequest.post(url, options)
                            .map((data) => this.formatResponse(data, responseType));
   }
 
   public postNative<T>(url: string, body: any, responseType?: new() => T): Observable<T> {
-    const r = new RxRequest({
+    const options = {
       body,
       json: true,
-    });
+    }
+
+    if (/:\d+\/peer/.test(url)) {
+      options['headers'] = {
+        nethash: this.network.nethash,
+        port: this.network.activePeer.port,
+        version: this.network.p2pVersion,
+      };
+    }
+
+    const r = new RxRequest(options);
 
     return r.post(url).map((data) => this.formatResponse(data, responseType));
   }
