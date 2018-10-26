@@ -4,31 +4,31 @@ import { Delegate } from './Delegate';
 /** Account model. */
 export class Account {
   @JsonProperty('address')
-  address: string;
+  public address: string;
 
   @JsonProperty('unconfirmedBalance')
-  unconfirmedBalance: string;
+  public unconfirmedBalance: string;
 
   @JsonProperty('balance')
-  balance: string;
+  public balance: string;
 
   @JsonProperty('publicKey')
-  publicKey: string;
+  public publicKey: string;
 
   @JsonProperty('unconfirmedSignature')
-  unconfirmedSignature: number;
+  public unconfirmedSignature: number;
 
   @JsonProperty('secondSignature')
-  secondSignature: number;
+  public secondSignature: number;
 
   @JsonProperty('secondPublicKey')
-  secondPublicKey: string;
+  public secondPublicKey: string;
 
   @JsonProperty({clazz: Object, name: 'multiSignatures'})
-  multiSignatures: object[];
+  public multiSignatures: object[];
 
   @JsonProperty({clazz: Object, name: 'u_multisignatures'})
-  uMultiSignatures: object[];
+  public uMultiSignatures: object[];
 
   constructor() {
     this.address = void 0;
@@ -45,13 +45,13 @@ export class Account {
 
 export class AccountResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({clazz: Account, name: 'account'})
-  account?: Account;
+  public account?: Account;
 
   @JsonProperty('publicKey')
-  publicKey?: string;
+  public publicKey?: string;
 
   constructor() {
     this.success = void 0;
@@ -62,13 +62,13 @@ export class AccountResponse {
 
 export class AccountBalanceResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty('balance')
-  balance: string;
+  public balance: string;
 
   @JsonProperty('unconfirmedBalance')
-  unconfirmedBalance: string;
+  public unconfirmedBalance: string;
 
   constructor() {
     this.success = void 0;
@@ -79,10 +79,10 @@ export class AccountBalanceResponse {
 
 export class AccountVotesResponse {
   @JsonProperty('success')
-  success: boolean;
+  public success: boolean;
 
   @JsonProperty({clazz: Delegate, name: 'delegates'})
-  delegates: Delegate[];
+  public delegates: Delegate[];
 
   constructor() {
     this.success = void 0;
@@ -91,5 +91,5 @@ export class AccountVotesResponse {
 }
 
 export class AccountQueryParams {
-  address: string;
+  public address: string;
 }

@@ -120,12 +120,11 @@ export default class TransactionApi {
     return Observable.create((observer: any) => {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
-        let data = <model.Transaction> {
-          asset: {},
-          fee: fees.secondsignature,
-          type: model.TransactionType.SecondSignature,
-          vendorField: vendorField,
-        };
+        let data = <model.Transaction> {};
+        data.asset = {};
+        data.fee = fees.secondsignature;
+        data.type = model.TransactionType.SecondSignature;
+        data.vendorField = vendorField;
 
         const tx = new Tx(data, this.http.network, passphrase, secondPassphrase);
         tx.setAssetSignature();
