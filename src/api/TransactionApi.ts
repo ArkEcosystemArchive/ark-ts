@@ -156,15 +156,25 @@ export default class TransactionApi {
    */
   public post(transaction: model.Transaction, peer?: Peer) {
     const params = {transactions: [transaction]};
+    const host = peer ? peer.ip : this.http.network.activePeer.ip;
+    const endpoint = '/peer/transactions';
 
-    if (peer) {
-      const port = this.http.network.isV2 ? this.http.network.p2pPort : peer.port;
-      let url = `http://${peer.ip}:${port}/peer/transactions`;
+    let port = peer ? peer.port : this.http.network.activePeer.port;
 
-      return this.http.postNative<model.TransactionPostResponse>(url, params, model.TransactionPostResponse);
+    if (this.http.network.isV2) {
+      port = this.http.network.p2pPort;
     }
 
-    return this.http.post<model.TransactionPostResponse>('/peer/transactions', params, model.TransactionPostResponse);
+    const options = {
+      headers: {
+        nethash: this.http.network.nethash,
+        port,
+        version: this.http.network.p2pVersion || ''
+      }
+    };
+
+    const url = `http://${host}:${port}${endpoint}`;
+    return this.http.postNative<model.TransactionPostResponse>(url, params, model.TransactionPostResponse, options);
   }
 
   /**
