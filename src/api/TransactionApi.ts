@@ -29,7 +29,7 @@ export default class TransactionApi {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
         if (!fees.send) {
-          return observer.error('Missing "send" transaction fee')
+          return observer.error('Missing "send" transaction fee');
         }
         let data = <model.Transaction> {
           amount: params.amount,
@@ -58,7 +58,7 @@ export default class TransactionApi {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
         if (!fees.vote) {
-          return observer.error('Missing "vote" transaction fee')
+          return observer.error('Missing "vote" transaction fee');
         }
         const updown = model.VoteType[params.type] === 'Add' ? '+' : '-';
 
@@ -96,7 +96,7 @@ export default class TransactionApi {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
         if (!fees.delegate) {
-          return observer.error('Missing "delegate" transaction fee')
+          return observer.error('Missing "delegate" transaction fee');
         }
         let data = <model.Transaction> {
           asset: {
@@ -130,7 +130,7 @@ export default class TransactionApi {
       BlockApi.networkFees(this.http.network).subscribe((blocks) => {
         const fees = blocks.fees;
         if (!fees.secondsignature) {
-          return observer.error('Missing "secondsignature" transaction fee')
+          return observer.error('Missing "secondsignature" transaction fee');
         }
         let data = <model.Transaction> {};
         data.asset = {};
@@ -169,8 +169,8 @@ export default class TransactionApi {
       headers: {
         nethash: this.http.network.nethash,
         port,
-        version: this.http.network.p2pVersion || ''
-      }
+        version: this.http.network.p2pVersion || '',
+      },
     };
 
     const url = `http://${host}:${port}${endpoint}`;

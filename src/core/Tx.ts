@@ -34,12 +34,12 @@ export default class Tx {
     this.transaction = transaction;
 
     if (typeof key === 'string') {
-      key = PrivateKey.fromSeed(key,network);
+      key = PrivateKey.fromSeed(key, network);
     }
 
     if (secondKey) {
       if (typeof secondKey === 'string') {
-        secondKey = PrivateKey.fromSeed(secondKey,network);
+        secondKey = PrivateKey.fromSeed(secondKey, network);
       }
 
       this.secondPrivKey = secondKey;

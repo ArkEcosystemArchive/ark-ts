@@ -12,13 +12,13 @@ export class RxRequest {
   constructor(options: any) {
     const headers = {
       ...options.headers,
-      'Content-Type': 'application/json'
-    }
+      'Content-Type': 'application/json',
+    };
 
     this.req = axios.create({
       ...options,
-      headers
-    })
+      headers,
+    });
 
     this.get = this.toObservable(this.req.get);
     this.post = this.toObservable(this.req.post);
@@ -30,8 +30,7 @@ export class RxRequest {
     return (url: string, options: AxiosRequestConfig): Observable<any> => {
       return Observable.create((observer) => {
         method(url, options)
-          .then(res => {
-            console.log(res);
+          .then((res) => {
             if (res.status < 200 || res.status >= 300) {
               observer.error({
                 statusCode: res.statusCode,
@@ -42,11 +41,10 @@ export class RxRequest {
               observer.complete();
             }
           })
-          .catch(err => {
-            console.error(err);
+          .catch((err) => {
             observer.error(err);
             observer.complete();
-          })
+          });
       });
     };
   }

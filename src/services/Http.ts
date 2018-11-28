@@ -11,7 +11,7 @@ import * as model from '../model';
 export default class Http {
 
   private baseRequest;
-  private timeout = 6000
+  private timeout = 6000;
 
   public constructor(public network?: model.Network) {
     const options = {
@@ -42,7 +42,6 @@ export default class Http {
   }
 
   public postNative<T>(url: string, body: any, responseType?: new() => T, options: any = {}): Observable<T> {
-    console.log(options)
     const r = new RxRequest(options);
 
     return r.post(url, body).map((data) => this.formatResponse(data, responseType));

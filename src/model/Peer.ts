@@ -86,18 +86,18 @@ const genericConverter: ICustomConverter = {
   },
   toJson(data: any): any {
     return JSON.stringify(data);
-  }
+  },
 };
 
 export class PeerVersion2ConfigDataResponse {
   @JsonProperty('version')
-  version: string;
+  public version: string;
 
   @JsonProperty({customConverter: genericConverter, name: 'network'})
-  network?: object;
+  public network?: object;
 
   @JsonProperty({customConverter: genericConverter, name: 'plugins'})
-  plugins?: object;
+  public plugins?: object;
 
   constructor() {
     this.version = void 0;
@@ -108,7 +108,7 @@ export class PeerVersion2ConfigDataResponse {
 
 export class PeerVersion2ConfigResponse {
   @JsonProperty({clazz: PeerVersion2ConfigDataResponse, name: 'data'})
-  data: PeerVersion2ConfigDataResponse;
+  public data: PeerVersion2ConfigDataResponse;
 
   constructor() {
     this.data = void 0;
