@@ -14,10 +14,13 @@ export default {
       version: 0x17,
       explorer: 'https://explorer.ark.io',
       wif: 0xaa,
-      p2pVersion: '1.1.0',
+      p2pPort: 4002,
+      apiPort: 4003,
+      p2pVersion: '2.0.0',
+      isV2: true,
       activePeer: {
-        ip: 'node1.arknet.cloud',
-        port: 4001,
+        ip: '167.114.29.51',
+        port: 4003,
       },
       peers: [
         '5.39.9.240:4001',
