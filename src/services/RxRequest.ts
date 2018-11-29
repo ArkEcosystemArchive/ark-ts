@@ -33,8 +33,7 @@ export class RxRequest {
           .then((res) => {
             if (res.status < 200 || res.status >= 300) {
               observer.error({
-                statusCode: res.statusCode,
-                statusMessage: res.statusMessage,
+                ...res.data
               });
             } else {
               observer.next(res.data);

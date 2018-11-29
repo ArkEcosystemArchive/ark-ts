@@ -158,10 +158,14 @@ export class TransactionPostResponse {
   @JsonProperty({clazz: TransactionPostDataResponse, name: 'data'})
   public data: TransactionPostDataResponse;
 
+  @JsonProperty('error')
+  public error: string;
+
   constructor() {
     this.success = void 0;
     this.transactionIds = void 0;
     this.data = void 0;
+    this.error = void 0;
   }
 }
 

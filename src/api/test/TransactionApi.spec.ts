@@ -9,6 +9,9 @@ import { Transaction, TransactionType, VoteType, TransactionVote, TransactionDel
 import { expect } from 'chai';
 import { PrivateKey } from '../../index';
 
+import 'rxjs/add/operator/take'
+import 'rxjs/add/operator/toPromise'
+
 /* tslint:disable:no-unused-expression */
 const network = Network.getDefault(NetworkType.Devnet);
 const http = new Http(network);
@@ -207,9 +210,10 @@ describe('TransactionApi', () => {
     };
 
     return api.post(transaction).forEach((response) => {
+      console.log(response)
       if (network.isV2) {
         expect(response).to.have.property('transactionIds');
-        expect(response.transactionIds).to.be.an('array').that.does.not.include(transaction.id);
+        expect(response.transactionIds).to.be.undefined;
       } else {
         expect(response).to.have.property('success', false);
       }
