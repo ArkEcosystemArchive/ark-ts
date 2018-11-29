@@ -129,16 +129,16 @@ export class TransactionSend {
 
 export class TransactionPostDataResponse {
   @JsonProperty('accept')
-  accept: string[];
+  public accept: string[];
 
   @JsonProperty('excess')
-  excess: string[];
+  public excess: string[];
 
   @JsonProperty('invalid')
-  invalid: string[];
+  public invalid: string[];
 
   @JsonProperty('broadcast')
-  broadcast: string[];
+  public broadcast: string[];
 
   constructor() {
     this.accept = void 0;
@@ -156,12 +156,16 @@ export class TransactionPostResponse {
   public transactionIds: string[];
 
   @JsonProperty({clazz: TransactionPostDataResponse, name: 'data'})
-  data: TransactionPostDataResponse;
+  public data: TransactionPostDataResponse;
+
+  @JsonProperty('error')
+  public error: string;
 
   constructor() {
     this.success = void 0;
     this.transactionIds = void 0;
     this.data = void 0;
+    this.error = void 0;
   }
 }
 

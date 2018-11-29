@@ -1,43 +1,47 @@
-import { Observable } from 'rxjs';
-import * as request from 'request';
+import { Observable } from 'rxjs/Observable';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosPromise } from 'axios';
 
 /** Based on @waldojeffers/rx-request. */
 export class RxRequest {
 
-  private req: request.RequestAPI<request.Request, request.CoreOptions, request.RequiredUriUrl>;
+  private req: AxiosInstance;
   public get;
   public post;
   public put;
 
   constructor(options: any) {
-    this.req = request.defaults(options);
+    const headers = {
+      ...options.headers,
+      'Content-Type': 'application/json',
+    };
+
+    this.req = axios.create({
+      ...options,
+      headers,
+    });
 
     this.get = this.toObservable(this.req.get);
     this.post = this.toObservable(this.req.post);
     this.put = this.toObservable(this.req.put);
   }
 
-  private toObservable(method: any): (url: string, options: request.CoreOptions) => Observable<any> {
+  private toObservable(method: any): (url: string, AxiosRequestConfig) => Observable<any> {
 
-    return (url: string, options: request.CoreOptions): Observable<any> => {
+    return (url: string, options: AxiosRequestConfig): Observable<any> => {
       return Observable.create((observer) => {
-        let body = '';
-
         method(url, options)
-          .on('response', function onResponse(res) {
-            res.setEncoding('utf8');
-            if (res.statusCode < 200 || res.statusCode >= 300) {
-              this.emit('error', {
-                statusCode: res.statusCode,
-                statusMessage: res.statusMessage,
+          .then((res) => {
+            if (res.status < 200 || res.status >= 300) {
+              observer.error({
+                ...res.data
               });
+            } else {
+              observer.next(res.data);
+              observer.complete();
             }
           })
-
-          .on('error', (e) => observer.error(e))
-          .on('data', (chunk) => body += chunk)
-          .on('end', () => {
-            observer.next(body);
+          .catch((err) => {
+            observer.error(err);
             observer.complete();
           });
       });
