@@ -1,4 +1,4 @@
-import { JsonProperty } from 'json-typescript-mapper';
+import { ICustomConverter, JsonProperty } from 'json-typescript-mapper';
 import { PrivateKey } from '../index';
 
 export enum TransactionType {
@@ -8,6 +8,15 @@ export enum TransactionType {
   Vote = 3,
   MultiSignature = 4,
 }
+
+const genericConverter: ICustomConverter = {
+  fromJson(data: any): any {
+    return data;
+  },
+  toJson(data: any): any {
+    return JSON.stringify(data);
+  },
+};
 
 /** Transaction model. */
 export class Transaction {
@@ -95,9 +104,11 @@ export class TransactionQueryParams {
 }
 
 export class TransactionSend {
-
   @JsonProperty('amount')
   public amount: number;
+
+  @JsonProperty('fee')
+  public fee?: number;
 
   @JsonProperty('recipientId')
   public recipientId: string;
@@ -119,6 +130,7 @@ export class TransactionSend {
 
   constructor() {
     this.amount = void 0;
+    this.fee = void 0;
     this.passphrase = void 0;
     this.publicKey = void 0;
     this.recipientId = void 0;
@@ -161,11 +173,15 @@ export class TransactionPostResponse {
   @JsonProperty('error')
   public error: string;
 
+  @JsonProperty({customConverter: genericConverter, name: 'errors'})
+  public errors: object;
+
   constructor() {
     this.success = void 0;
     this.transactionIds = void 0;
     this.data = void 0;
     this.error = void 0;
+    this.errors = void 0;
   }
 }
 
