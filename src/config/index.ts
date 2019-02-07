@@ -19,7 +19,7 @@ export default {
       p2pVersion: '2.0.0',
       isV2: true,
       activePeer: {
-        ip: '167.114.29.51',
+        ip: '5.196.105.32',
         port: 4003,
       },
       peers: [
