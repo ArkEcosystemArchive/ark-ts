@@ -32,7 +32,7 @@ export class Transaction {
   @JsonProperty('amount')
   public amount?: number;
 
-  @JsonProperty({clazz: Object, name: 'asset'})
+  @JsonProperty({customConverter: genericConverter, name: 'asset'})
   public asset?: object;
 
   @JsonProperty('fee')
