@@ -26,27 +26,24 @@ export default class TransactionApi {
         observer.error('Wrong recipientId');
       }
 
-      BlockApi.networkFees(this.http.network).subscribe((blocks) => {
-        const fees = blocks.fees;
-        if (!fees.send) {
-          return observer.error('Missing "send" transaction fee');
-        }
-        let data = <model.Transaction> {
-          amount: params.amount,
-          fee: fees.send,
-          recipientId: params.recipientId,
-          timestamp: params.timestamp,
-          type: model.TransactionType.SendArk,
-          vendorField: params.vendorField,
-        };
+      if (!params.fee) {
+        return observer.error('Missing "send" transaction fee');
+      }
+      let data = <model.Transaction> {
+        amount: params.amount,
+        fee: params.fee,
+        recipientId: params.recipientId,
+        timestamp: params.timestamp,
+        type: model.TransactionType.SendArk,
+        vendorField: params.vendorField,
+      };
 
-        const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
-        data = tx.generate();
-        const typedTx = deserialize(model.Transaction, data);
+      const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
+      data = tx.generate();
+      const typedTx = deserialize(model.Transaction, data);
 
-        observer.next(typedTx);
-        observer.complete();
-      }, (e) => observer.error(e));
+      observer.next(typedTx);
+      observer.complete();
     });
   }
 
@@ -55,32 +52,29 @@ export default class TransactionApi {
    */
   public createVote(params: model.TransactionVote) {
     return Observable.create((observer: any) => {
-      BlockApi.networkFees(this.http.network).subscribe((blocks) => {
-        const fees = blocks.fees;
-        if (!fees.vote) {
-          return observer.error('Missing "vote" transaction fee');
-        }
-        const updown = model.VoteType[params.type] === 'Add' ? '+' : '-';
+      if (!params.fee) {
+        return observer.error('Missing "vote" transaction fee');
+      }
+      const updown = model.VoteType[params.type] === 'Add' ? '+' : '-';
 
-        let data = <model.Transaction> {
-          asset: {
-            votes: [updown + params.delegatePublicKey],
-          },
-          fee: fees.vote,
-          type: model.TransactionType.Vote,
-          vendorField: params.vendorField,
-        };
+      let data = <model.Transaction> {
+        asset: {
+          votes: [updown + params.delegatePublicKey],
+        },
+        fee: params.fee,
+        type: model.TransactionType.Vote,
+        vendorField: params.vendorField,
+      };
 
-        const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
-        tx.setAddress();
-        data = tx.generate();
+      const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
+      tx.setAddress();
+      data = tx.generate();
 
-        const typedTx = deserialize(model.Transaction, data);
-        typedTx.asset = data.asset;
+      const typedTx = deserialize(model.Transaction, data);
+      typedTx.asset = data.asset;
 
-        observer.next(typedTx);
-        observer.complete();
-      }, (e) => observer.error(e));
+      observer.next(typedTx);
+      observer.complete();
     });
   }
 
@@ -93,61 +87,55 @@ export default class TransactionApi {
         observer.error('Delegate name is too long, 20 characters maximum');
       }
 
-      BlockApi.networkFees(this.http.network).subscribe((blocks) => {
-        const fees = blocks.fees;
-        if (!fees.delegate) {
-          return observer.error('Missing "delegate" transaction fee');
-        }
-        let data = <model.Transaction> {
-          asset: {
-            delegate: {
-              publicKey: params.publicKey,
-              username: params.username,
-            },
+      if (!params.fee) {
+        return observer.error('Missing "delegate" transaction fee');
+      }
+      let data = <model.Transaction> {
+        asset: {
+          delegate: {
+            publicKey: params.publicKey,
+            username: params.username,
           },
-          fee: fees.delegate,
-          type: model.TransactionType.CreateDelegate,
-          vendorField: params.vendorField,
-        };
+        },
+        fee: params.fee,
+        type: model.TransactionType.CreateDelegate,
+        vendorField: params.vendorField,
+      };
 
-        const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
-        data = tx.generate();
+      const tx = new Tx(data, this.http.network, params.passphrase, params.secondPassphrase);
+      data = tx.generate();
 
-        const typedTx = deserialize(model.Transaction, data);
-        typedTx.asset = data.asset;
+      const typedTx = deserialize(model.Transaction, data);
+      typedTx.asset = data.asset;
 
-        observer.next(typedTx);
-        observer.complete();
-      }, (e) => observer.error(e));
+      observer.next(typedTx);
+      observer.complete();
     });
   }
 
   /**
    * Transaction used to create second passphrase.
    */
-  public createSignature(passphrase: string | PrivateKey, secondPassphrase: string, vendorField?: string) {
+  public createSignature(passphrase: string | PrivateKey, secondPassphrase: string, vendorField?: string, fee?: number) {
     return Observable.create((observer: any) => {
-      BlockApi.networkFees(this.http.network).subscribe((blocks) => {
-        const fees = blocks.fees;
-        if (!fees.secondsignature) {
-          return observer.error('Missing "secondsignature" transaction fee');
-        }
-        let data = <model.Transaction> {};
-        data.asset = {};
-        data.fee = fees.secondsignature;
-        data.type = model.TransactionType.SecondSignature;
-        data.vendorField = vendorField;
+      if (!fee) {
+        return observer.error('Missing "secondsignature" transaction fee');
+      }
+      let data = <model.Transaction> {};
+      data.asset = {};
+      data.fee = fee;
+      data.type = model.TransactionType.SecondSignature;
+      data.vendorField = vendorField;
 
-        const tx = new Tx(data, this.http.network, passphrase, secondPassphrase);
-        tx.setAssetSignature();
-        data = tx.generate();
+      const tx = new Tx(data, this.http.network, passphrase, secondPassphrase);
+      tx.setAssetSignature();
+      data = tx.generate();
 
-        const typedTx = deserialize(model.Transaction, data);
-        typedTx.asset = tx.transaction.asset;
+      const typedTx = deserialize(model.Transaction, data);
+      typedTx.asset = tx.transaction.asset;
 
-        observer.next(typedTx);
-        observer.complete();
-      }, (e) => observer(e));
+      observer.next(typedTx);
+      observer.complete();
     });
   }
 

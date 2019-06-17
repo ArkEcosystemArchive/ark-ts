@@ -224,6 +224,9 @@ export class TransactionVote {
   @JsonProperty('type')
   public type: VoteType;
 
+  @JsonProperty('fee')
+  public fee?: number;
+
   @JsonProperty('delegatePublicKey')
   public delegatePublicKey: string;
 
@@ -238,6 +241,7 @@ export class TransactionVote {
 
   constructor() {
     this.type = void 0;
+    this.fee = void 0;
     this.delegatePublicKey = void 0;
     this.passphrase = void 0;
     this.secondPassphrase = void 0;
@@ -248,6 +252,9 @@ export class TransactionVote {
 export class TransactionDelegate {
   @JsonProperty('username')
   public username: string;
+
+  @JsonProperty('fee')
+  public fee?: number;
 
   @JsonProperty('publicKey')
   public publicKey: string;
@@ -263,6 +270,7 @@ export class TransactionDelegate {
 
   constructor() {
     this.username = void 0;
+    this.fee = void 0;
     this.publicKey = void 0;
     this.passphrase = void 0;
     this.secondPassphrase = void 0;
