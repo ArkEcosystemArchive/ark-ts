@@ -10,6 +10,8 @@
 [![npm](https://img.shields.io/npm/v/ark-ts.svg)]()
 [![license](https://img.shields.io/github/license/arkecosystem/ark-ts.svg)]()
 
+> Lead Maintainer: [Lúcio Rubens](https://github.com/luciorubeens)
+
 TSARK is a library client designed to facilitate how you interact with the ARK blockchain.
 
 ## Why TypeScript
@@ -84,10 +86,14 @@ If you discover a security vulnerability within this project, please send an e-m
   * Join the #development channel on Slack or contact our developer Lúcio (@lorenzo).
   * [Contribute bounties](./CONTRIBUTING.md).
 
+## Security
+
+If you discover a security vulnerability within this package, please send an e-mail to security@ark.io. All security vulnerabilities will be promptly addressed.
+
 ## Credits
 
-**Lúcio Rubens** - [@luciorubeens](https://github.com/luciorubeens);
+This project exists thanks to all the people who [contribute](../../contributors).
 
 ## License
 
-TSARK is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+[MIT](LICENSE) © [ARK Ecosystem](https://ark.io)
