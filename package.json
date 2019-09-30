@@ -58,6 +58,6 @@
     "tslint": "^5.6.0",
     "typedoc": "^0.8.0",
     "typedoc-plugin-external-module-map": "^0.0.6",
-    "typescript": "^2.4.1"
+    "typescript": "^3.0.0"
   }
 }
