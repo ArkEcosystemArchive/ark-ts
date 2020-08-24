@@ -34,7 +34,7 @@
     "@types/node": "^8.0.12",
     "@types/request": "^2.0.0",
     "@types/rx": "^4.1.1",
-    "axios": "^0.18.0",
+    "axios": "^0.20.0",
     "bigi": "^1.4.2",
     "bs58check": "^2.0.2",
     "bytebuffer": "^5.0.1",
