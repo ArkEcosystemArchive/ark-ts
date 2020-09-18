@@ -54,7 +54,7 @@
     "mocha": "^3.4.2",
     "shx": "^0.2.2",
     "source-map-support": "^0.4.15",
-    "ts-node": "^3.3.0",
+    "ts-node": "^9.0.0",
     "tslint": "^5.6.0",
     "typedoc": "^0.8.0",
     "typedoc-plugin-external-module-map": "^0.0.6",
